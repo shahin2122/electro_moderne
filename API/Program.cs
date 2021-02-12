@@ -1,7 +1,10 @@
 using System;
 using System.Threading.Tasks;
+using Core.Entities.Identity;
 using Infrastructure.Data;
+using Infrastructure.Identity;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,7 +24,14 @@ namespace API
                try
                {
                    var context = services.GetRequiredService<StoreContext>();
+                   var identityContext = services.GetRequiredService<AppIdentityDbContext>();
+                   var userManager = services.GetRequiredService<UserManager<AppUser>>();
+                   var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
+
                    await context.Database.MigrateAsync();
+                   await identityContext.Database.MigrateAsync();
+
+                   await IdentitySeed.SeedUsers(userManager, roleManager);
                }
                catch (Exception ex)
                {
@@ -29,7 +39,7 @@ namespace API
                    logger.LogError(ex, "An Error Occured during migration");
                }
            }
-           host.Run();
+           await host.RunAsync();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
