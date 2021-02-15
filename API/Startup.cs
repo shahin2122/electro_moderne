@@ -34,7 +34,7 @@ namespace API
         {
             services.AddApplicationServices(_config);
 
-            services.AddIdentityServices();
+            services.AddIdentityServices(_config);
 
             services.AddControllers();
 
@@ -63,6 +63,8 @@ namespace API
             app.UseRouting();
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
