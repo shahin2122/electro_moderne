@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class ProductsController : BaseController
+    public class ProductsController : BaseApiController
     {
 
 
