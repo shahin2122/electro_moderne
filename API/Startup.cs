@@ -42,6 +42,13 @@ namespace API
 
             services.AddControllers();
 
+            services.AddCors(opt => {
+                opt.AddPolicy("CorsPolicy", policy => 
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+                });
+            });
+
             services.AddDbContext<AppIdentityDbContext>(x => 
                 x.UseSqlite(_config.GetConnectionString("IdentityConnection")));
 
@@ -78,6 +85,8 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("CorsPolicy");
 
             app.UseStaticFiles();
 
