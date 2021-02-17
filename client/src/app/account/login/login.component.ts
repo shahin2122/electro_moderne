@@ -14,6 +14,6 @@ model: any = {}
 
   login()
   {
-    console.log(model);
+    console.log(this.model);
   }
 }
