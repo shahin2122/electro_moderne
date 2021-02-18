@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AccountService } from 'src/app/account/account.service';
+import { IUSer } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'app-nav-bar',
@@ -6,13 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
-model: any = {};
-  constructor() { }
+
+  currentUser$: Observable<IUSer>;
+
+  constructor(private accountService: AccountService) { }
 
   ngOnInit(): void {
+    this.currentUser$ = this.accountService.currentUser$;
   }
 
-  login() {
-    
+  logOut() {
+    this.accountService.logOut();
   }
 }

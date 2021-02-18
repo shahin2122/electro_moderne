@@ -1,1 +1,13 @@
-<p>login works!</p>
+<div class="d-flex  justify-content-center mt-5">
+    <div class=" col-md-8 col-sm-8 col-xs-2">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <h1 class="h1 mb-3 fw-normal d-flex justify-content-center">Login</h1>
+
+                 <app-text-input formControlName="email" [label]="'Email Address'"></app-text-input>
+                 <app-text-input formControlName="password" [label]="'Password'" [type]="'password'"></app-text-input>
+
+            <button [disabled]="loginForm.invalid" class="w-100 btn btn-lg btn-primary mt-2" type="submit">Sign in</button>
+          
+          </form>
+    </div>
+</div>

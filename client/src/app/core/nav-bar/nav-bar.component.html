@@ -17,11 +17,37 @@ p-3 px-md-4  bg-body border-bottom shadow-sm">
                </a>
             </div>
      <div class="container  d-flex flex-block col-xl-9 col-lg-9 col-md-9 ">
-          <a routerLink="/account/login" class="btn col-md-6 col-sm-6  col-xs-3  btn-success d-flex align-items-center 
-              mr-2 text-white font-large sign-in-btn " ><span class="d-none d-sm-block">Sign in</span>  <i class="fa fa-sign-in fa-2x "></i></a>
-          <a routerLink="/account/register" class="btn col-md-6 col-sm-6 col-xs-3 btn-info mr-3 d-flex align-items-center 
-              text-white font-large register-btn" ><span class="d-none d-sm-block">Register</span> <i class="fa fa-user-plus fa-2x"></i></a>
-     </div>
+      <ng-container *ngIf="(currentUser$ | async) === null">
+        <a routerLink="/account/login" class="btn col-md-6 col-sm-6  col-xs-3  btn-success d-flex align-items-center 
+        mr-2 text-white font-large sign-in-btn " ><span class="d-none d-sm-block">Sign in</span>  <i class="fa fa-sign-in fa-2x "></i></a>
+        <a routerLink="/account/register" class="btn col-md-6 col-sm-6 col-xs-3 btn-info mr-3 d-flex align-items-center 
+        text-white font-large register-btn" ><span class="d-none d-sm-block">Register</span> <i class="fa fa-user-plus fa-2x"></i></a>
+      </ng-container>  
+      
+      <ng-container *ngIf="currentUser$ | async">
+
+        <div class="dropdown " dropdown> 
+          <a class="dropdown-toggle" style="cursor: pointer;" dropdownToggle> 
+           <strong class="font-large"> Welcome {{(currentUser$ | async).displayName}}</strong></a>
+           <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;" *dropdownMenu>
+              <a class="dropdown-item d-flex align-items-center py-2 font-larger">
+                <i class="fa fa-shopping-cart mr-3"> View Basket</i>
+              </a>
+
+              <a class="dropdown-item d-flex align-items-center py-2 font-larger">
+                <i class="fa fa-history mr-3"> View Orders</i>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a (click)="logOut()" class="dropdown-item d-flex align-items-center py-2 font-larger">
+                <i class="fa fa-sign-out mr-3"> Log Out</i>
+              </a>
+          </div>
+        </div>
+
+      
+      </ng-container>
+      
+    </div>
     </div>
 
     <div class="col-xl-6 col-lg-4 col-md-4 col-sm-10 ">
@@ -45,7 +71,7 @@ p-3 px-md-4  bg-body border-bottom shadow-sm">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="navbar-collapse collapse" id="navbarColor02" style="">
+  <div class="navbar-collapse collapse" id="navbarColor02" >
     <ul class="navbar-nav mr-auto">
       
       <li class="nav-item">
