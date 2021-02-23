@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { product } from 'src/app/shared/models/product';
 import { IProductBrand } from 'src/app/shared/models/productBrand';
 import { IProductType } from 'src/app/shared/models/productType';
 import { AdminService } from '../../admin.service';
@@ -15,6 +16,7 @@ export class AddNewProductComponent implements OnInit {
   addProductForm: FormGroup;
   brands: Partial<IProductBrand[]>;
   types: Partial<IProductType[]>;
+  product: product;
 
   constructor(private adminService: AdminService, private toastr: ToastrService,
     private router: Router) { }
@@ -36,16 +38,22 @@ export class AddNewProductComponent implements OnInit {
       Specs: new FormControl('', [Validators.required]),
       Used: new FormControl('', ),
       LocalId: new FormControl('', [Validators.required]),
+      TypeId: new FormControl(''),
+      BrandId: new FormControl(''),
     });
   }
 
   onSubmit() {
+
+   
     this.adminService.addNewProduct(this.addProductForm.value).subscribe(() => {
       this.toastr.success("New Product  Added");
       this.router.navigateByUrl("/admin/pannel");
     }, error => {
       console.log(error);
-      this.toastr.error(error.error);
+      console.log("type id =" + this.addProductForm.controls.TypeId.value );
+      console.log("brand id =" + this.addProductForm.controls.BrandId.value );
+      this.toastr.error(error);
     })
   }
 

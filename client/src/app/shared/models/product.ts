@@ -6,4 +6,6 @@ export interface product {
     pictureUrl: string;
     productType: string;
     productBrand: string;
+    localId: string;
+    specs: string;
 }

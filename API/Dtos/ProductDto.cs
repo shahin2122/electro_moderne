@@ -9,7 +9,7 @@ namespace API.Dtos
         public string Specs { get; set; }
         public bool? Used { get; set; }
         public string LocalId { get; set; }
-        public int ProductTypeId { get; set; }
-        public int ProducBrandId { get; set; }
+        public int TypeId{ get; set; }
+        public int BrandId { get; set; }
     }
 }

@@ -40,7 +40,7 @@ namespace API
 
             services.AddIdentityServices(_config);
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
 
             services.AddCors(opt => {
                 opt.AddPolicy("CorsPolicy", policy => 

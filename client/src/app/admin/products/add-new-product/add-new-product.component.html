@@ -13,27 +13,27 @@
 
                 <div class="form-group">
                     <label class="font-xx-large">Product Type:</label>
-                    <select class="custom-select" ngForm="addProductForm" ngControl="addProductForm.ProductTypeId">
+                    <select class="custom-select"  formControlName="TypeId">
                       <option selected="">Select Product Type </option>
-                      <ng-container *ngFor="let type of types">
-                        <option value="{{type.id}}">{{type.name}}</option>
-                      </ng-container>
+                  
+                        <option *ngFor="let type of types" [ngValue]="type.id" >{{type.name}}</option>
+                     
                     </select>
                   </div>
 
                   <div class="form-group">
                     <label class="font-xx-large">Product Brand:</label>
-                    <select class="custom-select" ngForm="addProductForm" ngControl="addProductForm.ProductBrandId">
+                    <select class="custom-select"  formControlName="BrandId">
                       <option selected="">Select Product Brand </option>
-                      <ng-container *ngFor="let brand of brands">
-                        <option value="{{brand.id}}">{{brand.name}}</option>
-                      </ng-container>
+                  
+                        <option *ngFor="let brand of brands" [ngValue]="brand.id" >{{brand.name}}</option>
+                     
                     </select>
                   </div>
 
                   <div class="row d-flex align-items-center ml-1">
                     <label class="font-xx-large">Is Used?</label>
-                    <input class="ml-2" type="checkbox" ngForm="addProductForm" ngControl="addProductForm.Used" >
+                    <input class="ml-2" type="checkbox"  formControlName="Used" >
                     
                 </div>
 

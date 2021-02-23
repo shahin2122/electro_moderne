@@ -59,6 +59,10 @@ namespace Infrastructure.Data
         {
             return await _context.SaveChangesAsync() > 0;
         }
-      
+
+        public Task<T> GetByNameAsync(string name)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
