@@ -40,6 +40,12 @@ namespace API.Extensions
                 ValidateAudience = false
             };
                }) ;
+
+        services.AddAuthorization(opt => 
+        {
+            opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+            opt.AddPolicy("RepairAdminRole", policy => policy.RequireRole("Admin", "RepairMan"));
+        });
             
             return services;
 

@@ -1,0 +1,18 @@
+<div class="row">
+    <button routerLink="/admin/add-new-brand" class="btn-success d-flex align-items-center"><i class="fa fa-plus fa-2x mr-1"></i> Add New Brand</button>
+</div>
+<div class="row">
+    <table class="table">
+        <tr>
+            <th style="width: 50%;">Brand Name </th>
+            <th style="width: 50%;"></th>
+        </tr>
+        <tr *ngFor="let brand of brands">
+            <td>{{brand.name}}</td>
+            <td>
+                <button class="btn-danger d-flex-align-items-center"><i class="fa fa-edit fa-2x"></i>Edit</button>
+                <button class="btn-primary d-flex-align-items-center"><i class="fa fa-trash fa-2x"></i>Delete</button>
+            </td>
+        </tr>
+    </table>
+</div>

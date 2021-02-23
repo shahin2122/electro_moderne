@@ -1,0 +1,32 @@
+<h1>Admin Pannel</h1>
+<div >
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#Users">Users</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#Products">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#types">Product Types</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#brands">Product Brands</a>
+        </li>
+      </ul>
+      <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade show active" id="Users">
+         <app-users></app-users>
+        </div>
+        <div class="tab-pane fade" id="Products">
+         <app-products></app-products>
+        </div>
+        <div class="tab-pane fade" id="types">
+          <app-product-types></app-product-types>
+         </div>
+         <div class="tab-pane fade" id="brands">
+          <app-product-brands></app-product-brands>
+         </div>
+       
+      </div>
+</div>

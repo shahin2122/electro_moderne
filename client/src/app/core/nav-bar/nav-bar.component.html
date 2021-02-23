@@ -83,14 +83,17 @@ p-3 px-md-4  bg-body border-bottom shadow-sm">
       <li class="nav-item">
         <a class="nav-link font-large" href="#">Repair Request</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link font-large" href="#">Contact</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link font-large" href="#">About</a>
-      </li>
+     
+   
       <li class="nav-item">
         <a class="nav-link font-large" href="#">Support</a>
+      </li>
+      <li  class="nav-item">
+        <a  class="nav-link font-large" routerLink="/admin/pannel">Admin</a>
+      </li>
+
+      <li  class="nav-item">
+        <a  class="nav-link font-large" routerLink="/admin">Orders</a>
       </li>
       
     </ul>
@@ -106,34 +109,33 @@ p-3 px-md-4  bg-body border-bottom shadow-sm">
 
   <div class="navbar-collapse collapse " id="navbarColor01" style="padding: 0; margin: 0;">
     <ul class="navbar-nav  container">
-      <li class="nav-item active  " >
-        <a class="nav-link font-larger " href="#">REFRIGERATORS</a>
+      <li class="nav-item active "  *ngFor="let type of types">
+        <a class="nav-link font-larger " href="#">{{type.name}}</a>
       </li>
 
-      <li class="nav-item active  " >
-        <a class="nav-link font-larger " href="#">FREEZERS</a>
-      </li>
-      <li class="nav-item active  " >
-        <a class="nav-link font-larger " href="#">RANGES</a>
-      </li>
-      <li class="nav-item active  " >
-        <a class="nav-link font-larger " href="#">COOKTOPS</a>
-      </li>
-      <li class="nav-item active  " >
-        <a class="nav-link font-larger " href="#">WALL OVENS</a>
-      </li>
-      <li class="nav-item active  " >
-        <a class="nav-link font-larger " href="#">BBQ GRILLS</a>
-      </li>
-      <li class="nav-item active  " >
-        <a class="nav-link font-larger " href="#">VENTILATION</a>
-      </li>
-      <li class="nav-item active  " >
-        <a class="nav-link font-larger " href="#">BRANDS</a>
-      </li>
+
     
    
     </ul>
     
+  </div>
+</nav>
+
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <a class="navbar-brand" href="#">Brands</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor03">
+    <ul class="navbar-nav mr-auto container">
+      <li class="nav-item col-2" *ngFor="let brand of brands">
+        <a class="nav-link" href="#">{{brand.name}}
+       
+        </a>
+
+     
+    </ul>
+   
   </div>
 </nav>

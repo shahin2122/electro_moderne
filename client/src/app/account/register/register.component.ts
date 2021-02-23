@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AsyncValidatorFn, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { of, timer } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { AccountService } from '../account.service';
@@ -14,7 +15,8 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   errors: string[] = [];
 
-  constructor(private fb: FormBuilder, private accountService: AccountService, private router: Router) { }
+  constructor(private fb: FormBuilder, private accountService: AccountService, private router: Router,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.createRegisterForm();
@@ -37,6 +39,7 @@ export class RegisterComponent implements OnInit {
    }, error => {
      console.log(error);
      this.errors = error.error.errors;
+     this.toastr.error(error.error);
    });
   }
 

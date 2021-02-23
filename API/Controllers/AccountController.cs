@@ -40,7 +40,7 @@ namespace API.Controllers
             return new UserDto
             {
                 Email = user.Email,
-                Token = _tokenService.CreateToken(user),
+                Token = await _tokenService.CreateToken(user),
                 DisplayName = user.UserName
             };
         }
@@ -56,17 +56,17 @@ namespace API.Controllers
         {
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
-            if (user == null) return Unauthorized();
+            if (user == null) return Unauthorized("Email Not Found");
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password,
             false);
 
-            if (!result.Succeeded) return Unauthorized();
+            if (!result.Succeeded) return Unauthorized("Password is not correct");
 
             return new UserDto
             {
                 Email = user.Email,
-                Token = _tokenService.CreateToken(user),
+                Token = await _tokenService.CreateToken(user),
                 DisplayName = user.UserName
             };
         }
@@ -87,14 +87,19 @@ namespace API.Controllers
 
             };
 
+           
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
-            if (!result.Succeeded) return BadRequest();
+            if (!result.Succeeded) return BadRequest(result.Errors);
+
+            var roleResult =  await _userManager.AddToRoleAsync(user, "Member");
+
+            if(!roleResult.Succeeded) return BadRequest(result.Errors);
 
             return new UserDto
             {
                 DisplayName = user.UserName,
-                Token = _tokenService.CreateToken(user),
+                Token = await _tokenService.CreateToken(user),
                 Email = user.Email
             };
         }

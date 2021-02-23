@@ -1,0 +1,43 @@
+<button routerLink="/admin/pannel" class="btn-success font-x-large d-flex align-items-center justify-content-center"><i class="fa fa-long-arrow-left fa-2x mr-1"></i> Back</button>
+    <h1 class="mt-2">Add New Product</h1>
+    <div class="d-flex justify-content-center mt-5">
+        <div class="col-10">
+            <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
+                <app-text-input formControlName="Name" [label]="'Product Name'"></app-text-input>
+                <app-text-input formControlName="Description" [label]="'Description'"></app-text-input>
+                <app-text-input formControlName="Price" [label]="'Price'"></app-text-input>
+                <app-text-input formControlName="PictureUrl" [label]="'PictureUrl'"></app-text-input>
+                <app-text-input formControlName="Specs" [label]="'Specs'"></app-text-input>
+                <app-text-input formControlName="LocalId" [label]="'LocalId'"></app-text-input>
+                
+
+                <div class="form-group">
+                    <label class="font-xx-large">Product Type:</label>
+                    <select class="custom-select" ngForm="addProductForm" ngControl="addProductForm.ProductTypeId">
+                      <option selected="">Select Product Type </option>
+                      <ng-container *ngFor="let type of types">
+                        <option value="{{type.id}}">{{type.name}}</option>
+                      </ng-container>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="font-xx-large">Product Brand:</label>
+                    <select class="custom-select" ngForm="addProductForm" ngControl="addProductForm.ProductBrandId">
+                      <option selected="">Select Product Brand </option>
+                      <ng-container *ngFor="let brand of brands">
+                        <option value="{{brand.id}}">{{brand.name}}</option>
+                      </ng-container>
+                    </select>
+                  </div>
+
+                  <div class="row d-flex align-items-center ml-1">
+                    <label class="font-xx-large">Is Used?</label>
+                    <input class="ml-2" type="checkbox" ngForm="addProductForm" ngControl="addProductForm.Used" >
+                    
+                </div>
+
+                <button  class="w-100 btn btn-lg btn-info mt-2" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>

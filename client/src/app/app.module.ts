@@ -8,13 +8,17 @@ import { ShopComponent } from './shop/shop.component';
 import { ProductDetailsComponent } from './shop/product-details/product-details.component';
 import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminComponent } from './admin/admin.component';
+import { TabsModule, TabsetConfig } from 'ngx-bootstrap/tabs';
 
 
 @NgModule({
   declarations: [
     AppComponent,
   
-    ProductDetailsComponent
+    ProductDetailsComponent,
+  
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -22,10 +26,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    CoreModule
+    CoreModule,
+    TabsModule
 
   ],
-  providers: [],
+  providers: [TabsetConfig],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

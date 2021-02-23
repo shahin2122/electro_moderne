@@ -2,5 +2,6 @@ export interface IUSer {
     email: string;
     displayName: string;
     token: string;
-    address;
+    address: string;
+    roles: string[];
 }

@@ -57,5 +57,19 @@ namespace API.Controllers
 
             return _mapper.Map<Product,ProductToReturnDto>(product);
         }
+
+        [HttpPost("add-new-product")]
+        public async Task<ActionResult<Product>> AddNewProduct([FromBody]ProductDto productDto)
+        {
+            if(ModelState.IsValid)
+            {
+                Product newProduct = _mapper.Map<Product>(productDto);
+                await _productRepo.AddAsync(newProduct);
+
+                if(await _productRepo.SaveAllAsync()) return Ok(newProduct);
+            }
+
+            return BadRequest("failed to add new product");
+        }
     }
 }

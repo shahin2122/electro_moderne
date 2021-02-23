@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TextInputComponent } from './components/text-input/text-input.component';
+import { ToastrModule } from 'ngx-toastr';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 
 @NgModule({
@@ -10,12 +12,18 @@ import { TextInputComponent } from './components/text-input/text-input.component
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    CarouselModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right'
+    })
   ],
   exports: [
     ReactiveFormsModule,
     BsDropdownModule,
-    TextInputComponent
+    TextInputComponent,
+    ToastrModule,
+    CarouselModule,
   ]
 })
 export class SharedModule { }
