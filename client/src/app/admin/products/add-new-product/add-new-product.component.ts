@@ -32,7 +32,6 @@ export class AddNewProductComponent implements OnInit {
       Name: new FormControl('', [Validators.required]),
       Description: new FormControl('', [Validators.required]),
       Price: new FormControl('', [Validators.required]),
-      PictureUrl: new FormControl('',),
       ProductTypeId: new FormControl('', [Validators.required]),
       ProductBrandId: new FormControl('', [Validators.required]),
       Specs: new FormControl('', [Validators.required]),
@@ -45,14 +44,12 @@ export class AddNewProductComponent implements OnInit {
 
   onSubmit() {
 
-   
-    this.adminService.addNewProduct(this.addProductForm.value).subscribe(() => {
+    this.adminService.addNewProduct(this.addProductForm.value).subscribe((response: product) => {
       this.toastr.success("New Product  Added");
-      this.router.navigateByUrl("/admin/pannel");
+      this.adminService.productToAddPhoto = response;
+      this.router.navigateByUrl("/admin/photo-editor");
     }, error => {
       console.log(error);
-      console.log("type id =" + this.addProductForm.controls.TypeId.value );
-      console.log("brand id =" + this.addProductForm.controls.BrandId.value );
       this.toastr.error(error);
     })
   }

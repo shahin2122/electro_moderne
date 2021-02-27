@@ -1,11 +1,16 @@
+import { Photo } from "./photo";
+
 export interface product {
     id: number;
     name: string;
     description: string;
     price: number;
-    pictureUrl: string;
+    photoUrl: string;
     productType: string;
     productBrand: string;
     localId: string;
     specs: string;
+    photos: Photo[];
+
 }
+

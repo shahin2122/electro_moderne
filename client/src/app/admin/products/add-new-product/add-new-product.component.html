@@ -1,4 +1,4 @@
-<button routerLink="/admin/pannel" class="btn-success font-x-large d-flex align-items-center justify-content-center"><i class="fa fa-long-arrow-left fa-2x mr-1"></i> Back</button>
+<button routerLink="/admin/pannel" class="btn-success font-x-large d-flex align-items-center justify-content-center"><i class="fa fa-chevron-left fa-2x mr-1"></i> Back</button>
     <h1 class="mt-2">Add New Product</h1>
     <div class="d-flex justify-content-center mt-5">
         <div class="col-10">
@@ -6,7 +6,6 @@
                 <app-text-input formControlName="Name" [label]="'Product Name'"></app-text-input>
                 <app-text-input formControlName="Description" [label]="'Description'"></app-text-input>
                 <app-text-input formControlName="Price" [label]="'Price'"></app-text-input>
-                <app-text-input formControlName="PictureUrl" [label]="'PictureUrl'"></app-text-input>
                 <app-text-input formControlName="Specs" [label]="'Specs'"></app-text-input>
                 <app-text-input formControlName="LocalId" [label]="'LocalId'"></app-text-input>
                 
@@ -37,7 +36,7 @@
                     
                 </div>
 
-                <button  class="w-100 btn btn-lg btn-info mt-2" type="submit">Submit</button>
+                <button  class="w-100 btn btn-lg btn-info my-4 font-x-large d-flex align-items-center justify-content-center" type="submit">Next <i class="fa fa-chevron-right fa-2x"></i></button>
             </form>
         </div>
     </div>

@@ -7,6 +7,7 @@ using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -20,10 +21,14 @@ namespace API.Controllers
         private readonly IGenericRepository<ProductBrand> _productBrandRepo;
         private readonly IGenericRepository<ProductType> _ProductTypeRepo;
         private readonly IMapper _mapper;
+        private readonly IPhotoService _photoService;
+      
 
         public ProductsController(IGenericRepository<Product> productRepo, IGenericRepository<ProductBrand> productBrandRepo,
-        IGenericRepository<ProductType> ProductTypeRepo, IMapper mapper)
+        IGenericRepository<ProductType> ProductTypeRepo, IMapper mapper, IPhotoService photoService)
         {
+            
+            _photoService = photoService;
             _mapper = mapper;
             _ProductTypeRepo = ProductTypeRepo;
             _productBrandRepo = productBrandRepo;
@@ -32,7 +37,7 @@ namespace API.Controllers
 
         [HttpGet]
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts(
-           [FromQuery]ProductSpecParams productParams)
+           [FromQuery] ProductSpecParams productParams)
         {
             var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
 
@@ -48,28 +53,70 @@ namespace API.Controllers
             productParams.pageSize, totalItems, data));
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetProduct")]
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
             var spec = new ProductsWithTypesAndBrandsSpecification(id);
 
             var product = await _productRepo.GetEntityWithSpecAsync(spec);
 
-            return _mapper.Map<Product,ProductToReturnDto>(product);
+            return _mapper.Map<Product, ProductToReturnDto>(product);
+        }
+
+
+        [HttpGet("get-product-with-photos/{id}")]
+        public async Task<Product> GetProductWithPhotos(int id)
+        {
+            var spec = new ProductWithPhotosSpecification(id);
+
+            return await _productRepo.GetEntityWithSpecAsync(spec);
         }
 
         [HttpPost("add-new-product")]
-        public async Task<ActionResult<Product>> AddNewProduct([FromBody]ProductDto productDto)
+        public async Task<ActionResult<Product>> AddNewProduct([FromBody] ProductDto productDto)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 Product newProduct = _mapper.Map<Product>(productDto);
                 await _productRepo.AddAsync(newProduct);
 
-                if(await _productRepo.SaveAllAsync()) return Ok(newProduct);
+                if (await _productRepo.SaveAllAsync()) return Ok(newProduct);
             }
 
             return BadRequest("failed to add new product");
+        }
+
+        [HttpPost("add-photo/{productId}")]
+        public async Task<ActionResult<PhotoDto>> AddPhoto([FromForm] IFormFile file, [FromRoute] int productId)
+        {
+            var product = await _productRepo.GetByIdAsync(productId);
+
+            var result = await _photoService.AddPhotoAsync(file);
+
+            if (result.Error != null) return BadRequest(result.Error.Message);
+
+            var photo = new Photo
+            {
+                Url = result.SecureUrl.AbsoluteUri,
+                PublicId = result.PublicId,
+                Product = product,
+                ProductId = product.Id
+            };
+
+            var spec = new ProductWithPhotosSpecification(productId);
+
+            Product productWithPhotos =  await _productRepo.GetEntityWithSpecAsync(spec);
+
+            if(productWithPhotos.Photos.Count == 0) photo.IsMain = true;
+
+            product.Photos.Add(photo);
+
+            if (await _productRepo.SaveAllAsync())
+            {
+                return CreatedAtRoute("GetProduct", new { id = productId }, _mapper.Map<PhotoDto>(photo));
+            }
+
+            return BadRequest("failed to add photo");
         }
     }
 }

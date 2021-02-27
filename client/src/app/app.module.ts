@@ -10,6 +10,7 @@ import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminComponent } from './admin/admin.component';
 import { TabsModule, TabsetConfig } from 'ngx-bootstrap/tabs';
+import { AdminModule } from './admin/admin.module';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { TabsModule, TabsetConfig } from 'ngx-bootstrap/tabs';
     HttpClientModule,
     FormsModule,
     CoreModule,
-    TabsModule
+    TabsModule,
+    AdminModule
 
   ],
   providers: [TabsetConfig],

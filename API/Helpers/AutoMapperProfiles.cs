@@ -1,3 +1,4 @@
+using System.Linq;
 using API.Dtos;
 using AutoMapper;
 using Core.Entities;
@@ -18,6 +19,8 @@ namespace API.Helpers
                     src.ProductBrandId))
                 .ForMember(dest => dest.TypeId, opts => opts.MapFrom(src => 
                     src.ProductTypeId))
+                .ForMember(dest => dest.PhotoUrl, opts => opts.MapFrom(source => 
+                    source.Photos.FirstOrDefault(x => x.IsMain).Url))
                 .ReverseMap();
            
             CreateMap<RegisterDto, AppUser>()
@@ -25,6 +28,8 @@ namespace API.Helpers
 
             CreateMap<AppUser, UserDto>();
             
+            CreateMap<PhotoDto, Photo>()
+                .ReverseMap();
         }
     }
 }

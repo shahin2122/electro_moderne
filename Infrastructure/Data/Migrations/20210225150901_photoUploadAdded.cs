@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class photoUploadAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,7 +54,6 @@ namespace Infrastructure.Data.Migrations
                     Name = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     Price = table.Column<int>(type: "INTEGER", nullable: false),
-                    PictureUrl = table.Column<string>(type: "TEXT", nullable: true),
                     ProductTypeId = table.Column<int>(type: "INTEGER", nullable: false),
                     ProductBrandId = table.Column<int>(type: "INTEGER", nullable: false),
                     Specs = table.Column<string>(type: "TEXT", nullable: true),
@@ -78,6 +77,33 @@ namespace Infrastructure.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Photos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Url = table.Column<string>(type: "TEXT", nullable: true),
+                    PublicId = table.Column<string>(type: "TEXT", nullable: true),
+                    ProductId = table.Column<int>(type: "INTEGER", nullable: false),
+                    IsMain = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Photos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Photos_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Photos_ProductId",
+                table: "Photos",
+                column: "ProductId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Products_ProductBrandId",
                 table: "Products",
@@ -93,6 +119,9 @@ namespace Infrastructure.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Parts");
+
+            migrationBuilder.DropTable(
+                name: "Photos");
 
             migrationBuilder.DropTable(
                 name: "Products");

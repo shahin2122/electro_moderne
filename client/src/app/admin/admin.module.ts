@@ -11,11 +11,14 @@ import { AddNewTypeComponent } from './product-types/add-new-type/add-new-type.c
 import { SharedModule } from '../shared/shared.module';
 import { AddNewBrandComponent } from './product-brands/add-new-brand/add-new-brand.component';
 import { AddNewProductComponent } from './products/add-new-product/add-new-product.component';
+import { PhotoEditorComponent } from './products/photo-editor/photo-editor.component';
 
 
 
 @NgModule({
-  declarations: [UsersComponent, ProductsComponent, PannelComponent, ProductBrandsComponent, ProductTypesComponent, AddNewTypeComponent, AddNewBrandComponent, AddNewProductComponent],
+  declarations: [UsersComponent, ProductsComponent, PannelComponent, 
+    ProductBrandsComponent, ProductTypesComponent, AddNewTypeComponent, 
+    AddNewBrandComponent, AddNewProductComponent, PhotoEditorComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

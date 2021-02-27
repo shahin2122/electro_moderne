@@ -30,6 +30,31 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("Parts");
                 });
 
+            modelBuilder.Entity("Core.Entities.Photo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Photos");
+                });
+
             modelBuilder.Entity("Core.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -43,9 +68,6 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PictureUrl")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Price")
@@ -100,6 +122,17 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("ProductTypes");
                 });
 
+            modelBuilder.Entity("Core.Entities.Photo", b =>
+                {
+                    b.HasOne("Core.Entities.Product", "Product")
+                        .WithMany("Photos")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Core.Entities.Product", b =>
                 {
                     b.HasOne("Core.Entities.ProductBrand", "ProductBrand")
@@ -117,6 +150,11 @@ namespace Infrastructure.Data.Migrations
                     b.Navigation("ProductBrand");
 
                     b.Navigation("ProductType");
+                });
+
+            modelBuilder.Entity("Core.Entities.Product", b =>
+                {
+                    b.Navigation("Photos");
                 });
 #pragma warning restore 612, 618
         }

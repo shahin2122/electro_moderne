@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using Core.Entities;
+
 namespace Core.Specifications
 {
     public class ProductSpecParams
@@ -20,5 +23,7 @@ namespace Core.Specifications
             get => _search;
             set => _search = value.ToLower();
         }
+
+       
     }
 }

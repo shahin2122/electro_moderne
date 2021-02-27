@@ -9,6 +9,7 @@ import { ProductTypesComponent } from './product-types/product-types.component';
 import { AddNewTypeComponent } from './product-types/add-new-type/add-new-type.component';
 import { AddNewBrandComponent } from './product-brands/add-new-brand/add-new-brand.component';
 import { AddNewProductComponent } from './products/add-new-product/add-new-product.component';
+import { PhotoEditorComponent } from './products/photo-editor/photo-editor.component';
 
 const routes: Routes = [
   {path: 'users', component: UsersComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'add-new-type', component: AddNewTypeComponent},
   {path: 'brands', component: ProductBrandsComponent},
   {path: 'add-new-brand', component: AddNewBrandComponent},
+  {path: 'photo-editor/:productId', component: PhotoEditorComponent},
 ]
 
 @NgModule({
