@@ -11,11 +11,13 @@ namespace Core.Specifications
             (string.IsNullOrEmpty(productParams.Search) || x.Name.ToLower().Contains
             (productParams.Search)) &&
             (!productParams.BrandId.HasValue || x.ProductBrandId == productParams.BrandId) &&
-            (!productParams.TypeId.HasValue || x.ProductTypeId == productParams.TypeId)
+            (!productParams.TypeId.HasValue || x.ProductTypeId == productParams.TypeId) 
+            
         )
         {
             AddInclude(x => x.ProductType);
             AddInclude(x => x.ProductBrand);
+            AddInclude(x => x.Photos);
             AddOrderBy(x => x.Id);
             ApplyPaging(productParams.pageSize * (productParams.PageIndex - 1),
             productParams.pageSize);
@@ -30,6 +32,9 @@ namespace Core.Specifications
                     case "priceDesc":
                         AddOrderByDescending(p => p.Price);
                         break;
+                 
+                       
+
                     default:
                         AddOrderBy(i => i.Id);
                         break;

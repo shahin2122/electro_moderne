@@ -7,11 +7,13 @@ import { ToastrModule } from 'ngx-toastr';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { FileUploadModule } from 'ng2-file-upload';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
-
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { PagingHeaderComponent } from './components/paging-header/paging-header.component';
+import { PagerComponent } from './components/pager/pager.component';
 
 
 @NgModule({
-  declarations: [TextInputComponent],
+  declarations: [TextInputComponent, PagingHeaderComponent, PagerComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -21,7 +23,8 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
       positionClass: 'toast-bottom-right'
     }),
     FileUploadModule,
-    NgxGalleryModule
+    NgxGalleryModule,
+    PaginationModule.forRoot()
   ],
   exports: [
     ReactiveFormsModule,
@@ -30,7 +33,10 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
     ToastrModule,
     CarouselModule,
     FileUploadModule,
-    NgxGalleryModule
+    NgxGalleryModule,
+    PaginationModule,
+    PagingHeaderComponent,
+    PagerComponent
   ]
 })
 export class SharedModule { }

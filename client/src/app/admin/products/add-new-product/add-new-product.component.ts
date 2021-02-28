@@ -47,7 +47,7 @@ export class AddNewProductComponent implements OnInit {
     this.adminService.addNewProduct(this.addProductForm.value).subscribe((response: product) => {
       this.toastr.success("New Product  Added");
       this.adminService.productToAddPhoto = response;
-      this.router.navigateByUrl("/admin/photo-editor");
+      this.router.navigateByUrl("/admin/photo-editor/" + response.id);
     }, error => {
       console.log(error);
       this.toastr.error(error);
