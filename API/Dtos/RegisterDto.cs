@@ -14,5 +14,7 @@ namespace API.Dtos
         [Required]
         [RegularExpression("(?=^.{6,10}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\\s).*$")]
         public string Password { get; set; }
+
+         public string Provider { get; set; }
     }
 }

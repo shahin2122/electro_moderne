@@ -9,6 +9,7 @@ using Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -56,12 +57,16 @@ namespace API.Controllers
         {
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
+            
             if (user == null) return Unauthorized("Email Not Found");
 
-            var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password,
-            false);
+            if(loginDto.Provider == "Internal")
+            {
+                var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password,
+                false);
 
-            if (!result.Succeeded) return Unauthorized("Password is not correct");
+                if (!result.Succeeded) return Unauthorized("Password is not correct");
+            }
 
             return new UserDto
             {
@@ -70,6 +75,7 @@ namespace API.Controllers
                 DisplayName = user.UserName
             };
         }
+
 
 
         [HttpPost("register")]
@@ -84,7 +90,7 @@ namespace API.Controllers
             {
                 UserName = registerDto.DisplayName,
                 Email = registerDto.Email,
-
+                Provider = registerDto.Provider
             };
 
            
@@ -96,12 +102,71 @@ namespace API.Controllers
 
             if(!roleResult.Succeeded) return BadRequest(result.Errors);
 
+            if(user.Provider == "GOOGLE")
+            {
+                user.EmailConfirmed = true;
+            }
+
             return new UserDto
             {
                 DisplayName = user.UserName,
                 Token = await _tokenService.CreateToken(user),
-                Email = user.Email
+                Email = user.Email,
+                Provider = user.Provider,
+                EmailConfirmed = user.EmailConfirmed
             };
+        }
+
+        [HttpPost("external-login")]
+        public async Task<ActionResult<UserDto>> ExternalLogin(UserDto externalUser)
+        {
+            if (externalUser == null) return Unauthorized("Wrong USer");
+
+            if (await UserExists(externalUser.Email))
+            {
+                var user = new LoginDto
+                {
+                    Provider = externalUser.Provider,
+                    Password = GeneratePassword(),
+                    Email = externalUser.Email,
+                    
+                };
+                
+                return await Login(user);
+
+
+            }
+            else
+            {
+                var user = new RegisterDto
+                {
+
+                    DisplayName = GenerateUsername(externalUser.Email),
+                    Password = GeneratePassword(),
+                    Email = externalUser.Email,
+                    Provider = externalUser.Provider
+                };
+                return await Register(user);
+
+            }
+        }
+
+
+        public async Task<bool> UserExists(string email)
+        {
+            return await _userManager.Users.AnyAsync(x => x.Email == email);
+        }
+
+        private string GeneratePassword()
+        {
+            return "X7n33d5or28s";
+        }
+
+        private string GenerateUsername(string input)
+        {
+            int index = input.IndexOf("@");
+            return input = input.Substring(0, index);
+
         }
     }
 }

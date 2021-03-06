@@ -3,6 +3,9 @@ import { product } from 'src/app/shared/models/product';
 import { AdminService } from '../admin.service';
 import { IPagination } from '../../shared/models/pagination';
 import { Router } from '@angular/router';
+import { ShopParams } from 'src/app/shared/models/shopParams';
+import { ShopService } from 'src/app/shop/shop.service';
+import { AdminProductsParams } from 'src/app/shared/models/adminProductsParams';
 
 @Component({
   selector: 'app-products',
@@ -11,14 +14,22 @@ import { Router } from '@angular/router';
 })
 export class ProductsComponent implements OnInit {
  products: product[] ;
+ totalCount: number;
+ productsParams = new AdminProductsParams();
+
   constructor(private adminService: AdminService, private router: Router) { }
 
   ngOnInit() {
-    this.adminService.getProducts().subscribe(response  => {
+    this.getProducts();
+  }
+
+  getProducts() {
+    this.adminService.getProducts(this.productsParams)
+    .subscribe(response => {
       this.products = response.data;
-      console.log("response is:" + response.data);
-    }, error => {
-      console.log(error);
+      this.productsParams.pageNumber = response.pageIndex;
+      this.productsParams.pageSize = response.pageSize;
+      this.totalCount = response.count;
     })
   }
 
@@ -27,5 +38,11 @@ export class ProductsComponent implements OnInit {
     this.router.navigateByUrl("/admin/photo-editor/"+ product.id);
   }
 
+  onPageChanged(event:any) {
+    if(this.productsParams.pageNumber !== event){
+    this.productsParams.pageNumber = event;
+    this.getProducts();
+    }
+  }
 
 }

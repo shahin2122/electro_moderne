@@ -4,7 +4,7 @@ import { ShopComponent } from './shop.component';
 import { ShopRoutingModule } from './shop-routing.module';
 import { ProductItemComponent } from './product-item/product-item.component';
 import { SharedModule } from '../shared/shared.module';
-
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 
 
 @NgModule({
@@ -12,7 +12,10 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     ShopRoutingModule,
-    SharedModule
+    SharedModule,
+    NgxGalleryModule
   ]
 })
-export class ShopModule { }
+export class ShopModule {
+
+ }

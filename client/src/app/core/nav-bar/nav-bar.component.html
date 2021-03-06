@@ -88,12 +88,12 @@ p-3 px-md-4  bg-body border-bottom shadow-sm">
       <li class="nav-item">
         <a class="nav-link font-large" href="#">Support</a>
       </li>
-      <li  class="nav-item">
-        <a  class="nav-link font-large" routerLink="/admin/pannel">Admin</a>
+      <li  class="nav-item" >
+        <a  class="nav-link font-large" *appHasRole='["Admin"]' routerLink="/admin/pannel">Admin</a>
       </li>
 
-      <li  class="nav-item">
-        <a  class="nav-link font-large" routerLink="/admin">Orders</a>
+      <li  class="nav-item" >
+        <a  class="nav-link font-large" *appHasRole='["Admin","RepairMan"]'  routerLink="/admin">Orders</a>
       </li>
       
     </ul>

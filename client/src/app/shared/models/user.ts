@@ -4,4 +4,5 @@ export interface IUSer {
     token: string;
     address: string;
     roles: string[];
+    provider: string;
 }

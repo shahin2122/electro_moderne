@@ -26,7 +26,7 @@ export class ShopComponent implements OnInit {
   ];
 
 
-  constructor(private adminService: AdminService, private shopService: ShopService) { }
+  constructor( private shopService: ShopService) { }
 
   ngOnInit(): void {
     this.getBrands();
@@ -35,13 +35,13 @@ export class ShopComponent implements OnInit {
   }
 
   getBrands() {
-    this.adminService.getBrands().subscribe(brands => {
+    this.shopService.getBrands().subscribe(brands => {
       this.brands = [{id: 0, name: 'All'}, ...brands];
     })
   }
 
   getTypes() {
-    this.adminService.getTypes().subscribe(types => {
+    this.shopService.getTypes().subscribe(types => {
       this.types = [{id: 0, name: 'All'}, ...types];
     })
   }

@@ -1,15 +1,15 @@
-<button routerLink="/admin/pannel" class="btn-success font-x-large d-flex align-items-center justify-content-center"><i class="fa fa-chevron-left fa-2x mr-1"></i> Back</button>
+<div class="container">
+
+  <button routerLink="/admin/pannel" class="btn-success font-x-large d-flex align-items-center justify-content-center"><i class="fa fa-chevron-left fa-2x mr-1"></i> Back</button>
     <h1 class="mt-2">Add New Product</h1>
     <div class="d-flex justify-content-center mt-5">
         <div class="col-10">
             <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
                 <app-text-input formControlName="Name" [label]="'Product Name'"></app-text-input>
-                <app-text-input formControlName="Description" [label]="'Description'"></app-text-input>
                 <app-text-input formControlName="Price" [label]="'Price'"></app-text-input>
                 <app-text-input formControlName="Specs" [label]="'Specs'"></app-text-input>
                 <app-text-input formControlName="LocalId" [label]="'LocalId'"></app-text-input>
                 
-
                 <div class="form-group">
                     <label class="font-xx-large">Product Type:</label>
                     <select class="custom-select"  formControlName="TypeId">
@@ -30,13 +30,20 @@
                     </select>
                   </div>
 
-                  <div class="row d-flex align-items-center ml-1">
+                  <div class="row d-flex align-items-center text-center ml-1">
                     <label class="font-xx-large">Is Used?</label>
-                    <input class="ml-2" type="checkbox"  formControlName="Used" >
+                    <input class="ml-2" type="checkbox"  formControlName="Used" style="width: 25px; height: 25px;">
                     
                 </div>
+
+                <label for="Description" class="font-xx-large">Description:</label>
+                <textarea class="form-control" formControlName="Description" id="Description" placeholder="Description" style="font-size: 30px;" rows="4"></textarea>
+
 
                 <button  class="w-100 btn btn-lg btn-info my-4 font-x-large d-flex align-items-center justify-content-center" type="submit">Next <i class="fa fa-chevron-right fa-2x"></i></button>
             </form>
         </div>
     </div>
+
+
+</div>

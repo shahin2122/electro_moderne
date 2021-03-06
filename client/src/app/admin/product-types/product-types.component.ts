@@ -8,7 +8,10 @@ import { AdminService } from '../admin.service';
   styleUrls: ['./product-types.component.scss']
 })
 export class ProductTypesComponent implements OnInit {
- types: Partial<IProductType[]>;
+ types: IProductType[];
+ pageNumber = 1;
+ pageSize = 10;
+ totalCount: number;
 
   constructor(private adminService: AdminService) { }
 
@@ -17,9 +20,20 @@ export class ProductTypesComponent implements OnInit {
   }
 
   getTypes() {
-    this.adminService.getTypes().subscribe(types => {
-      this.types = types;
+    this.adminService.getTypesPaginated(this.pageNumber, this.pageSize).subscribe(response => {
+      this.types = response.data;
+      this.pageNumber = response.pageIndex;
+      this.pageSize = response.pageSize;
+      this.totalCount = response.count;
+      
     })
+  }
+
+  onPageChanged(event: any) {
+    if(this.pageNumber !== event){
+      this.pageNumber = event;
+      this.getTypes();
+    }
   }
 
 }

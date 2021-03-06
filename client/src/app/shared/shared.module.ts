@@ -24,7 +24,8 @@ import { PagerComponent } from './components/pager/pager.component';
     }),
     FileUploadModule,
     NgxGalleryModule,
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+  
   ],
   exports: [
     ReactiveFormsModule,
@@ -36,7 +37,8 @@ import { PagerComponent } from './components/pager/pager.component';
     NgxGalleryModule,
     PaginationModule,
     PagingHeaderComponent,
-    PagerComponent
+    PagerComponent,
+   
   ]
 })
 export class SharedModule { }

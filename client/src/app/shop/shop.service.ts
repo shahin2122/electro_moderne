@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { delay, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IPagination } from '../shared/models/pagination';
+import { Photo } from '../shared/models/photo';
+import { product } from '../shared/models/product';
 import { IProductBrand } from '../shared/models/productBrand';
 import { IProductType } from '../shared/models/productType';
 import { ShopParams } from '../shared/models/shopParams';
@@ -44,11 +46,18 @@ baseUrl = environment.baseApiUrl;
   }
 
   getTypes() {
-    return this.http.get<IProductType[]>(this.baseUrl + 'types');
+    return this.http.get<IProductType[]>(this.baseUrl + 'types/get-all-raw');
   }
 
   getBrands() {
-    return this.http.get<IProductBrand[]>(this.baseUrl + 'brands');
+    return this.http.get<IProductBrand[]>(this.baseUrl + 'brands/get-all-raw');
   }
 
+  getProduct(id: number) {
+    return this.http.get<product>(this.baseUrl + 'products/' + id);
+  }
+
+  getPhotosOfProduct(productId: number) {
+    return this.http.get<Photo[]>(this.baseUrl + 'photos/' + productId);
+  }
 }

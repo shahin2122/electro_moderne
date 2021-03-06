@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment';
 import { IUSer } from '../shared/models/user';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { SocialAuthService } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,8 @@ export class AccountService {
  private currentUserSource = new ReplaySubject<IUSer>(1);
  currentUser$ = this.currentUserSource.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router,
+    private socialAuthService: SocialAuthService) { }
 
  
 
@@ -24,6 +27,7 @@ export class AccountService {
     Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
+    this.router.navigateByUrl('/');
   }
 
   loadCurrentUser(token: string) {
@@ -59,6 +63,7 @@ login(values: any) {
 }
 
 register(values: any) {
+  values.provider = "Internal";
   return this.http.post(this.baseUrl + 'account/register', values).pipe(
     map((user: IUSer) => {
       if(user) {
@@ -84,5 +89,19 @@ checkEmailExist(email: string) {
 getDecodedToken(token) {
   return JSON.parse(atob(token.split('.')[1]));
 }
+
+googleLogin(model: any){
+  return this.http.post(this.baseUrl + 'account/external-login', model).pipe(
+    
+    map((user: IUSer) => {
+      if(user) {
+        localStorage.setItem('token', user.token);
+        this.setCurrentUser(user);
+      
+      }
+      return user;
+    })
+  );
+ }
 
 }

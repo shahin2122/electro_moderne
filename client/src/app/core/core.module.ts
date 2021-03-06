@@ -17,6 +17,7 @@ import { SectionHeaderComponent } from './section-header/section-header.componen
     SharedModule
   ],
   exports: [NavBarComponent, 
-  SectionHeaderComponent]
+  SectionHeaderComponent,
+  ]
 })
 export class CoreModule { }

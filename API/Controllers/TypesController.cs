@@ -3,6 +3,7 @@ using API.Helpers;
 using Core.Entities;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Core.Specifications;
 
 namespace API.Controllers
 {
@@ -34,16 +35,32 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ProductType>> GetTypes()
+        public async Task<ActionResult<Pagination<ProductType>>> GetTypes([FromQuery] 
+            ProductTypeSpecParams productTypeParams)
         {
-            return Ok(await _typeRepo.ListAllAsync());
+            var spec = new ProductTypeSpecification(productTypeParams.PageIndex , 
+            productTypeParams.pageSize);
+
+            var totalItems = await _typeRepo.CountAsync(spec);
+
+            var data = await _typeRepo.ListAllAsync();
+
+            return Ok(new Pagination<ProductType>(productTypeParams.PageIndex,
+            productTypeParams.pageSize, totalItems, data));
 
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetType")]
         public async Task<ActionResult<ProductType>> GetType(int id)
         {
+            
             return Ok(await _typeRepo.GetByIdAsync(id));
+        }
+
+        [HttpGet("get-all-raw")]
+        public async Task<ActionResult<ProductType>> GetTypes()
+        {
+            return Ok(await _typeRepo.ListAllAsync());
         }
     }
 }

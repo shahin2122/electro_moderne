@@ -20,6 +20,8 @@ namespace Core.Entities.Identity
         public bool? IsCommercial { get; set; } = false;
         public string PostalCode { get; set; }
         public ICollection<AppUserRole> UserRoles { get; set; }
+        public string Provider { get; set; }
+        public bool? Deactive { get; set; } = false;
 
     }
 }

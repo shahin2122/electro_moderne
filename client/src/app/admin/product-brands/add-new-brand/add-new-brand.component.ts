@@ -32,7 +32,7 @@ export class AddNewBrandComponent implements OnInit {
       this.router.navigateByUrl("/admin/pannel");
     }, error => {
       console.log(error);
-      this.toastr.error(error.error);
+      this.toastr.error(error);
     });
   }
 }

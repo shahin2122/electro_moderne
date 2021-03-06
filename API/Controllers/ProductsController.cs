@@ -55,17 +55,15 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}", Name = "GetProduct")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
+        public async Task<ActionResult<ProductDto>> GetProduct(int id)
         {
-            var spec = new ProductsWithTypesAndBrandsSpecification(id);
+            var spec = new ProductWithPhotosSpecification(id);
 
             var product = await _productRepo.GetEntityWithSpecAsync(spec);
 
             if(product == null) return NotFound(new ApiResponse(404));
 
-            return _mapper.Map<Product, ProductToReturnDto>(product);
+            return _mapper.Map<Product, ProductDto>(product);
         }
 
 
@@ -83,6 +81,7 @@ namespace API.Controllers
             if (ModelState.IsValid)
             {
                 Product newProduct = _mapper.Map<Product>(productDto);
+                
                 await _productRepo.AddAsync(newProduct);
 
                 if (await _productRepo.SaveAllAsync()) return Ok(newProduct);

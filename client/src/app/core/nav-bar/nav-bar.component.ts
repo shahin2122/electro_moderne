@@ -5,6 +5,7 @@ import { AdminService } from 'src/app/admin/admin.service';
 import { IUSer } from 'src/app/shared/models/user';
 import { IProductBrand } from 'src/app/shared/models/productBrand';
 import { IProductType } from 'src/app/shared/models/productType';
+import { ShopService } from 'src/app/shop/shop.service';
 
 
 @Component({
@@ -15,10 +16,10 @@ import { IProductType } from 'src/app/shared/models/productType';
 export class NavBarComponent implements OnInit {
 
   currentUser$: Observable<IUSer>;
-  brands: Partial<IProductBrand[]>;
-  types: Partial<IProductType[]>;
+  brands: IProductBrand[];
+  types: IProductType[];
 
-  constructor(private accountService: AccountService, private adminService: AdminService) { }
+  constructor(private accountService: AccountService, private shopService: ShopService) { }
 
   ngOnInit(): void {
     this.currentUser$ = this.accountService.currentUser$;
@@ -31,13 +32,13 @@ export class NavBarComponent implements OnInit {
   }
 
   getBrands() {
-    this.adminService.getBrands().subscribe(brands => {
+    this.shopService.getBrands().subscribe(brands => {
       this.brands = brands;
     })
   }
 
   getTypes() {
-    this.adminService.getTypes().subscribe(types => {
+    this.shopService.getTypes().subscribe(types => {
       this.types = types;
     })
   }

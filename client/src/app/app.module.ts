@@ -9,8 +9,13 @@ import { ProductDetailsComponent } from './shop/product-details/product-details.
 import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminComponent } from './admin/admin.component';
-import { TabsModule, TabsetConfig } from 'ngx-bootstrap/tabs';
 import { AdminModule } from './admin/admin.module';
+import { HomeModule } from './home/home.module';
+import { ShopModule } from './shop/shop.module';
+import { SharedModule } from './shared/shared.module';
+import { AccountModule } from './account/account.module';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
 
 
 @NgModule({
@@ -19,7 +24,8 @@ import { AdminModule } from './admin/admin.module';
   
     ProductDetailsComponent,
   
-    AdminComponent
+    AdminComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -28,11 +34,26 @@ import { AdminModule } from './admin/admin.module';
     HttpClientModule,
     FormsModule,
     CoreModule,
-    TabsModule,
-    AdminModule
-
+    AdminModule,
+    HomeModule,
+    ShopModule,
+    SharedModule,
+    AccountModule,
+    SocialLoginModule
   ],
-  providers: [TabsetConfig],
-  bootstrap: [AppComponent]
-})
+  providers: [
+    {provide: 'SocialAuthServiceConfig', useValue: {
+      autoLogin: false,providers: [{
+        id: GoogleLoginProvider.PROVIDER_ID,
+        provider: new GoogleLoginProvider(
+          '457129431480-eme0r5m4mpu0401fhnloicdju32ajcq9.apps.googleusercontent.com'
+        )
+      }]
+    }as SocialAuthServiceConfig,
+  }
+ 
+             ],
+  bootstrap: [AppComponent],
+
+            })
 export class AppModule { }

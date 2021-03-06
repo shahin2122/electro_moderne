@@ -1,6 +1,15 @@
-<div class="row">
+<div class="row my-2">
     <button routerLink="/admin/add-new-type" class="btn-success d-flex align-items-center"><i class="fa fa-plus fa-2x mr-1"></i> Add New Type</button>
 </div>
+
+<div class="row d-flex justify-content-center align-items-center my-2">
+    <app-paging-header
+    [totalCount]="totalCount"
+    [pageSize]="this.pageSize"
+    [pageNumber]="this.pageNumber"
+    ></app-paging-header>
+</div>
+
 <div class="row">
     <table class="table">
         <tr>
@@ -11,9 +20,19 @@
             <td>{{type.name}}</td>
             
             <td>
-                <button class="btn-danger d-flex-align-items-center"><i class="fa fa-edit fa-2x"></i>Edit</button>
-                <button class="btn-primary d-flex-align-items-center"><i class="fa fa-trash fa-2x"></i>Delete</button>
+                <div class="btn-group">
+                <button class="btn btn-outline-danger d-flex-align-items-center"><i class="fa fa-edit fa-2x"></i>Edit</button>
+                <button class="btn btn-outline-primary d-flex-align-items-center"><i class="fa fa-trash fa-2x"></i>Delete</button>
+                </div>
             </td>
         </tr>
     </table>
 </div>
+
+<div class="row d-flex justify-content-center mt-2 " *ngIf="totalCount > 0">
+    <app-pager
+     [pageSize]="pageSize"
+     [totalCount]="totalCount"
+     (pageChanged)="onPageChanged($event)"
+    ></app-pager>
+   </div>

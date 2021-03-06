@@ -1,8 +1,12 @@
-<h1>Admin Pannel</h1>
+<div class="container">
+  <h1>Admin Pannel</h1>
 <div >
     <ul class="nav nav-tabs">
         <li class="nav-item">
           <a class="nav-link active" data-toggle="tab" href="#Products">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#Parts">Parts</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#Users">Users</a>
@@ -13,11 +17,20 @@
         <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#brands">Product Brands</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#partBrands">Part Brands</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#partTypes">Part Types</a>
+        </li>
       </ul>
       <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade show active" id="Products">
          
          <app-products></app-products>
+        </div>
+        <div class="tab-pane fade" id="Parts">
+         <app-parts></app-parts>
         </div>
         <div class="tab-pane fade" id="Users">
           <app-users></app-users>
@@ -28,6 +41,13 @@
          <div class="tab-pane fade" id="brands">
           <app-product-brands></app-product-brands>
          </div>
+         <div class="tab-pane fade" id="partBrands">
+          <app-part-brands></app-part-brands>
+         </div>
+         <div class="tab-pane fade" id="partTypes">
+          <app-part-types></app-part-types>
+         </div>
        
       </div>
+</div>
 </div>

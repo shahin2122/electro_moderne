@@ -2,12 +2,12 @@
 
 namespace Infrastructure.Data.Migrations
 {
-    public partial class photoUploadAdded : Migration
+    public partial class partBrandAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Parts",
+                name: "PartBrand",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -16,7 +16,20 @@ namespace Infrastructure.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Parts", x => x.Id);
+                    table.PrimaryKey("PK_PartBrand", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PartType",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PartType", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,6 +56,38 @@ namespace Infrastructure.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProductTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Parts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Price = table.Column<int>(type: "INTEGER", nullable: false),
+                    PartBrandId = table.Column<int>(type: "INTEGER", nullable: false),
+                    PartTypeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Manufacturer = table.Column<string>(type: "TEXT", nullable: true),
+                    Specs = table.Column<string>(type: "TEXT", nullable: true),
+                    LocalId = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Parts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Parts_PartBrand_PartBrandId",
+                        column: x => x.PartBrandId,
+                        principalTable: "PartBrand",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Parts_PartType_PartTypeId",
+                        column: x => x.PartTypeId,
+                        principalTable: "PartType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -78,6 +123,28 @@ namespace Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PartPhoto",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Url = table.Column<string>(type: "TEXT", nullable: true),
+                    PublicId = table.Column<string>(type: "TEXT", nullable: true),
+                    PartId = table.Column<int>(type: "INTEGER", nullable: false),
+                    IsMain = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PartPhoto", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PartPhoto_Parts_PartId",
+                        column: x => x.PartId,
+                        principalTable: "Parts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Photos",
                 columns: table => new
                 {
@@ -100,6 +167,21 @@ namespace Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_PartPhoto_PartId",
+                table: "PartPhoto",
+                column: "PartId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Parts_PartBrandId",
+                table: "Parts",
+                column: "PartBrandId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Parts_PartTypeId",
+                table: "Parts",
+                column: "PartTypeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Photos_ProductId",
                 table: "Photos",
                 column: "ProductId");
@@ -118,13 +200,22 @@ namespace Infrastructure.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Parts");
+                name: "PartPhoto");
 
             migrationBuilder.DropTable(
                 name: "Photos");
 
             migrationBuilder.DropTable(
+                name: "Parts");
+
+            migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "PartBrand");
+
+            migrationBuilder.DropTable(
+                name: "PartType");
 
             migrationBuilder.DropTable(
                 name: "ProductBrands");

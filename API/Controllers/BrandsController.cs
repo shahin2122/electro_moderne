@@ -2,6 +2,8 @@ using System.Threading.Tasks;
 using Core.Entities;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Core.Specifications;
+using API.Helpers;
 
 namespace API.Controllers
 {
@@ -16,9 +18,18 @@ namespace API.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<ProductBrand>> GetBrands()
+        public async Task<ActionResult<ProductBrand>> GetBrands([FromQuery] 
+        ProductBrandSpecParams productBrandParams)
         {
-            return Ok(await _brandsRepo.ListAllAsync());
+            var spec = new ProductBrandSpecification(productBrandParams.PageIndex, 
+            productBrandParams.pageSize);
+
+            var totalItems = await _brandsRepo.CountAsync(spec);
+
+            var data = await _brandsRepo.ListAllAsync();
+
+            return Ok( new Pagination<ProductBrand>(productBrandParams.PageIndex,
+                productBrandParams.pageSize, totalItems, data));
         }
 
         [HttpGet("{id}")]
@@ -43,6 +54,12 @@ namespace API.Controllers
             }
 
             return BadRequest("failed to add new brand");
+        }
+
+        [HttpGet("get-all-raw")]
+        public async Task<ActionResult<ProductBrand>> GetBrands()
+        {
+            return Ok(await _brandsRepo.ListAllAsync());
         }
     }
 }

@@ -14,8 +14,8 @@ import { AdminService } from '../../admin.service';
 })
 export class AddNewProductComponent implements OnInit {
   addProductForm: FormGroup;
-  brands: Partial<IProductBrand[]>;
-  types: Partial<IProductType[]>;
+  brands: IProductBrand[];
+  types: IProductType[];
   product: product;
 
   constructor(private adminService: AdminService, private toastr: ToastrService,
