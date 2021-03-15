@@ -1,3 +1,4 @@
+
 using System.Collections.Generic;
 
 
@@ -7,7 +8,7 @@ namespace Core.Entities
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public int Price { get; set; }
+        public decimal Price { get; set; }
         public ICollection<PartPhoto> Photos { get; set; }
         public PartBrand PartBrand { get; set; }
         public int PartBrandId { get; set; }
@@ -16,6 +17,7 @@ namespace Core.Entities
         public string Manufacturer { get; set; }
         public string Specs { get; set; }
         public string LocalId { get; set; }
+        public string PartNumber { get; set; }
 
     }
 }

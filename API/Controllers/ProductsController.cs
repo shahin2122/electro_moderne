@@ -91,7 +91,8 @@ namespace API.Controllers
         }
 
         [HttpPost("add-photo/{productId}")]
-        public async Task<ActionResult<PhotoDto>> AddPhoto([FromForm] IFormFile file, [FromRoute] int productId)
+        public async Task<ActionResult<PhotoDto>> AddPhoto([FromForm] IFormFile file, 
+        [FromRoute] int productId)
         {
             var product = await _productRepo.GetByIdAsync(productId);
 
@@ -117,7 +118,8 @@ namespace API.Controllers
 
             if (await _productRepo.SaveAllAsync())
             {
-                return CreatedAtRoute("GetProduct", new { id = productId }, _mapper.Map<PhotoDto>(photo));
+                return CreatedAtRoute("GetProduct", new { id = productId }, 
+                _mapper.Map<PhotoDto>(photo));
             }
 
             return BadRequest("failed to add photo");

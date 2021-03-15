@@ -12,7 +12,6 @@ import { AdminService } from '../admin.service';
 })
 export class PartsComponent implements OnInit {
   parts: IPart[];
-  
   totalCount: number;
   partsParams = new PartsParams();
 
@@ -35,7 +34,8 @@ export class PartsComponent implements OnInit {
 
   setPartToAddPhoto(part: IPart) {
     this.adminService.partToAddPhoto = part;
-    this.router.navigateByUrl("/");
+    this.router.navigateByUrl("/admin/part-photo-editor/"+ part.id);
+    console.log("part  =" + part.id);
   }
 
   onPageChanged(event:any) {

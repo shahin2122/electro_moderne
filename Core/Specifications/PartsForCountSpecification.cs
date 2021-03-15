@@ -8,8 +8,8 @@ namespace Core.Specifications
          : base(x=> 
             (string.IsNullOrEmpty(partsParams.Search) || x.Name.ToLower().Contains
             (partsParams.Search)) &&
-            (!partsParams.PartBrandId.HasValue || x.PartBrandId == partsParams.PartBrandId) &&
-            (!partsParams.PartTypeId.HasValue || x.PartTypeId == partsParams.PartTypeId)
+            (!partsParams.BrandId.HasValue || x.PartBrandId == partsParams.BrandId) &&
+            (!partsParams.TypeId.HasValue || x.PartTypeId == partsParams.TypeId)
         )
         {
         }

@@ -26,14 +26,7 @@ namespace API.Controllers
             
         }
 
-    [HttpGet]
-    public async Task<IReadOnlyList<PhotoDto>> getAllPhotos()
-    {
-        var photos = await _photosRepo.ListAllAsync();
-
-        return _mapper.Map<IReadOnlyList<PhotoDto>>(photos);
-    }
-
+    
     [HttpGet("{productId}")]
     public async Task<ActionResult<IReadOnlyList<PhotoDto>>> GetPhotosOfProductAsync(int productId)
     {

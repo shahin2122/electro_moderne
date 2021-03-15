@@ -30,7 +30,7 @@ baseUrl = environment.baseApiUrl;
 
     if(shopParams.search) {
      params = params.append('search', shopParams.search);
-      console.log("search: " + shopParams.search);
+  
     }
     
     params = params.append('sort', shopParams.sort);

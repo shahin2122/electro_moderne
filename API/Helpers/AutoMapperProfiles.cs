@@ -28,20 +28,14 @@ namespace API.Helpers
                 .ReverseMap();
            
             CreateMap<Part, PartDto>()
-                .ForMember(dest => dest.PartTypeId, opts => opts.MapFrom(src => 
-                    src.PartTypeId))
-                .ForMember(dest => dest.PartBrandId, opts => opts.MapFrom(src => 
-                    src.PartBrandId))
+                .ForMember(dest => dest.PartType, opts => opts.MapFrom(src => 
+                    src.PartType.Name))
+                .ForMember(dest => dest.PartBrand, opts => opts.MapFrom(src => 
+                    src.PartBrand.Name))
+                .ForMember(dest => dest.PhotoUrl, opts => opts.MapFrom(src => 
+                    src.Photos.FirstOrDefault(x => x.IsMain).Url))
                 .ReverseMap();
 
-            CreateMap<Part, PartToReturnDto>()
-            .ForMember(dest => dest.PartTypeId, opts => opts.MapFrom(src => 
-                    src.PartTypeId))
-            .ForMember(dest => dest.PartBrandId, opts => opts.MapFrom(src => 
-                    src.PartBrandId))
-            .ForMember(dest => dest.PhotoUrl, opts => opts.MapFrom(src => 
-                    src.Photos.FirstOrDefault(x => x.IsMain).Url))
-            .ReverseMap();
             
 
 
@@ -53,10 +47,13 @@ namespace API.Helpers
                 src.UserRoles.FirstOrDefault(x=> x.UserId == src.Id).Role.Name))
                 .ReverseMap();
 
-           
             
             CreateMap<PhotoDto, Photo>()
                 .ReverseMap();
+
+            CreateMap<PartPhotoDto, PartPhoto>()
+                .ReverseMap();
+            
         }
     }
 }

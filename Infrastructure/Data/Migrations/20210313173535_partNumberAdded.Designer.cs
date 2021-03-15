@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20210304144607_partBrandAdded")]
-    partial class partBrandAdded
+    [Migration("20210313173535_partNumberAdded")]
+    partial class partNumberAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,11 +39,14 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int>("PartBrandId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("PartNumber")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("PartTypeId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("INTEGER");
+                    b.Property<double>("Price")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("Specs")
                         .HasColumnType("TEXT");
@@ -150,8 +153,8 @@ namespace Infrastructure.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("INTEGER");
+                    b.Property<double>("Price")
+                        .HasColumnType("REAL");
 
                     b.Property<int>("ProductBrandId")
                         .HasColumnType("INTEGER");

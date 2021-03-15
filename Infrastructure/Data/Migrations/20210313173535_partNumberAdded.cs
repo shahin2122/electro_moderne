@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Data.Migrations
 {
-    public partial class partBrandAdded : Migration
+    public partial class partNumberAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -66,12 +66,13 @@ namespace Infrastructure.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Price = table.Column<int>(type: "INTEGER", nullable: false),
+                    Price = table.Column<double>(type: "REAL", nullable: false),
                     PartBrandId = table.Column<int>(type: "INTEGER", nullable: false),
                     PartTypeId = table.Column<int>(type: "INTEGER", nullable: false),
                     Manufacturer = table.Column<string>(type: "TEXT", nullable: true),
                     Specs = table.Column<string>(type: "TEXT", nullable: true),
-                    LocalId = table.Column<string>(type: "TEXT", nullable: true)
+                    LocalId = table.Column<string>(type: "TEXT", nullable: true),
+                    PartNumber = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -98,7 +99,7 @@ namespace Infrastructure.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Price = table.Column<int>(type: "INTEGER", nullable: false),
+                    Price = table.Column<double>(type: "REAL", nullable: false),
                     ProductTypeId = table.Column<int>(type: "INTEGER", nullable: false),
                     ProductBrandId = table.Column<int>(type: "INTEGER", nullable: false),
                     Specs = table.Column<string>(type: "TEXT", nullable: true),

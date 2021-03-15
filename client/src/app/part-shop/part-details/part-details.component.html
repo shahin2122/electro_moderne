@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row" *ngIf="part">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+           <ngx-gallery [options]="galleryOptions" [images]="GalleryImages" 
+                style="display: inline-block; margin-bottom: 20px;">
+    
+           </ngx-gallery>
+        </div>
+    
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <h1><strong>{{part.name}}</strong></h1>
+            <h2 class="text-info">Manufacturer : {{part.manufacturer}}</h2>
+            <h3 class="text-primary">Part Number :#{{part.partNumber}}</h3>
+            
+            <p class="font-xx-large text-success"><strong>{{part.price | currency}}</strong></p>
+            <div class="d-flex justify-content-start align-items-center">
+                <i (click)="decrementQuantity()" class="fa fa-minus-circle text-danger mr-2" style="cursor: pointer; font-size: 2em;"></i>
+                <span class="font-weight-bold" style="font-size: 1.5em;">{{quantity}}</span>
+                <i (click)="incrementQuantity()" class="fa fa-plus-circle text-success mx-2" style="cursor: pointer; font-size: 2em;"></i>
+                <button (click)="addItemToBasket()" class="btn btn-success btn-lg ml-4">Add To Cart</button>
+            </div>
+            <p class="mt-2 font-large">{{part.specs}} </p>
+    
+        </div>
+    
+        <div class="row mt-5">
+            <div class="col-12 ml-3">
+                <h4>Description: </h4>
+                <p class="font-large">{{part.description}}</p>
+            </div>
+        </div>
+    </div>
+    
+</div>

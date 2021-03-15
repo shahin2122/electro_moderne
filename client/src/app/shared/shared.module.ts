@@ -10,10 +10,11 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PagingHeaderComponent } from './components/paging-header/paging-header.component';
 import { PagerComponent } from './components/pager/pager.component';
+import { OrderTotalsComponent } from './components/order-totals/order-totals.component';
 
 
 @NgModule({
-  declarations: [TextInputComponent, PagingHeaderComponent, PagerComponent],
+  declarations: [TextInputComponent, PagingHeaderComponent, PagerComponent, OrderTotalsComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -38,7 +39,7 @@ import { PagerComponent } from './components/pager/pager.component';
     PaginationModule,
     PagingHeaderComponent,
     PagerComponent,
-   
+    OrderTotalsComponent
   ]
 })
 export class SharedModule { }

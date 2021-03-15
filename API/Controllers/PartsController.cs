@@ -7,6 +7,7 @@ using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace API.Controllers
 {
@@ -24,7 +25,7 @@ namespace API.Controllers
         }
 
        [HttpGet]
-       public async Task<ActionResult<Pagination<Part>>> GetPaginatedParts(
+       public async Task<ActionResult<Pagination<PartDto>>> GetPaginatedParts(
            [FromQuery] PartsSpecParams partsParams)
         {
             var spec = new PartsSpecification(partsParams);
@@ -66,6 +67,40 @@ namespace API.Controllers
             }
 
             return BadRequest("failed to add new part");
+        }
+
+        [HttpPost("add-photo/{partId}")]
+        public async Task<ActionResult<PartPhotoDto>> AddPhoto([FromForm] IFormFile file,
+        [FromRoute] int partId)
+        {
+            var part = await _partsRepo.GetByIdAsync(partId);
+
+            var result = await _photoService.AddPhotoAsync(file);
+
+            if(result.Error != null) return BadRequest(result.Error.Message);
+
+            var photo = new PartPhoto
+            {
+                Url = result.SecureUrl.AbsoluteUri,
+                PublicId = result.PublicId,
+                Part = part,
+                PartId = part.Id
+            };
+
+            var spec = new PartWithPhotosSpecification(partId);
+
+            Part partWithPhotos = await _partsRepo.GetEntityWithSpecAsync(spec);
+
+            if(partWithPhotos.Photos.Count == 0) photo.IsMain = true;
+
+            part.Photos.Add(photo);
+
+            if(await _partsRepo.SaveAllAsync())
+            {
+                return CreatedAtRoute("GetPart", new {id = partId}, _mapper.Map<PartPhotoDto>(photo));
+            }
+
+            return BadRequest("failed to add photo");
         }
     }
 }

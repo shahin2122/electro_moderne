@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { IPart } from 'src/app/shared/models/part';
 import { AdminService } from '../../admin.service';
 
 @Component({
@@ -26,12 +27,13 @@ export class AddNewPartTypeComponent implements OnInit {
   }
 
   onSubmit(){
-    this.adminService.addNewPartType(this.addTypeForm.controls.typeName.value).subscribe(() => {
+    this.adminService.addNewPartType(this.addTypeForm.controls.typeName.value).subscribe((response : IPart) => {
       this.toastr.success("New Part Type Added");
+      this.adminService.partToAddPhoto = response;
       this.router.navigateByUrl("/admin/pannel");
     }, error => {
       console.log(error);
-      this.toastr.error(error.error);
+      this.toastr.error(error.error.message);
     });
   }
 

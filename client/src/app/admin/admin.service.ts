@@ -197,4 +197,16 @@ deletePhoto(productId: number,photoId: number) {
   return this.http.delete(this.baseUrl + 'photos/'+ productId + '-' + photoId);
 }
 
+getPhotosOfPart(partId: number) {
+  return this.http.get<Photo[]>(this.baseUrl + 'partphotos/' + partId);
+}
+
+setMainPartPhoto(photoId: number, partId: number) {
+  return this.http.put(this.baseUrl + 'partphotos/set-main-photo/' + partId + '-' + photoId, {});
+}
+
+deletePartPhoto(partId: number, photoId: number) {
+  return this.http.delete(this.baseUrl + 'partphotos/' + partId + '-' + photoId);
+}
+
 }

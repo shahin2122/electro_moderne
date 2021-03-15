@@ -15,6 +15,7 @@ import { AddNewPartComponent } from './parts/add-new-part/add-new-part.component
 import { PartBrandsComponent } from './part-brands/part-brands.component';
 import { AddNewPartTypeComponent } from './part-types/add-new-part-type/add-new-part-type.component';
 import { AddNewPartBrandComponent } from './part-brands/add-new-part-brand/add-new-part-brand.component';
+import { PartPhotoEditorComponent } from './parts/part-photo-editor/part-photo-editor.component';
 
 const routes: Routes = [
   {path: 'users', component: UsersComponent},
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path: 'add-new-part-type', component: AddNewPartTypeComponent},
   {path: 'add-new-part-brand', component: AddNewPartBrandComponent},
   {path: 'photo-editor/:productId', component: PhotoEditorComponent},
+  {path: 'part-photo-editor/:partId', component: PartPhotoEditorComponent},
 ]
 
 @NgModule({

@@ -11,4 +11,6 @@ export interface IPart {
     localId: string;
     specs: string;
     photos: IPartPhoto[];
+    partNumber: string;
+    manufacturer: string;
 }

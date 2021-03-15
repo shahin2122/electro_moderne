@@ -11,9 +11,9 @@ p-3 px-md-4  bg-body border-bottom shadow-sm">
     <div class="d-flex  col-xl-4 col-lg-5 col-md-5 align-items-center">
     
               <div class="container col-xl-3 col-lg-3 col-md-3 ">
-                <a class="position-relative">
+                <a routerLink="/basket" class="position-relative">
                 <i class="fa fa-shopping-cart fa-2x mr-5 text-dark" aria-hidden="true"></i>
-                <div class="cart-no" style="padding-top: 2px;">5</div>
+                <div *ngIf="(basket$ | async) as basket" class="cart-no" style="padding-top: 2px;">{{basket.partItems.length + basket.productItems.length}}</div>
                </a>
             </div>
      <div class="container  d-flex flex-block col-xl-9 col-lg-9 col-md-9 ">
@@ -122,7 +122,7 @@ p-3 px-md-4  bg-body border-bottom shadow-sm">
 </nav>
 
 <nav class="navbar navbar-expand-md navbar-light bg-light">
-  <a class="navbar-brand" href="#">Brands</a>
+  <a routerLink="/part-shop" class="navbar-brand font-large" href="#">Appliances Parts</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>

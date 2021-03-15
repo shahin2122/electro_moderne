@@ -22,10 +22,17 @@ const routes: Routes = [
     {path: 'shop', loadChildren: () => import('./shop/shop.module')
       .then(mod => mod.ShopModule)},
 
+    {path: 'part-shop', loadChildren: () => import('./part-shop/part-shop.module')
+      .then(mod => mod.PartShopModule)},
+
     {path: 'account', loadChildren: () => import('./account/account.module')
       .then(mod => mod.AccountModule)},
 
+    {path: 'basket', loadChildren: () => import('./basket/basket.module')
+      .then(mod => mod.BasketModule)},
     
+    {path: 'checkout', loadChildren: () => import('./checkout/checkout.module')
+      .then(mod => mod.CheckoutModule)},
 
     {path: '**', redirectTo : '', pathMatch: 'full'}
 ];

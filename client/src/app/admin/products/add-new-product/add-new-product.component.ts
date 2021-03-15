@@ -50,7 +50,7 @@ export class AddNewProductComponent implements OnInit {
       this.router.navigateByUrl("/admin/photo-editor/" + response.id);
     }, error => {
       console.log(error);
-      this.toastr.error(error);
+      this.toastr.error(error.message);
     })
   }
 

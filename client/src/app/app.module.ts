@@ -16,6 +16,7 @@ import { SharedModule } from './shared/shared.module';
 import { AccountModule } from './account/account.module';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
+import { PartShopModule } from './part-shop/part-shop.module';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { GoogleLoginProvider } from 'angularx-social-login';
     AdminModule,
     HomeModule,
     ShopModule,
+    PartShopModule,
     SharedModule,
     AccountModule,
     SocialLoginModule

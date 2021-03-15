@@ -37,11 +37,14 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int>("PartBrandId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("PartNumber")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("PartTypeId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("INTEGER");
+                    b.Property<double>("Price")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("Specs")
                         .HasColumnType("TEXT");
@@ -148,8 +151,8 @@ namespace Infrastructure.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("INTEGER");
+                    b.Property<double>("Price")
+                        .HasColumnType("REAL");
 
                     b.Property<int>("ProductBrandId")
                         .HasColumnType("INTEGER");

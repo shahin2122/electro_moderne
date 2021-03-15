@@ -31,7 +31,8 @@ export class PhotoEditorComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.adminService.getPhotosOfProduct(Number(this.route.snapshot.paramMap.get('productId'))).subscribe(response =>{
+    this.adminService.getPhotosOfProduct(Number(this.route.snapshot.paramMap.get('productId')))
+    .subscribe(response =>{
         this.photosOfProduct = response;
    });
    this.product = this.adminService.productToAddPhoto;
@@ -76,7 +77,7 @@ export class PhotoEditorComponent implements OnInit {
         if(p.id === photo.id) p.isMain = true;
         
       })
-      this.toastr.success("please refresh your page");
+      this.toastr.success("photo is now Main photo");
       console.log(photo.id);
     });
   }

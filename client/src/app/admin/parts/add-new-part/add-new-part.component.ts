@@ -45,10 +45,10 @@ export class AddNewPartComponent implements OnInit {
     this.adminService.addNewPart(this.addPartForm.value).subscribe((response: IPart) => {
       this.toastr.success("New Part Added");
       this.adminService.partToAddPhoto = response;
-      this.router.navigateByUrl("/admin/pannel");
+      this.router.navigateByUrl("/admin/part-photo-editor/" + response.id);
     }, error => {
       console.log(error);
-      this.toastr.error(error);
+      this.toastr.error(error.message);
     })
   }
 
@@ -62,6 +62,7 @@ export class AddNewPartComponent implements OnInit {
       PartBrandId: new FormControl('', [Validators.required]),
       Specs: new FormControl('', [Validators.required]),
       LocalId: new FormControl('', [Validators.required]),
+      PartNumber: new FormControl('', [Validators.required]),
       PartType: new FormControl(''),
       PartBrand: new FormControl(''),
     });

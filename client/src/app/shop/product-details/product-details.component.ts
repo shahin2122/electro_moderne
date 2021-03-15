@@ -6,6 +6,7 @@ import { ShopService } from '../shop.service';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { Photo } from 'src/app/shared/models/photo';
 import { map } from 'rxjs/operators';
+import { BasketService } from 'src/app/basket/basket.service';
 
 @Component({
   selector: 'app-product-details',
@@ -17,17 +18,18 @@ product: product;
 productPhotos: Photo[] = [];
 galleryOptions: NgxGalleryOptions[];
 GalleryImages: NgxGalleryImage[];
+quantity = 1;
 
-
-  constructor(private shopService: ShopService, private activatedRoute: ActivatedRoute) { }
+  constructor(private shopService: ShopService, private activatedRoute: ActivatedRoute,
+    private basketService: BasketService) { }
 
   ngOnInit(): void {
     this.loadProduct();
 
     this.galleryOptions = [
       {
-        width: '600px',
-        height: '600px',
+        width: '500px',
+        height: '500px',
         imagePercent: 100,
         thumbnailsColumns: 4,
         imageAnimation: NgxGalleryAnimation.Slide,
@@ -46,7 +48,9 @@ GalleryImages: NgxGalleryImage[];
       
   }
 
-
+  addItemToBasket() {
+    this.basketService.addProductItemToBasket(this.product, this.quantity);
+  }
 
   getImages(): NgxGalleryImage[] {
     
@@ -63,5 +67,17 @@ GalleryImages: NgxGalleryImage[];
   return imageUrls;
   }
 
+  incrementQuantity() {
+    
+      this.quantity++;
+    
+    
+  }
+
+  decrementQuantity() {
+    if(this.quantity > 1) {
+    this.quantity--;
+    }
+  }
 
 }
