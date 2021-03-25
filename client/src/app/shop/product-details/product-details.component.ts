@@ -7,6 +7,7 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { Photo } from 'src/app/shared/models/photo';
 import { map } from 'rxjs/operators';
 import { BasketService } from 'src/app/basket/basket.service';
+import { BreadcrumbService } from 'xng-breadcrumb';
 
 @Component({
   selector: 'app-product-details',
@@ -21,7 +22,9 @@ GalleryImages: NgxGalleryImage[];
 quantity = 1;
 
   constructor(private shopService: ShopService, private activatedRoute: ActivatedRoute,
-    private basketService: BasketService) { }
+    private basketService: BasketService, private bcService: BreadcrumbService) {
+      this.bcService.set('@productDetails','')
+     }
 
   ngOnInit(): void {
     this.loadProduct();
@@ -43,6 +46,7 @@ quantity = 1;
   loadProduct() {
     this.shopService.getProduct(+this.activatedRoute.snapshot.paramMap.get('id')).subscribe(product => {
         this.product = product;
+        this.bcService.set('@productDetails', product.name);
         this.GalleryImages = this.getImages();
       })
       

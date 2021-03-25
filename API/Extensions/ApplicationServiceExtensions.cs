@@ -16,9 +16,11 @@ namespace API.Extensions
         {
 
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IPhotoService, PhotoService>();
+            services.AddScoped<IOrderService, OrderService>();
             services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
             services.AddAutoMapper(typeof(AutoMapperProfiles));
              services.AddDbContext<StoreContext>(options =>

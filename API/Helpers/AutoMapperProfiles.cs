@@ -3,6 +3,7 @@ using API.Dtos;
 using AutoMapper;
 using Core.Entities;
 using Core.Entities.Identity;
+using Core.Entities.OrderAggregate;
 
 namespace API.Helpers
 {
@@ -28,17 +29,14 @@ namespace API.Helpers
                 .ReverseMap();
            
             CreateMap<Part, PartDto>()
-                .ForMember(dest => dest.PartType, opts => opts.MapFrom(src => 
-                    src.PartType.Name))
-                .ForMember(dest => dest.PartBrand, opts => opts.MapFrom(src => 
-                    src.PartBrand.Name))
+                .ForMember(dest => dest.PartTypeId, opts => opts.MapFrom(src => 
+                    src.PartTypeId))
+                .ForMember(dest => dest.PartBrandId, opts => opts.MapFrom(src => 
+                    src.PartBrandId))
                 .ForMember(dest => dest.PhotoUrl, opts => opts.MapFrom(src => 
                     src.Photos.FirstOrDefault(x => x.IsMain).Url))
                 .ReverseMap();
-
             
-
-
             CreateMap<RegisterDto, AppUser>()
             .ReverseMap();
 
@@ -54,6 +52,18 @@ namespace API.Helpers
             CreateMap<PartPhotoDto, PartPhoto>()
                 .ReverseMap();
             
+            CreateMap<Order, OrderToReturnDto>()
+                .ForMember(d => d.DeliveryMethod,o => o.MapFrom(s => s.DeliveryMethod.ShortName))
+                .ForMember(d => d.ShippingPrice,o => o.MapFrom(s => s.DeliveryMethod.Price));
+                
+
+            CreateMap<OrderItem, OrderItemDto>()
+                .ForMember(d => d.ProductId, o => o.MapFrom(s => s.ProductItemOrdered.ProductItemId))
+                .ForMember(d => d.PartId, o => o.MapFrom(s => s.PartItemOrdered.PartId))
+                .ForMember(d => d.ProductName, o => o.MapFrom(s => s.ProductItemOrdered.ProductName))
+                .ForMember(d => d.PartName, o => o.MapFrom(s => s.PartItemOrdered.PartName))
+                .ForMember(d => d.ProductPhotoUrl, o => o.MapFrom(s => s.ProductItemOrdered.PhotoUrl))
+                .ForMember(d => d.PartPhotoUrl, o => o.MapFrom(s => s.PartItemOrdered.PhotoUrl));
         }
     }
 }

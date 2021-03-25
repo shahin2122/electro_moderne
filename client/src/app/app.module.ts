@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +17,9 @@ import { AccountModule } from './account/account.module';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { PartShopModule } from './part-shop/part-shop.module';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 
 
 @NgModule({
@@ -41,9 +44,12 @@ import { PartShopModule } from './part-shop/part-shop.module';
     PartShopModule,
     SharedModule,
     AccountModule,
-    SocialLoginModule
+    SocialLoginModule,
+    NgxSpinnerModule
   ],
   providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
     {provide: 'SocialAuthServiceConfig', useValue: {
       autoLogin: false,providers: [{
         id: GoogleLoginProvider.PROVIDER_ID,

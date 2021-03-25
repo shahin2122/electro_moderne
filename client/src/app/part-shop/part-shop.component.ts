@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { BreadcrumbService } from 'xng-breadcrumb';
 import { IPart } from '../shared/models/part';
 import { IPartBrand } from '../shared/models/partBrand';
 import { IPartType } from '../shared/models/partType';
