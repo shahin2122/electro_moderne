@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -60,19 +61,30 @@ namespace API.Controllers
             
             if (user == null) return Unauthorized("Email Not Found");
 
-            if(loginDto.Provider == "Internal")
-            {
-                var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password,
-                false);
+           if(loginDto.Provider != "GOOGLE")
+           {
+            var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password,
+            false);
 
-                if (!result.Succeeded) return Unauthorized("Password is not correct");
-            }
+            if (!result.Succeeded) return Unauthorized("Password is not correct");
+            return new UserDto
+            {
+                Email = user.Email,
+                Token = await _tokenService.CreateToken(user),
+                DisplayName = user.UserName,
+                Address1 = user.Address1
+            };
+
+           }
+           
+           await _signInManager.SignInAsync(user,true,default);
 
             return new UserDto
             {
                 Email = user.Email,
                 Token = await _tokenService.CreateToken(user),
-                DisplayName = user.UserName
+                DisplayName = user.UserName,
+                Address1 = user.Address1
             };
         }
 
@@ -93,6 +105,10 @@ namespace API.Controllers
                 Provider = registerDto.Provider
             };
 
+            if(user.Provider == "GOOGLE")
+            {
+                user.EmailConfirmed = true;
+            }
            
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
@@ -102,10 +118,7 @@ namespace API.Controllers
 
             if(!roleResult.Succeeded) return BadRequest(result.Errors);
 
-            if(user.Provider == "GOOGLE")
-            {
-                user.EmailConfirmed = true;
-            }
+           
 
             return new UserDto
             {
@@ -118,22 +131,14 @@ namespace API.Controllers
         }
 
         [HttpPost("external-login")]
-        public async Task<ActionResult<UserDto>> ExternalLogin(UserDto externalUser)
+        public async Task<ActionResult<UserDto>> ExternalLogin(LoginDto externalUser)
         {
             if (externalUser == null) return Unauthorized("Wrong USer");
 
             if (await UserExists(externalUser.Email))
             {
-                var user = new LoginDto
-                {
-                    Provider = externalUser.Provider,
-                    Password = GeneratePassword(),
-                    Email = externalUser.Email,
-                    
-                };
-                
-                return await Login(user);
 
+                return await Login(externalUser);
 
             }
             else
@@ -151,6 +156,30 @@ namespace API.Controllers
             }
         }
 
+        [HttpGet("address")]
+        public async Task<ActionResult<AddressDto>> GetUserAddress()
+        {
+            var user = await _userManager.FindUserByClaimsPrincipleWithIncludeAsync(HttpContext.User);
+
+            return _mapper.Map<AddressDto>(user);
+        }
+
+
+        [Authorize]
+        [HttpPost("address")]
+        public async Task<ActionResult<IReadOnlyList<AddressDto>>> UpdateUserAddress(AddressDto dto)
+        {
+            var user = await _userManager.FindUserByClaimsPrincipleWithIncludeAsync(HttpContext.User);
+
+            user.Address1 = dto.Address1;
+            user.Address2 = dto.Address2;
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if(result.Succeeded) return Ok(_mapper.Map<AddressDto>(user));
+
+            return BadRequest("Problem Updating Address");
+        }
 
         public async Task<bool> UserExists(string email)
         {

@@ -11,6 +11,9 @@ namespace API.Helpers
     {
         public AutoMapperProfiles()
         {
+            CreateMap<AppUser, AddressDto>();
+            
+
             CreateMap<Product, ProductToReturnDto>()
             .ForMember(dest => dest.ProductBrand,opts => opts.MapFrom(source => 
                 source.ProductBrand.Name) )

@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="mt-4" [formGroup]="checkoutForm">
+        <h2>Choose Your Address Please</h2>
+
+        <div class="row" formGroupName="addressForm">
+            <div class="form-group col-12">
+                <app-text-input [label]="'Shipping Address1'" formControlName="address1" ></app-text-input>
+                <app-text-input [label]="'Shipping Address2'" formControlName="address2" ></app-text-input>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+           
+            <button (click)="saveUserAddress()" 
+            [disabled]="!checkoutForm.get('addressForm').valid || 
+            !checkoutForm.get('addressForm').dirty" class="btn btn-info">
+                Save as default address
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5">
+    <button class="btn btn-outline-danger d-flex align-items-center" routerLink="/Basket">
+        <i class="fa fa-angle-left fa-3x"></i> Back To Basket
+    </button>
+    <button class="btn btn-success
+     d-flex align-items-center" cdkStepperNext>
+      Go To Delivery <i class="fa fa-angle-right fa-3x "></i> 
+    </button>
+</div>

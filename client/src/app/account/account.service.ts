@@ -7,6 +7,8 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { SocialAuthService } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
+import { IAddress } from '../shared/models/address';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,8 @@ export class AccountService {
  baseUrl = environment.baseApiUrl;
  private currentUserSource = new ReplaySubject<IUSer>(1);
  currentUser$ = this.currentUserSource.asObservable();
+ user: IUSer;
+
 
   constructor(private http: HttpClient, private router: Router,
     private socialAuthService: SocialAuthService) { }
@@ -27,6 +31,7 @@ export class AccountService {
     Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
+    this.user = user;
     this.router.navigateByUrl('/');
   }
 
@@ -37,10 +42,10 @@ export class AccountService {
       return of(null);
     }
 
-    let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
+  // let headers = new HttpHeaders();
+  //  headers = headers.set('Authorization', `Bearer ${token}`);
 
-    return this.http.get(this.baseUrl + 'account', {headers}).pipe(
+    return this.http.get(this.baseUrl + 'account').pipe(
       map((user: IUSer) => {
         if(user) {
           localStorage.setItem('token', user.token);
@@ -97,11 +102,21 @@ googleLogin(model: any){
       if(user) {
         localStorage.setItem('token', user.token);
         this.setCurrentUser(user);
-      
+      console.log("ac " + user.address1);
       }
       return user;
     })
   );
  }
+
+ getUserAddress(){
+   return this.http.get<IAddress>(this.baseUrl + 'account/address');
+ }
+
+ updateUserAddress(NewAddress: IAddress) {
+  return this.http.post<IAddress>(this.baseUrl + 'account/address', NewAddress);
+ }
+
+ 
 
 }

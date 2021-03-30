@@ -8,5 +8,6 @@ namespace API.Dtos
         public string Role { get; set; }
         public string Provider { get; set; }
         public bool EmailConfirmed { get; set; }
+        public string Address1 { get; set; }
     }
 }

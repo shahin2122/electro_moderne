@@ -19,7 +19,9 @@ namespace Infrastructure.Identity
                 FirstName = "Shahin",
                 LastName = "Mohammadpur",
                 EmailConfirmed = true,
-                UserName = "admin"
+                UserName = "admin",
+                Address1 = "Add re ss, 1 for, admin",
+                Provider = "Internal"
             };
 
             var roles = new List<AppRole>

@@ -62,10 +62,10 @@ export class LoginComponent implements OnInit {
           firstName: response.firstName,
           lastName: response.lastName,
           pictureUrl: response.photoUrl,
-          provider: response.provider,
+          provider: response.provider
         };
       
-      console.log(this.externalUser);
+
         this.accountService.googleLogin(this.externalUser).subscribe();
       });
      
