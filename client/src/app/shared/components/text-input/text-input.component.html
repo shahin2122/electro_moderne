@@ -1,5 +1,5 @@
 <div class="form-label-group">
-    <label class="font-xx-large" for="{{label}}"> {{label}}:</label>
+   
     <input
         
         [ngClass]="(controlDir && controlDir.control &&  
@@ -14,6 +14,8 @@
         style="font-size: 30px;"
         
     >
+    <label class="font-xx-large" for="{{label}}">{{label}}</label>
+
     <div *ngIf="controlDir && controlDir.control && controlDir.control.status === 'PENDING'" 
     class="fa fa-spinner fa-spin loader" ></div>
     
@@ -30,3 +32,4 @@
     </div>
 
 </div>
+

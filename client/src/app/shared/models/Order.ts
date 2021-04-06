@@ -13,17 +13,20 @@ export interface IOrder {
     shippingToAddress: IAddress;
     deliveryMethod: string;
     shippingPrice: number;
-    orderItems: IOrderItem[];
+    items: IOrderItem[];
     subtotal: number;
     total: number;
     status: string;
 }
 
 export interface IOrderItem {
-    productId: number;
-    productName: string;
-    partId: number;
-    partName: string;
+    id: number;
+    name: string;
     price: number;
     quantity: number;
+    photoUrl: string;
+    type: string;
+    brand: string;
 }
+
+

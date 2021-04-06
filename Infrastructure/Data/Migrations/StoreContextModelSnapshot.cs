@@ -51,17 +51,17 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int?>("DeliveryMethodId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTimeOffset>("OrderDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("OrderStatus")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<long>("OrderDate")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("PaymentIntentId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ShipToAddress")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<double>("Subtotal")
@@ -295,22 +295,28 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Core.Entities.OrderAggregate.OrderItem", b =>
                 {
                     b.HasOne("Core.Entities.OrderAggregate.Order", null)
-                        .WithMany("OrderItems")
+                        .WithMany("Items")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.OwnsOne("Core.Entities.OrderAggregate.PartItemOrdered", "PartItemOrdered", b1 =>
+                    b.OwnsOne("Core.Entities.OrderAggregate.ItemOrdered", "ItemOrdered", b1 =>
                         {
                             b1.Property<int>("OrderItemId")
                                 .HasColumnType("INTEGER");
 
-                            b1.Property<int>("PartId")
+                            b1.Property<string>("Brand")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<int>("Id")
                                 .HasColumnType("INTEGER");
 
-                            b1.Property<string>("PartName")
+                            b1.Property<string>("Name")
                                 .HasColumnType("TEXT");
 
                             b1.Property<string>("PhotoUrl")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Type")
                                 .HasColumnType("TEXT");
 
                             b1.HasKey("OrderItemId");
@@ -321,31 +327,7 @@ namespace Infrastructure.Data.Migrations
                                 .HasForeignKey("OrderItemId");
                         });
 
-                    b.OwnsOne("Core.Entities.OrderAggregate.ProductItemOrdered", "ProductItemOrdered", b1 =>
-                        {
-                            b1.Property<int>("OrderItemId")
-                                .HasColumnType("INTEGER");
-
-                            b1.Property<string>("PhotoUrl")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<int>("ProductItemId")
-                                .HasColumnType("INTEGER");
-
-                            b1.Property<string>("ProductName")
-                                .HasColumnType("TEXT");
-
-                            b1.HasKey("OrderItemId");
-
-                            b1.ToTable("OrderItems");
-
-                            b1.WithOwner()
-                                .HasForeignKey("OrderItemId");
-                        });
-
-                    b.Navigation("PartItemOrdered");
-
-                    b.Navigation("ProductItemOrdered");
+                    b.Navigation("ItemOrdered");
                 });
 
             modelBuilder.Entity("Core.Entities.Part", b =>
@@ -410,7 +392,7 @@ namespace Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Core.Entities.OrderAggregate.Order", b =>
                 {
-                    b.Navigation("OrderItems");
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("Core.Entities.Part", b =>

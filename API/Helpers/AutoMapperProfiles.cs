@@ -57,16 +57,19 @@ namespace API.Helpers
             
             CreateMap<Order, OrderToReturnDto>()
                 .ForMember(d => d.DeliveryMethod,o => o.MapFrom(s => s.DeliveryMethod.ShortName))
-                .ForMember(d => d.ShippingPrice,o => o.MapFrom(s => s.DeliveryMethod.Price));
+                .ForMember(d => d.ShippingPrice,o => o.MapFrom(s => s.DeliveryMethod.Price))
+                .ForMember(d => d.Total , o => o.MapFrom(s => s.GetTotal()));
+               
                 
 
             CreateMap<OrderItem, OrderItemDto>()
-                .ForMember(d => d.ProductId, o => o.MapFrom(s => s.ProductItemOrdered.ProductItemId))
-                .ForMember(d => d.PartId, o => o.MapFrom(s => s.PartItemOrdered.PartId))
-                .ForMember(d => d.ProductName, o => o.MapFrom(s => s.ProductItemOrdered.ProductName))
-                .ForMember(d => d.PartName, o => o.MapFrom(s => s.PartItemOrdered.PartName))
-                .ForMember(d => d.ProductPhotoUrl, o => o.MapFrom(s => s.ProductItemOrdered.PhotoUrl))
-                .ForMember(d => d.PartPhotoUrl, o => o.MapFrom(s => s.PartItemOrdered.PhotoUrl));
+                .ForMember(d => d.Id, o => o.MapFrom(s => s.ItemOrdered.Id))
+                .ForMember(d => d.Name, o => o.MapFrom(s => s.ItemOrdered.Name))
+                .ForMember(d => d.PhotoUrl, o => o.MapFrom(s => s.ItemOrdered.PhotoUrl))
+                .ForMember(d => d.Type, o => o.MapFrom(s => s.ItemOrdered.Type))
+                .ForMember(d => d.Brand, o => o.MapFrom(s => s.ItemOrdered.Brand));
+
+                
         }
     }
 }

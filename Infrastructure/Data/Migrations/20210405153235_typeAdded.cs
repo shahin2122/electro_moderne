@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Data.Migrations
 {
-    public partial class addressAdded : Migration
+    public partial class typeAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -82,11 +81,11 @@ namespace Infrastructure.Data.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     BuyerEmail = table.Column<string>(type: "TEXT", nullable: true),
-                    OrderDate = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    OrderDate = table.Column<long>(type: "INTEGER", nullable: false),
                     ShipToAddress = table.Column<string>(type: "TEXT", nullable: true),
                     DeliveryMethodId = table.Column<int>(type: "INTEGER", nullable: true),
                     Subtotal = table.Column<double>(type: "REAL", nullable: false),
-                    OrderStatus = table.Column<string>(type: "TEXT", nullable: false),
+                    Status = table.Column<string>(type: "TEXT", nullable: false),
                     PaymentIntentId = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
@@ -171,12 +170,11 @@ namespace Infrastructure.Data.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    ProductItemOrdered_ProductItemId = table.Column<int>(type: "INTEGER", nullable: true),
-                    ProductItemOrdered_ProductName = table.Column<string>(type: "TEXT", nullable: true),
-                    ProductItemOrdered_PhotoUrl = table.Column<string>(type: "TEXT", nullable: true),
-                    PartItemOrdered_PartId = table.Column<int>(type: "INTEGER", nullable: true),
-                    PartItemOrdered_PartName = table.Column<string>(type: "TEXT", nullable: true),
-                    PartItemOrdered_PhotoUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    ItemOrdered_Id = table.Column<int>(type: "INTEGER", nullable: true),
+                    ItemOrdered_Name = table.Column<string>(type: "TEXT", nullable: true),
+                    ItemOrdered_PhotoUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    ItemOrdered_Type = table.Column<string>(type: "TEXT", nullable: true),
+                    ItemOrdered_Brand = table.Column<string>(type: "TEXT", nullable: true),
                     Price = table.Column<double>(type: "decimal(18,2)", nullable: false),
                     Quantity = table.Column<int>(type: "INTEGER", nullable: false),
                     OrderId = table.Column<int>(type: "INTEGER", nullable: true)

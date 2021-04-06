@@ -21,7 +21,9 @@ const routes: Routes = [
     children: [
      
       {path: 'admin', loadChildren: () => import('./admin/admin.module')
-      .then(mod => mod.AdminModule), canActivate: [AdminGuard] },
+        .then(mod => mod.AdminModule), canActivate: [AdminGuard] },
+      {path: 'order', loadChildren: () => import('./order/order.module')
+        .then(mod => mod.OrderModule), data: { breadcrumb: 'Orders'}},
     ]
     },
 

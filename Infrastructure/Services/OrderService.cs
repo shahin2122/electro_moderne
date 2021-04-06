@@ -13,16 +13,19 @@ namespace Infrastructure.Services
 
         private readonly IBasketRepository _basketRepo;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IPaymentService _paymentService;
 
-        public OrderService(IBasketRepository basketRepo, IUnitOfWork unitOfWork)
+        public OrderService(IBasketRepository basketRepo, IUnitOfWork unitOfWork, IPaymentService paymentService)
         {
+            _paymentService = paymentService;
             _unitOfWork = unitOfWork;
 
             _basketRepo = basketRepo;
 
         }
 
-        public async Task<Order> CreateOrderAsync(string buyerEmail, int deliveryMethodId, string basketId, string shippingAddress)
+        public async Task<Order> CreateOrderAsync(string buyerEmail, int deliveryMethodId, string basketId,
+         string shippingAddress)
         {
             // get basket from repo
             var basket = await _basketRepo.GetBasketAsync(basketId);
@@ -33,18 +36,18 @@ namespace Infrastructure.Services
             {
                 var spec = new ProductWithPhotosSpecification(item.Id);
                 var productItem = await _unitOfWork.Repository<Product>().GetEntityWithSpecAsync(spec);
-                var itemOrdered = new ProductItemOrdered(productItem.Id, productItem.Name,
+                var itemOrdered = new ItemOrdered(productItem.Id, productItem.Name,
                 productItem.Photos.FirstOrDefault(x => x.IsMain).Url);
-                var orderItem = new OrderItem(itemOrdered, null, productItem.Price, item.Quantity);
+                var orderItem = new OrderItem(itemOrdered, productItem.Price, item.Quantity);
                 items.Add(orderItem);
             }
             foreach (var item in basket.PartItems)
             {
                 var spec = new PartsSpecification(item.Id);
                 var partItem = await _unitOfWork.Repository<Part>().GetEntityWithSpecAsync(spec);
-                var itemOrdered = new PartItemOrdered(partItem.Id, partItem.Name,
+                var itemOrdered = new ItemOrdered(partItem.Id, partItem.Name,
                 partItem.Photos.FirstOrDefault(x => x.IsMain).Url);
-                var orderItem = new OrderItem(null, itemOrdered, partItem.Price, item.Quantity);
+                var orderItem = new OrderItem(itemOrdered, partItem.Price, item.Quantity);
                 items.Add(orderItem);
             }
 
@@ -54,17 +57,27 @@ namespace Infrastructure.Services
             // calc subtotal
             var subtotal = items.Sum(item => item.Price * item.Quantity);
 
+            //check to see if order exists
+            var orderSpec = new OrderByPaymentIntentIdSpecification(basket.PaymentIntentId);
+            var exisitingOrder = await _unitOfWork.Repository<Order>().GetEntityWithSpecAsync(orderSpec);
+
+            if (exisitingOrder != null)
+            {
+                _unitOfWork.Repository<Order>().Delete(exisitingOrder);
+                await _paymentService.CreateOrUpdatePaymentIntent(basket.PaymentIntentId);
+            }
+
             // create order
-            var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subtotal);
+            var order = new Order(items, buyerEmail, shippingAddress, deliveryMethod, subtotal,
+            basket.PaymentIntentId);
             _unitOfWork.Repository<Order>().Add(order);
 
             // TODO: save to db
             var result = await _unitOfWork.Complete();
-            
-            if(result <= 0) return null;
 
-            // delete basket
-            await _basketRepo.DeleteBasketAsync(basketId);
+            if (result <= 0) return null;
+
+
 
             // return order
             return order;
@@ -72,7 +85,7 @@ namespace Infrastructure.Services
 
         public async Task<IReadOnlyList<DeliveryMethod>> GetDeliveryMethodsAsync()
         {
-             return await _unitOfWork.Repository<DeliveryMethod>().ListAllAsync();
+            return await _unitOfWork.Repository<DeliveryMethod>().ListAllAsync();
         }
 
         public async Task<Order> GetOrderByIdAsync(int id, string buyerEmail)

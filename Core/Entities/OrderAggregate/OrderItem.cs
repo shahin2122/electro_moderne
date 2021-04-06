@@ -6,10 +6,10 @@ namespace Core.Entities.OrderAggregate
         {
 
         }
-        public OrderItem(ProductItemOrdered? productItemOrdered ,PartItemOrdered? PartItemOrdered ,decimal price, int quantity) 
+        public OrderItem(ItemOrdered itemOrdered ,decimal price, int quantity) 
         {   
-            this.ProductItemOrdered = productItemOrdered;
-            this.PartItemOrdered = PartItemOrdered;
+            this.ItemOrdered = itemOrdered;
+
             this.Price = price;
             this.Quantity = quantity;
 
@@ -17,8 +17,7 @@ namespace Core.Entities.OrderAggregate
      
 
         
-        public ProductItemOrdered? ProductItemOrdered {get; set;}
-        public PartItemOrdered? PartItemOrdered {get; set;}
+        public ItemOrdered ItemOrdered {get; set;}
         public decimal Price { get; set; }
         public int Quantity { get; set; }
         

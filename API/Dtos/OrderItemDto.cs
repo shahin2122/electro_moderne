@@ -2,13 +2,12 @@ namespace API.Dtos
 {
     public class OrderItemDto
     {
-        public int? ProductId { get; set; }
-        public int? PartId { get; set; }
-        public string ProductName { get; set; }
-        public string PartName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
-        public string ProductPhotoUrl { get; set; }
-        public string PartPhotoUrl { get; set; }
+        public string PhotoUrl { get; set; }
+        public string Type { get; set; }
+        public string Brand { get; set; }
     }
 }

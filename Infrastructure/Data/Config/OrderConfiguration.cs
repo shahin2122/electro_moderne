@@ -10,13 +10,13 @@ namespace Infrastructure.Data.Config
         public void Configure(EntityTypeBuilder<Order> builder)
         {
             
-            builder.Property(s=> s.OrderStatus)
+            builder.Property(s=> s.Status)
                 .HasConversion(
                     o => o.ToString(),
-                    o => (OrderStatus) Enum.Parse(typeof(OrderStatus), o)
+                    o => (Status) Enum.Parse(typeof(Status), o)
                 );
 
-            builder.HasMany(o => o.OrderItems).WithOne().OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(o => o.Items).WithOne().OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

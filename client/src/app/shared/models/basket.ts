@@ -4,6 +4,10 @@ export interface IBasket {
     id: string;
     productItems: IBasketProductItem[];
     partItems: IBasketPartItem[];
+    deliveryMethodId: number;
+    shippingPrice: number;
+    paymentIntentId: string;
+    clientSecret: string;
 }
 
 export interface IBasketProductItem {
@@ -31,6 +35,10 @@ export class Basket implements IBasket {
     id = uuidv4();
     productItems: IBasketProductItem[] = [];
     partItems: IBasketPartItem[] = [];
+    deliveryMethodId: number;
+    shippingPrice: number;
+    paymentIntentId: string;
+    clientSecret: string;
 }
 
 export interface IBasketTotals {
