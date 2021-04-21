@@ -11,6 +11,19 @@
     right: 32px;
 }
 
+.req-no {
+    position:absolute;
+    min-height: 25px;
+    min-width: 25px;
+    border-radius: 50%;
+    font-size: 1em;
+    background: red;
+    color: white;
+    text-align: center;
+    top: -12px;
+    left: 2px
+}
+
 .font-large {
     font-size: large;
 }
@@ -19,5 +32,5 @@
     font-size: x-large;
 }
 .my-dropdown-item {
-    font-size: x-large;
+    font-size: large;
 }

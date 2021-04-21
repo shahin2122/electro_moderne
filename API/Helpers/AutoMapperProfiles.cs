@@ -39,6 +39,15 @@ namespace API.Helpers
                 .ForMember(dest => dest.PhotoUrl, opts => opts.MapFrom(src => 
                     src.Photos.FirstOrDefault(x => x.IsMain).Url))
                 .ReverseMap();
+
+            CreateMap<Part, PartToReturnDto>()
+                .ForMember(dest => dest.PartType, opts => opts.MapFrom(src => 
+                    src.PartType.Name))
+                .ForMember(dest => dest.PartBrand, opts => opts.MapFrom(src =>
+                    src.PartBrand.Name))
+                .ForMember(dest => dest.PhotoUrl, opts => opts.MapFrom(src => 
+                    src.Photos.FirstOrDefault(x => x.IsMain).Url))
+                .ReverseMap();
             
             CreateMap<RegisterDto, AppUser>()
             .ReverseMap();
@@ -69,7 +78,9 @@ namespace API.Helpers
                 .ForMember(d => d.Type, o => o.MapFrom(s => s.ItemOrdered.Type))
                 .ForMember(d => d.Brand, o => o.MapFrom(s => s.ItemOrdered.Brand));
 
-                
+            CreateMap<RepairRequest, RepairRequestToReturnDto>();
+
+            CreateMap<ContactRequest, ContactRequestToRetuenDto>();
         }
     }
 }

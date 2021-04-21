@@ -1,0 +1,25 @@
+<div class="container" [formGroup]="repairRequestForm">
+    <div class="row mt-4 ml-2 d-flex justify-content-center" formGroupName="productForm">
+        <div class="col-6 form-group">
+            <app-text-input  formControlName="ProductType" [label]="'Appliance Type'"></app-text-input>
+        </div>
+        
+        <div class="col-6 form-group">
+            <app-text-input  formControlName="ProductBrand" [label]="'Appliance Brand'"></app-text-input>
+        </div>
+        <div class="col-12 form-group">
+            <app-text-input  formControlName="ProblemInfo" [label]="'Describe Problem'"></app-text-input>
+        </div>
+    </div>
+
+    <div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5">
+        <button class="btn btn-warning d-flex align-items-center" cdkStepperPrevious>
+            <i class="fa fa-angle-left fa-3x"></i> Go Back
+        </button>
+        <button 
+         [disabled]="repairRequestForm.get('productForm').invalid"
+         class="btn btn-success
+         d-flex align-items-center" cdkStepperNext>
+          Go To Next <i class="fa fa-angle-right fa-3x "></i> 
+        </button>
+    </div>

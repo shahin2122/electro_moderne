@@ -10,7 +10,6 @@ namespace Core.Specifications
         : base(o => o.BuyerEmail == email)
         {
             AddInclude(o => o.Items);
-            
             AddInclude(o => o.DeliveryMethod);
             AddOrderByDescending(o => o.OrderDate);
         }
@@ -20,6 +19,15 @@ namespace Core.Specifications
         {
             AddInclude(o => o.Items);
             AddInclude(o => o.DeliveryMethod);
+        }
+
+        public OrdersWithItemsAndOrderingSpecification(OrderSpecParams orderParams)
+        {
+            AddInclude(o => o.Items);
+            AddInclude(o => o.DeliveryMethod);
+            AddOrderByDescending(o => o.OrderDate);
+            ApplyPaging(orderParams.pageSize * (orderParams.PageIndex - 1),
+            orderParams.pageSize);
         }
     }
 }

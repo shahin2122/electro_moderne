@@ -10,7 +10,6 @@ namespace Core.Specifications
             (productParams.Search)) &&
             (!productParams.BrandId.HasValue || x.ProductBrandId == productParams.BrandId) &&
             (!productParams.TypeId.HasValue || x.ProductTypeId == productParams.TypeId) 
-            
         )
         {
             AddInclude(x => x.ProductType);
@@ -30,7 +29,9 @@ namespace Core.Specifications
                     case "priceDesc":
                         AddOrderByDescending(p => p.Price);
                         break;
-                 
+                    case "used":
+                        AddOrderBy(x => x.Used == true);
+                        break;
                        
 
                     default:

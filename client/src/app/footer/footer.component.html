@@ -1,0 +1,59 @@
+
+ <footer id="sticky-footer " class="py-4 bg-dark text-white-50">
+   
+<div class="d-flex col-12  justify-content-center">
+  <div class="col-3 d-flex " style="flex-direction: column;"> 
+    <p class="font-large text-white " routerLink="shop " style="cursor: pointer;">Products</p>
+    <ng-container *ngFor="let type of types"> 
+      <p>{{type.name}}</p>
+    </ng-container>
+  </div>
+
+  <div class="col-3 d-flex " style="flex-direction: column;"> 
+    <p class="font-large text-white" routerLink="part-shop " style="cursor: pointer;">Appliance Parts</p>
+    <ng-container *ngFor="let type of partTypes"> 
+      <p>{{type.name}}</p>
+    </ng-container>
+  </div>
+
+  
+  <div class="col-6 d-flex text-white" style="flex-direction: column;"> 
+    <p class="font-large " routerLink="contact-us " style="cursor: pointer;">Contact Us</p>
+    <div class="d-flex align-items-center mb-3">
+      <div class="col-1">
+        <i class="fa fa-map-marker fa-3x"></i>
+      </div>
+      <div class="col-11">
+       <p> Shop 1: 10415 Boulevard Gouin Ouest, Roxboro - QC H8Y 1W5 </p>
+       <p> Shop 2 :946 Rue Bégin, Saint-Laurent, QC </p>
+      </div>
+    </div>
+  <div class="d-flex align-items-center mb-3">
+    <div class="col-1">
+      <i class="fa fa-phone fa-3x"></i>
+    </div>
+    <div class="col-11">
+      Phone 1: (438) 494 7672 
+    <p>  Phone 2 :(514) 676 7672</p>
+    </div>
+  </div>
+  <div class="ml-3">
+    <i class="fa fa-instagram fa-4x"></i>
+    <i class="fa fa-facebook fa-4x ml-5"></i>
+    <i class="fa fa-whatsapp fa-4x ml-5"></i>
+  </div>
+  </div>
+
+</div>
+
+
+    <hr class="bg-white">
+    <div class="container text-center" >
+
+      <p >Copyright © {{currentDate.getFullYear()}} Electro Moderne,This Website Fully Developed And Managing By
+        <a href="https://www.linkedin.com/in/shahin-mohammadpur-05379119b/">Shahin Mohammadpur </a>
+         All Rights Reserved.</p>
+         <p>beta version. 0.1b</p>
+    </div>
+  </footer>
+

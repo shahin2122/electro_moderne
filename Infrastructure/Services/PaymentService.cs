@@ -38,6 +38,7 @@ namespace Infrastructure.Services
             if(basket.DeliveryMethodId.HasValue)
             {
                 var deliveryMethod = await _unitOfWork.Repository<DeliveryMethod>().GetByIdAsync((int)basket.DeliveryMethodId);
+                shippingPrice = deliveryMethod.Price;
             }
 
             foreach(var item in basket.ProductItems)

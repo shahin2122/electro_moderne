@@ -1,0 +1,53 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <h1>Recieved Repair Requests</h1>
+
+            <div class="d-flex justify-content-center align-items-center pb-2 mr-2">
+
+                <app-paging-header
+                  [totalCount]="totalCount"
+                  [pageSize]="this.requestParams.pageSize"
+                  [pageNumber]="this.requestParams.pageNumber"
+                ></app-paging-header>
+              
+                  <div class="form-inline mt-2 " *ngIf="requests">
+                      <input (keyup.enter)="onSearch()" #search class="form-control mr-1 ml-4" style="width: 300px;" placeholder="search" type="text">
+                      <button (click)="onSearch()" class="btn btn-outline-primary my-2 ">Search</button>
+                     
+                  </div>
+            </div>
+
+                 
+            <table class="table table-hover" style="cursor: pointer;">
+                <thead class="thead-primary">
+                    <tr>
+                        <th>Request</th>
+                        <th>Customer Name</th>
+                        <th>Date</th>
+                        <th>Product</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let request of requests" (click)="onClicked(request.id)">
+                        <th># {{request.id}}</th>
+                        <td>{{request.fullName}}</td>
+                        <td>{{request.requestDate | date: 'medium'}}</td>
+                        <td>{{request.productType}}</td>
+                        <td>{{request.status}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center mt-2" *ngIf="totalCount > 0">
+    <app-pager
+     [pageSize]="requestParams.pageSize"
+     [totalCount]="totalCount"
+     (pageChanged)="onPageChanged($event)"
+    ></app-pager>
+   </div>

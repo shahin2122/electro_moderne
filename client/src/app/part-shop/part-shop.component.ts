@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BreadcrumbService } from 'xng-breadcrumb';
 import { IPart } from '../shared/models/part';
 import { IPartBrand } from '../shared/models/partBrand';
@@ -24,14 +25,23 @@ export class PartShopComponent implements OnInit {
     {name: 'Price High to Low', value: 'priceDesc'}
   ];
 
-  constructor(private partShopService: PartShopService) { }
+  constructor(private partShopService: PartShopService, private activatedRoute: ActivatedRoute,
+    ) { }
 
   ngOnInit(): void {
     this.getTypes();
     this.getBrands();
     this.getParts();
+    this.checkTypeSelectedFromNav();
   }
 
+
+  checkTypeSelectedFromNav(){
+    if(+this.activatedRoute.snapshot.paramMap.get('typeIdFromNav')) {
+      this.shopParams.typeId = +this.activatedRoute.snapshot.paramMap.get('typeIdFromNav');
+      this.getParts();
+    }
+  }
 
   getTypes() {
     this.partShopService.getTypes().subscribe(types => {

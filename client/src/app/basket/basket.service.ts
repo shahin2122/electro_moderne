@@ -67,6 +67,7 @@
   
     incrementProductItemQuantity(item: IBasketProductItem) {
       const basket = this.getCurrentBasketValue();
+      console.log("basket service item = " + item.id);
       const foundItemIndex = basket.productItems.findIndex(x => x.id === item.id);
       basket.productItems[foundItemIndex].quantity++;
       this.setBasket(basket);

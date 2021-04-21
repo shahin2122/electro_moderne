@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from './account/account.service';
 import { BasketService } from './basket/basket.service';
+import { RepairRequestService } from './repair-request/repair-request.service';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +12,12 @@ import { BasketService } from './basket/basket.service';
 export class AppComponent implements OnInit {
   title = 'Electro Moderne';
 
-  constructor(private accountService: AccountService, private basketService: BasketService) {}
+  constructor(private accountService: AccountService, private basketService: BasketService,
+    private repairRequestService: RepairRequestService) {}
 
   ngOnInit(){
     this.loadCurrentUser();
+    this.loadUnseenRequests();
     const basketId = localStorage.getItem('basket_id');
     if(basketId) {
       this.basketService.getBasket(basketId).subscribe(() => {
@@ -34,6 +37,11 @@ export class AppComponent implements OnInit {
         console.log(error);
       });
     }
+
+  loadUnseenRequests() {
+    this.repairRequestService.getUnseenRequestsCount();
+    console.log("app component " + this.repairRequestService.getUnseenRequestsCount().subscribe());
+  }
 
 
   }

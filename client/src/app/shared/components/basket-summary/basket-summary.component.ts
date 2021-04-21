@@ -10,9 +10,9 @@ import {IOrderItem} from '../../models/Order';
   styleUrls: ['./basket-summary.component.scss']
 })
 export class BasketSummaryComponent implements OnInit {
- 
-  @Output() decrementProduct: EventEmitter<IBasketProductItem> = new EventEmitter<IBasketProductItem>();
+
   @Output() incrementProduct: EventEmitter<IBasketProductItem> = new EventEmitter<IBasketProductItem>();
+  @Output() decrementProduct: EventEmitter<IBasketProductItem> = new EventEmitter<IBasketProductItem>();
   @Output() removeProduct: EventEmitter<IBasketProductItem> = new EventEmitter<IBasketProductItem>();
   @Output() decrementPart: EventEmitter<IBasketPartItem> = new EventEmitter<IBasketPartItem>();
   @Output() incrementPart: EventEmitter<IBasketPartItem> = new EventEmitter<IBasketPartItem>();
@@ -37,6 +37,7 @@ p
 
   incrementProductItemQuantity(item: IBasketProductItem) {
     this.incrementProduct.emit(item);
+    console.log("basket summary item = " + item);
   }
 
   removeBasketProductItem(item: IBasketProductItem) {

@@ -1,0 +1,52 @@
+<div class="container" >
+    <div class="row d-flex justify-content-center align-items-center" >
+        <div class="col-12 text-center text-success my-5 d-flex">
+            <h1><strong>You Can Contact Us Easily ; By</strong></h1>
+        </div>
+        <div class="col-5 text-center text-info">
+            <h1><i class="fa fa-phone fa-2x"></i></h1>
+            <h1> Calling us  </h1>
+            <h2>Phone 1: (438) 494 7672</h2>
+            <h2>Phone 2 :(514) 676 7672</h2>
+        </div>
+        <div class="col-7 text-center text-info">
+            <h1><i class="fa fa-map-marker fa-2x"></i></h1>
+            <h1> Visit us </h1>
+            <h2>Shop 1: 10415 Boulevard Gouin Ouest, Roxboro - QC H8Y 1W5</h2>
+            <h2>Shop 2 :946 Rue Bégin, Saint-Laurent, QC</h2>
+        </div>
+        <div class="col-12 text-center text-success my-5">
+            <h1><strong>Or Submit Form Below and we will Call You As Soon As Possible!</strong></h1>
+             <hr class="bg-dark">
+        </div>
+        <form [formGroup]="contactUsForm" (ngSubmit)="onSubmit()">
+        <div class="row d-flex justify-content-between">
+            <div class="col-12">
+                <app-text-input  formControlName="title" [label]="'Title'"></app-text-input>
+            </div>
+            <div class="col-12">
+                <app-text-input  formControlName="email" [label]="'Email'"></app-text-input>
+            </div>
+            <div class="col-6 ">
+                <app-text-input  formControlName="fullName" [label]="'Full Name'"></app-text-input>
+            </div>
+            <div class="col-6">
+                <app-text-input  formControlName="phoneNumber" [label]="'Phone Number'"></app-text-input>
+            </div>
+            <hr>
+           <div class="col-12">
+            <textarea class="form-control text-dark ml-2" formControlName="context" 
+            id="Context" placeholder="Description..." style="font-size: 30px;" 
+            rows="5"></textarea>
+           </div>
+           
+           <button  class="w-100 btn btn-lg btn-info my-4 font-x-large d-flex align-items-center 
+           justify-content-center" type="submit">Submit <i class="fa fa-check fa-2x"></i></button>
+      
+        </div>
+    </form>
+    </div>
+</div>
+
+
+

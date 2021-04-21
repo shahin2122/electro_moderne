@@ -25,7 +25,10 @@ namespace Infrastructure.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<DeliveryMethod> DeliveryMethods {get; set;}
-
+        public DbSet<RepairRequest> RepairRequests {get; set;}
+        public DbSet<ContactRequest> ContactRequests { get; set; }
+        public DbSet<PaymentMethods> PaymentMethods { get; set; }
+        public DbSet<DaysAvailable> DaysAvailability { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

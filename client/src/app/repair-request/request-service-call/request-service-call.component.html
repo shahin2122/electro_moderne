@@ -1,0 +1,44 @@
+<div class="row">
+<div class="mt-4 " [formGroup]="repairRequestForm">
+    <h1 class="text-warning">NOTE:You must accept service call of 90$ fee is the fee that is charged in order for the service technician(s) to come out and perform the service.</h1>
+    <div class="row ml-5 form-group"  formGroupName="serviceCallForm">
+
+        
+        <div class="col-6 custom-control custom-radio ">
+            <input 
+            type="radio"
+            id= "accept"
+            value="1"
+            formControlName="AcceptServiceFee"
+            class="custom-control-input ml-5"
+            name="AcceptServiceFee"
+        >
+      <label  class="custom-control-label" for="accept">
+            <span class="label-description"> accept service call fee</span>
+         </label>
+        </div>
+
+        <div class="col-6 custom-control custom-radio">
+            <input 
+            type="radio"
+            id="decline"
+            value="0"
+            formControlName="AcceptServiceFee"
+            class="custom-control-input ml-5"
+            name="AcceptServiceFee"
+        >
+      <label  class="custom-control-label" for="decline">
+    <span class="label-description"> Decline service call fee</span>
+     </label>
+    </div>
+    </div>
+
+</div>
+<div>
+    <button  [disabled]="loading
+    || repairRequestForm.get('serviceCallForm').invalid"
+    class="w-100 btn btn-lg btn-success my-4 font-x-large d-flex align-items-center justify-content-center" type="submit">
+        Submit Request <i class="fa fa-check fa-2x"></i>
+    </button>
+</div>
+

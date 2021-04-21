@@ -25,7 +25,7 @@ namespace API.Controllers
         }
 
        [HttpGet]
-       public async Task<ActionResult<Pagination<PartDto>>> GetPaginatedParts(
+       public async Task<ActionResult<Pagination<PartToReturnDto>>> GetPaginatedParts(
            [FromQuery] PartsSpecParams partsParams)
         {
             var spec = new PartsSpecification(partsParams);
@@ -36,9 +36,9 @@ namespace API.Controllers
 
             var parts = await _partsRepo.ListAsync(spec);
 
-            var data =  _mapper.Map<IReadOnlyList<Part>, IReadOnlyList<PartDto>>(parts);
+            var data =  _mapper.Map<IReadOnlyList<Part>, IReadOnlyList<PartToReturnDto>>(parts);
 
-            return Ok(new Pagination<PartDto>(partsParams.PageIndex, 
+            return Ok(new Pagination<PartToReturnDto>(partsParams.PageIndex, 
                 partsParams.pageSize, totalItems, data));
         }
 

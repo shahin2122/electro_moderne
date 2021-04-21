@@ -1,0 +1,35 @@
+<div class="container card border-primary d-flex justify-content-center text-center">
+    <div *ngIf="request" class="row card-body text-center my-5 d-flex justify-content-between">
+       <div class="col-12">
+        <h1 class="text-primary">We Have A Contact Request!</h1>
+       </div>
+    <div class="col-12 ">
+       <div class="col-12 text-info">
+            <h1>Submited Date: {{request.submitedDate | date:'medium'}}</h1>
+       </div>
+       <hr >
+       <div class="col-12 text-success card-title">
+        <h1>Customer Email: {{request.email}} </h1>
+      </div>
+    </div>
+      <hr >
+        <div class="col-12 text-info card-title">
+          <h1>  Request Title: {{request.title}} </h1>
+        </div>
+        <hr >
+        <div class="col-6 text-primary">
+            <h1>Customer : {{request.fullName}}</h1>
+        </div>
+        <div class="col-6 text-primary">
+            <h1>Phone Number : {{request.phoneNumber}}</h1>
+        </div>
+        <hr >
+        <div class="col-12 text-danger">
+            <h1>  Text: {{request.context}} </h1>
+          </div>
+
+    </div>
+</div>
+
+
+ 

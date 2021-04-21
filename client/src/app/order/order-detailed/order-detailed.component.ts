@@ -22,7 +22,6 @@ order: IOrder;
       .subscribe((order: IOrder) => {
         this.order = order;
         this.breadcrumbService.set('@OrderDetailed', `Order# ${order.id} - ${order.status}`);
-        console.log(order);
       }, error => {
         console.log(error);
       });

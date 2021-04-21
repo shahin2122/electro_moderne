@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Core.Entities;
 using Core.Entities.OrderAggregate;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,6 +32,54 @@ namespace Infrastructure.Data
             foreach(var method in methods)
             {
                 await storeContext.DeliveryMethods.AddAsync(method);
+            }
+
+            var paymentMethods = new List<PaymentMethods>
+            {
+                new PaymentMethods{
+                    Name = "Debit"
+                },
+                new PaymentMethods{
+                    Name = "Credit"
+                },
+                new PaymentMethods{
+                    Name = "Cash"
+                },
+                new PaymentMethods{
+                    Name = "Cheque"
+                },
+                new PaymentMethods{
+                    Name = "E-Transfer"
+                }
+            };
+
+            foreach(var method in paymentMethods)
+            {
+                await storeContext.PaymentMethods.AddAsync(method);
+            }
+
+            var days = new List<DaysAvailable>
+            {
+                new DaysAvailable{
+                    Name="Tuesday"
+                },
+                new DaysAvailable{
+                    Name="Wednesday"
+                },
+                new DaysAvailable{
+                    Name="Thursday"
+                },
+                new DaysAvailable{
+                    Name="Friday"
+                },
+                new DaysAvailable{
+                    Name="Saturday"
+                },
+            };
+
+            foreach(var day in days)
+            {
+                await storeContext.DaysAvailability.AddAsync(day);
             }
 
             await storeContext.SaveChangesAsync();

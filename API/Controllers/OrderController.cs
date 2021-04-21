@@ -10,6 +10,8 @@ using Core.Entities.OrderAggregate;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Core.Specifications;
+using API.Helpers;
 
 namespace API.Controllers
 {
@@ -64,6 +66,24 @@ namespace API.Controllers
         public async Task<ActionResult<IReadOnlyList<DeliveryMethod>>> GetDeliveryMethods()
         {
             return Ok(await _orderService.GetDeliveryMethodsAsync());
+        }
+
+        [HttpGet("get-all")]
+        public async Task<ActionResult<Pagination<OrderToReturnDto>>> GetAllOrders(
+        [FromQuery] OrderSpecParams ordersParams)
+        {
+            var spec = new OrdersWithItemsAndOrderingSpecification(ordersParams);
+
+            var countSpec = new OrdersForCountSpecification(ordersParams);
+
+            var totalItems = await _orderService.CountAsync(spec);
+
+            var orders = await _orderService.GetAllOrdersAsync(spec);
+
+            var data = _mapper.Map<IReadOnlyList<Order>, IReadOnlyList<OrderToReturnDto>>(orders);
+
+            return Ok(new Pagination<OrderToReturnDto>(ordersParams.PageIndex,
+            ordersParams.pageSize, totalItems, data));
         }
     }
 }

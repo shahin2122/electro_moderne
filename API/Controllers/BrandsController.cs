@@ -16,7 +16,7 @@ namespace API.Controllers
 
         }
 
-
+        // [Cached(400)]
         [HttpGet]
         public async Task<ActionResult<ProductBrand>> GetBrands([FromQuery] 
         ProductBrandSpecParams productBrandParams)
@@ -32,6 +32,7 @@ namespace API.Controllers
                 productBrandParams.pageSize, totalItems, data));
         }
 
+       // [Cached(400)]
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductBrand>> GetBrand(int id)
         {
@@ -56,6 +57,7 @@ namespace API.Controllers
             return BadRequest("failed to add new brand");
         }
 
+       // [Cached(400)]
         [HttpGet("get-all-raw")]
         public async Task<ActionResult<ProductBrand>> GetBrands()
         {

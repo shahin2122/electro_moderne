@@ -12,10 +12,30 @@ p-3 px-md-4  bg-body border-bottom shadow-sm">
     
               <div class="container col-xl-3 col-lg-3 col-md-3 ">
                 <a routerLink="/basket" class="position-relative">
-                <i class="fa fa-shopping-cart fa-2x mr-5 text-dark" aria-hidden="true"></i>
+                <i class="fa fa-shopping-cart fa-2x mr-2 text-dark" aria-hidden="true"></i>
                 <div *ngIf="(basket$ | async) as basket" class="cart-no" style="padding-top: 2px;">{{basket.partItems.length + basket.productItems.length}}</div>
                </a>
             </div>
+
+            <ng-container *appHasRole='["Admin"]'>
+              <div class="container col-xl-3 col-lg-3 col-md-3 ">
+                <a routerLink="/requests" class="position-releative">
+                <i class="fa fa-wrench fa-2x text-dark" aria-hidden="true"></i>
+                <div *ngIf="(unseenRepairReqs > 0)" class="req-no" style="padding-top: 2px;">{{unseenRepairReqs}}</div>
+                </a>
+              </div>
+            </ng-container>
+
+            <ng-container *appHasRole='["Admin"]'>
+              <div class="container col-xl-3 col-lg-3 col-md-3 ">
+                <a routerLink="/contacts" class="position-releative">
+                <i class="fa fa-commenting-o fa-2x text-dark" aria-hidden="true"></i>
+                <div *ngIf="(unseenContactReqs > 0)" class="req-no" style="padding-top: 2px;">{{unseenContactReqs}}</div>
+                </a>
+              </div>
+            </ng-container>
+
+
      <div class="container  d-flex flex-block col-xl-9 col-lg-9 col-md-9 ">
       <ng-container *ngIf="(currentUser$ | async) === null">
         <a routerLink="/account/login" class="btn col-md-6 col-sm-6  col-xs-3  btn-success d-flex align-items-center 
@@ -31,7 +51,7 @@ p-3 px-md-4  bg-body border-bottom shadow-sm">
            <strong class="font-large"> Welcome {{(currentUser$ | async).displayName}}</strong></a>
            <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;" *dropdownMenu>
               <a class="dropdown-item d-flex align-items-center py-2 font-larger">
-                <i class="fa fa-shopping-cart mr-3"> View Basket</i>
+                <i routerLink="/basket" class="fa fa-shopping-cart mr-3"> View Basket</i>
               </a>
 
               <a  routerLink="/order"
@@ -79,22 +99,19 @@ p-3 px-md-4  bg-body border-bottom shadow-sm">
         <a class="nav-link font-large" href="#">Used Appliances</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link font-large" href="#">Jobs</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link font-large" href="#">Repair Request</a>
+        <a class="nav-link font-large" routerLink="repair-request">Repair Request</a>
       </li>
      
    
       <li class="nav-item">
-        <a class="nav-link font-large" href="#">Support</a>
+        <a class="nav-link font-large" routerLink="contact-us">Contact Us</a>
       </li>
       <li  class="nav-item" >
         <a  class="nav-link font-large" *appHasRole='["Admin"]' routerLink="/admin/pannel" routerLinkActive="active">Admin</a>
       </li>
 
       <li  class="nav-item" >
-        <a  class="nav-link font-large" *appHasRole='["Admin","RepairMan"]'  routerLink="/admin" routerLinkActive="active">Orders</a>
+        <a  class="nav-link font-large" *appHasRole='["Admin","RepairMan"]'  routerLink="/admin/orders" routerLinkActive="active">Orders</a>
       </li>
 
       <li  class="nav-item" >
@@ -107,7 +124,7 @@ p-3 px-md-4  bg-body border-bottom shadow-sm">
 </nav>
 
 <nav class=" navbar navbar-expand-md navbar-dark bg-primary ">
-  <a class="navbar-brand font-larger" routerLink="/shop" href="#">Appliances</a>
+  <a class="navbar-brand font-larger" routerLink="/shop">Appliances</a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -115,7 +132,7 @@ p-3 px-md-4  bg-body border-bottom shadow-sm">
   <div class="navbar-collapse collapse " id="navbarColor01" style="padding: 0; margin: 0;">
     <ul class="navbar-nav  container">
       <li class="nav-item active "  *ngFor="let type of types">
-        <a class="nav-link font-larger " href="#">{{type.name}}</a>
+        <a routerLink="shop/{{type.id}}" class="nav-link font-larger " >{{type.name}} </a>
       </li>
 
 
@@ -127,15 +144,15 @@ p-3 px-md-4  bg-body border-bottom shadow-sm">
 </nav>
 
 <nav class="navbar navbar-expand-md navbar-light bg-light">
-  <a routerLink="/part-shop" class="navbar-brand font-large" href="#">Appliances Parts</a>
+  <a routerLink="/part-shop" class="navbar-brand font-large" routerLink="/part-shop">Appliances Parts</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarColor03">
     <ul class="navbar-nav mr-auto container">
-      <li class="nav-item col-2" *ngFor="let brand of brands">
-        <a class="nav-link" href="#">{{brand.name}}
+      <li class="nav-item col-3" *ngFor="let type of partTypes">
+        <a class="nav-link" routerLink="part-shop/{{type.id}}">{{type.name}}
        
         </a>
 

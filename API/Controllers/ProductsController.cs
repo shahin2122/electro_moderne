@@ -36,6 +36,7 @@ namespace API.Controllers
             _productRepo = productRepo;
         }
 
+       // [Cached(400)]
         [HttpGet]
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts(
            [FromQuery] ProductSpecParams productParams)
@@ -54,6 +55,7 @@ namespace API.Controllers
             productParams.pageSize, totalItems, data));
         }
 
+        //[Cached(400)]
         [HttpGet("{id}", Name = "GetProduct")]
         public async Task<ActionResult<ProductDto>> GetProduct(int id)
         {
@@ -66,7 +68,7 @@ namespace API.Controllers
             return _mapper.Map<Product, ProductDto>(product);
         }
 
-
+       // [Cached(600)]
         [HttpGet("get-product-with-photos/{id}")]
         public async Task<Product> GetProductWithPhotos(int id)
         {

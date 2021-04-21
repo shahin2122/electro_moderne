@@ -18,6 +18,9 @@ import { PartTypesComponent } from './part-types/part-types.component';
 import { AddNewPartTypeComponent } from './part-types/add-new-part-type/add-new-part-type.component';
 import { AddNewPartBrandComponent } from './part-brands/add-new-part-brand/add-new-part-brand.component';
 import { PartPhotoEditorComponent } from './parts/part-photo-editor/part-photo-editor.component';
+import { OrdersComponent } from './orders/orders.component';
+import { RepairRequestsComponent } from './repair-requests/repair-requests.component';
+import { RequestDetailedComponent } from './repair-requests/request-detailed/request-detailed.component';
 
 
 
@@ -25,7 +28,10 @@ import { PartPhotoEditorComponent } from './parts/part-photo-editor/part-photo-e
 @NgModule({
   declarations: [UsersComponent, ProductsComponent, PannelComponent, 
     ProductBrandsComponent, ProductTypesComponent, AddNewTypeComponent, 
-    AddNewBrandComponent, AddNewProductComponent, PhotoEditorComponent, PartsComponent, AddNewPartComponent, PartBrandsComponent, PartTypesComponent, AddNewPartTypeComponent, AddNewPartBrandComponent, PartPhotoEditorComponent],
+    AddNewBrandComponent, AddNewProductComponent, PhotoEditorComponent,
+     PartsComponent, AddNewPartComponent, PartBrandsComponent, PartTypesComponent,
+      AddNewPartTypeComponent, AddNewPartBrandComponent, PartPhotoEditorComponent,
+       OrdersComponent, RepairRequestsComponent, RequestDetailedComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

@@ -101,5 +101,15 @@ namespace Infrastructure.Services
 
             return await _unitOfWork.Repository<Order>().ListAsync(spec);
         }
+
+        public async Task<IReadOnlyList<Order>> GetAllOrdersAsync(OrdersWithItemsAndOrderingSpecification spec)
+        {
+            return await _unitOfWork.Repository<Order>().ListAsync(spec);
+        }
+
+        public async Task<int> CountAsync(OrdersWithItemsAndOrderingSpecification spec)
+        {
+            return await _unitOfWork.Repository<Order>().CountAsync(spec);
+        }
     }
 }

@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AdminService } from '../admin/admin.service';
 import { IPagination } from '../shared/models/pagination';
 import { product } from '../shared/models/product';
@@ -22,16 +23,27 @@ export class ShopComponent implements OnInit {
   sortOptions = [
     {name: 'Alphabetical', value: 'name'},
     {name: 'Price: Low to High', value: 'priceAsc'},
-    {name: 'Price High to Low', value: 'priceDesc'}
+    {name: 'Price High to Low', value: 'priceDesc'},
+    {name: 'Used Appliances', value: 'used'}
   ];
 
 
-  constructor( private shopService: ShopService) { }
+  constructor( private shopService: ShopService, private activatedRoute: ActivatedRoute) { 
+
+  }
 
   ngOnInit(): void {
     this.getBrands();
     this.getTypes();
     this.getProducts();
+    this.checkTypeSelectedFromNav();
+  }
+
+  checkTypeSelectedFromNav() {
+    if(+this.activatedRoute.snapshot.paramMap.get('typeIdFromNav') > 0) {
+      this.shopParams.typeId = +this.activatedRoute.snapshot.paramMap.get('typeIdFromNav');
+      this.getProducts();
+    }
   }
 
   getBrands() {
@@ -70,6 +82,7 @@ export class ShopComponent implements OnInit {
 
   onSortSelected(sort: string) {
     this.shopParams.sort = sort;
+    if(sort == "used") this.shopParams.isUsed = true;
     this.getProducts();
   }
 

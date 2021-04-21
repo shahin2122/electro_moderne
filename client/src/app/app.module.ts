@@ -21,6 +21,19 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
+import { FooterComponent } from './footer/footer.component';
+import { RepairRequestComponent } from './repair-request/repair-request.component';
+import { RequestSubmitedComponent } from './repair-request/request-submited/request-submited.component';
+import { RequestAddressComponent } from './repair-request/request-address/request-address.component';
+import { RequestProductComponent } from './repair-request/request-product/request-product.component';
+import { RequestDaysComponent } from './repair-request/request-days/request-days.component';
+import { RequestMethodsComponent } from './repair-request/request-methods/request-methods.component';
+import { RequestServiceCallComponent } from './repair-request/request-service-call/request-service-call.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { SubmitedComponent } from './contact-us/submited/submited.component';
+import { ContactsComponent } from './contact-us/contacts/contacts.component';
+import { ContactsDetailedComponent } from './contact-us/contacts-detailed/contacts-detailed.component';
+
 
 
 @NgModule({
@@ -30,6 +43,30 @@ import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
     ProductDetailsComponent,
   
     AdminComponent,
+  
+    FooterComponent,
+  
+    RepairRequestComponent,
+  
+    RequestSubmitedComponent,
+  
+    RequestAddressComponent,
+  
+    RequestProductComponent,
+  
+    RequestDaysComponent,
+  
+    RequestMethodsComponent,
+  
+    RequestServiceCallComponent,
+  
+    ContactUsComponent,
+  
+    SubmitedComponent,
+  
+    ContactsComponent,
+  
+    ContactsDetailedComponent,
   
   ],
   imports: [
@@ -46,7 +83,8 @@ import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
     SharedModule,
     AccountModule,
     SocialLoginModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

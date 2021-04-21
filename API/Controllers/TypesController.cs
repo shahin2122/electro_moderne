@@ -34,6 +34,7 @@ namespace API.Controllers
             return BadRequest("failed to add new product type");
         }
 
+        //[Cached(400)]
         [HttpGet]
         public async Task<ActionResult<Pagination<ProductType>>> GetTypes([FromQuery] 
             ProductTypeSpecParams productTypeParams)
@@ -50,6 +51,7 @@ namespace API.Controllers
 
         }
 
+        //[Cached(400)]
         [HttpGet("{id}", Name = "GetType")]
         public async Task<ActionResult<ProductType>> GetType(int id)
         {
@@ -57,6 +59,7 @@ namespace API.Controllers
             return Ok(await _typeRepo.GetByIdAsync(id));
         }
 
+       // [Cached(400)]
         [HttpGet("get-all-raw")]
         public async Task<ActionResult<ProductType>> GetTypes()
         {

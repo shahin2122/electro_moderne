@@ -1,0 +1,12 @@
+<div class="container d-flex justify-content-center ">
+    <div *ngIf="request" class="row text-center my-5 d-flex justify-content-center">
+        <h1 >We Have A Repair Request!</h1>
+        <h1 class="col-12"> 
+             From <strong class="text-primary">{{request.fullName}}</strong> for a <strong class="text-primary">{{request.productBrand}} {{request.productType}}</strong>
+        In This Address: <strong class="text-success">{{request.address}}</strong> With This Phone Number: <strong class="text-primary">{{request.phoneNumber}}</strong></h1>
+        <h2 class="col-12 mt-5">Problem Information Gathered By Customer: <strong class="text-danger">{{request.problemInfo}}</strong></h2>
+
+        <button (click)="onAccept()" class="btn btn-success col-3 font-x-large d-flex align-items-center justify-content-center">ACCEPT<i class="fa fa-check fa-2x"></i></button>
+        <button (click)="onReject()" class="btn btn-danger col-3 font-x-large d-flex align-items-center justify-content-center">REJECT<i class="fa fa-ban fa-2x"></i></button>
+    </div>
+</div>

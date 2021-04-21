@@ -7,3 +7,45 @@ img {
     height: 600px;
     width: 100%;
 }
+
+.custom-img {
+    max-height: 200px;
+    max-width: 200px;
+    cursor: pointer;
+    border: 1px solid white;
+    border-radius: 2%;
+    background-color: white;
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+.custom-img:hover{
+    transition: all 0.3s;
+    transform: translateY(-10px);
+}
+
+.custom-part {
+    border: 1px solid black;
+    border-radius: 2%;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.custom-part:hover{
+    transition: all 0.1s;
+    transform: translateY(-5px);
+    
+}
+
+.brand-img {
+    cursor: pointer;
+    max-height: 50px;
+    max-width: 150px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+.brand-img:hover {
+    transition: all 0.1s;
+    transform: translateY(5px);
+}

@@ -16,11 +16,14 @@ import { PartBrandsComponent } from './part-brands/part-brands.component';
 import { AddNewPartTypeComponent } from './part-types/add-new-part-type/add-new-part-type.component';
 import { AddNewPartBrandComponent } from './part-brands/add-new-part-brand/add-new-part-brand.component';
 import { PartPhotoEditorComponent } from './parts/part-photo-editor/part-photo-editor.component';
+import { OrdersComponent } from './orders/orders.component';
+
 
 const routes: Routes = [
   {path: 'users', component: UsersComponent},
   {path: 'products', component: ProductsComponent},
   {path: 'parts', component: PartsComponent},
+  {path: 'orders', component: OrdersComponent},
   {path: 'add-new-product', component: AddNewProductComponent},
   {path: 'add-new-part', component: AddNewPartComponent},
   {path: 'pannel', component: PannelComponent},

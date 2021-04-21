@@ -8,6 +8,10 @@ import { IProductType } from 'src/app/shared/models/productType';
 import { ShopService } from 'src/app/shop/shop.service';
 import { IBasket } from 'src/app/shared/models/basket';
 import { BasketService } from 'src/app/basket/basket.service';
+import { IPartType } from 'src/app/shared/models/partType';
+import { PartShopService } from 'src/app/part-shop/part-shop.service';
+import { RepairRequestService } from 'src/app/repair-request/repair-request.service';
+import { ContactUsService } from 'src/app/contact-us/contact-us.service';
 
 
 @Component({
@@ -18,17 +22,22 @@ import { BasketService } from 'src/app/basket/basket.service';
 export class NavBarComponent implements OnInit {
 
   currentUser$: Observable<IUSer>;
-  brands: IProductBrand[];
+  partTypes: IPartType[];
   types: IProductType[];
   basket$: Observable<IBasket>;
+  unseenRepairReqs = 0;
+  unseenContactReqs = 0;
 
-  constructor(private accountService: AccountService, private shopService: ShopService,
-    private basketService: BasketService) { }
+
+  constructor(private accountService: AccountService, private shopService: ShopService, private partShopService: PartShopService,
+    private basketService: BasketService,private repairRequestService: RepairRequestService, private contactUsService: ContactUsService) { }
 
   ngOnInit(): void {
     this.currentUser$ = this.accountService.currentUser$;
     this.basket$ = this.basketService.basket$;
-    this.getBrands();
+    this.getUnseenRepairRequests();
+    this.getUnseenContactRequests();
+    this.getPartTypes();
     this.getTypes();
   }
 
@@ -36,15 +45,28 @@ export class NavBarComponent implements OnInit {
     this.accountService.logOut();
   }
 
-  getBrands() {
-    this.shopService.getBrands().subscribe(brands => {
-      this.brands = brands;
-    })
+  getPartTypes() {
+   this.partShopService.getTypes().subscribe(types => {
+     this.partTypes = types;
+   });
   }
 
   getTypes() {
     this.shopService.getTypes().subscribe(types => {
       this.types = types;
-    })
+    });
   }
+
+  getUnseenRepairRequests() {
+    this.repairRequestService.getUnseenRequestsCount().subscribe(reqs  => {
+      this.unseenRepairReqs = reqs;
+    });
+  }
+
+  getUnseenContactRequests(){
+    this.contactUsService.getUnseenRequestsCount().subscribe(reqs => {
+      this.unseenContactReqs = reqs;
+    });
+  }
+  
 }
