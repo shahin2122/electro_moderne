@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
+using Pomelo.EntityFrameworkCore.MySql;
 
 namespace API
 {
@@ -51,7 +52,9 @@ namespace API
             });
 
             services.AddDbContext<AppIdentityDbContext>(x => 
-                x.UseSqlite(_config.GetConnectionString("IdentityConnection")));
+                x.UseMySQL(
+                    _config.GetConnectionString("IdentityConnection")));
+                
 
             services.Configure<ApiBehaviorOptions>(options => {
                 options.InvalidModelStateResponseFactory = actionContext =>
@@ -97,8 +100,6 @@ namespace API
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c=> {c.SwaggerEndpoint("/swagger/v1/swagger.json", "Electro Moderne API");});
 
             app.UseEndpoints(endpoints =>
             {

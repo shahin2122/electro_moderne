@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Infrastructure.Services;
 using Infrastructure.Helpers;
 
+
 namespace API.Extensions
 {
     public static class ApplicationServiceExtensions
@@ -26,7 +27,7 @@ namespace API.Extensions
             services.AddAutoMapper(typeof(AutoMapperProfiles));
              services.AddDbContext<StoreContext>(options =>
              {
-                 options.UseSqlite(config.GetConnectionString("DefaultConnection"));
+                 options.UseMySQL(config.GetConnectionString("DefaultConnection"));
              });
             
             return services;

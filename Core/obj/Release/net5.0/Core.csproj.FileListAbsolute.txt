@@ -1,0 +1,12 @@
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\Core\bin\Release\net5.0\Core.deps.json
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\Core\bin\Release\net5.0\Core.dll
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\Core\bin\Release\net5.0\ref\Core.dll
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\Core\bin\Release\net5.0\Core.pdb
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\Core\obj\Release\net5.0\Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\Core\obj\Release\net5.0\Core.AssemblyInfoInputs.cache
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\Core\obj\Release\net5.0\Core.AssemblyInfo.cs
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\Core\obj\Release\net5.0\Core.csproj.CoreCompileInputs.cache
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\Core\obj\Release\net5.0\Core.dll
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\Core\obj\Release\net5.0\ref\Core.dll
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\Core\obj\Release\net5.0\Core.pdb
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\Core\obj\Release\net5.0\Core.csprojAssemblyReference.cache

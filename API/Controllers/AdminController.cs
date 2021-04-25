@@ -28,6 +28,7 @@ namespace API.Controllers
                 {
                     u.Id,
                     displayName = u.UserName,
+                    email = u.Email,
                     Roles = u.UserRoles.Select(r => r.Role.Name).ToList()
                 })
                 .ToListAsync();
@@ -46,7 +47,7 @@ namespace API.Controllers
         [HttpPost("edit-roles/{email}")]
         public async Task<ActionResult> EditRoles(string email, [FromQuery] string roles)
         {
-            var selectedRoles = roles.Split(".").ToArray();
+            var selectedRoles = roles.Split(",").ToArray();
 
             var user = await _userManager.FindByEmailAsync(email);
 

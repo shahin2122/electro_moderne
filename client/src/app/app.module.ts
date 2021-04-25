@@ -33,6 +33,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { SubmitedComponent } from './contact-us/submited/submited.component';
 import { ContactsComponent } from './contact-us/contacts/contacts.component';
 import { ContactsDetailedComponent } from './contact-us/contacts-detailed/contacts-detailed.component';
+import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 
 
 
@@ -67,6 +68,8 @@ import { ContactsDetailedComponent } from './contact-us/contacts-detailed/contac
     ContactsComponent,
   
     ContactsDetailedComponent,
+  
+    RolesModalComponent,
   
   ],
   imports: [

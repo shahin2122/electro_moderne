@@ -90,7 +90,11 @@ productToAddPhoto: product;
   }
 
   getUsersWithRoles() {
-    return this.http.get<IUSer[]>(this.baseUrl + 'admin/users-with-roles');
+    return this.http.get<Partial<IUSer[]>>(this.baseUrl + 'admin/users-with-roles');
+  }
+
+  updateUserRoles(email: string, roles: string[]) {
+    return this.http.post(this.baseUrl + 'admin/edit-roles/' + email + '?roles=' + roles, {});
   }
 
   getTypesPaginated(pageNumber: number, pageSize: number) {

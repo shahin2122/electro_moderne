@@ -39,6 +39,7 @@ namespace Infrastructure.Identity
 
             await userManager.CreateAsync(admin, "X7n33d5or28s");
             await userManager.AddToRolesAsync(admin, new[] {"Admin", "RepairMan"});
+
         }
     }
 }

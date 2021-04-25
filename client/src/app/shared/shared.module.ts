@@ -15,6 +15,7 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
 import { RouterModule } from '@angular/router';
+import { ModalModule } from 'ngx-bootstrap/modal'
 
 @NgModule({
   declarations: [TextInputComponent, PagingHeaderComponent, PagerComponent, OrderTotalsComponent, StepperComponent, BasketSummaryComponent],
@@ -30,7 +31,8 @@ import { RouterModule } from '@angular/router';
     NgxGalleryModule,
     PaginationModule.forRoot(),
     CdkStepperModule,
-    RouterModule
+    RouterModule,
+    ModalModule.forRoot()
   ],
   exports: [
     ReactiveFormsModule,
@@ -46,7 +48,8 @@ import { RouterModule } from '@angular/router';
     OrderTotalsComponent,
     CdkStepperModule,
     StepperComponent,
-    BasketSummaryComponent
+    BasketSummaryComponent,
+    ModalModule
   ]
 })
 export class SharedModule { }

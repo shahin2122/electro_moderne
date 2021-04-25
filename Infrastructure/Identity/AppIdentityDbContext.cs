@@ -30,7 +30,14 @@ namespace Infrastructure.Identity
                 .HasMany(ur => ur.UserRoles)
                 .WithOne(u => u.Role)
                 .HasForeignKey(ur => ur.RoleId)
-                .IsRequired();    
+                .IsRequired();   
+
+           builder.Entity<IdentityRole>().Property(r => r.Name).HasMaxLength(128);
+           builder.Entity<AppUser>().Property(p => p.Email).HasMaxLength(128);
+           builder.Entity<AppUser>().Property(p => p.UserName).HasMaxLength(128);
+
         }
+
+        
     }
 }

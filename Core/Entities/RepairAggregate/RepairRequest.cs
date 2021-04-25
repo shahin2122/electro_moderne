@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using Core.Entities.Identity;
+
 
 namespace Core.Entities
 {
@@ -24,7 +24,7 @@ namespace Core.Entities
 
         public IReadOnlyList<DaysAvailable> DaysAvailability { get; set; }
 
-        public IReadOnlyList<PaymentMethods> PaymentMethods { get; set; }
+       // public IReadOnlyList<PaymentMethods> PaymentMethods { get; set; }
         public RepairRequestStatus Status { get; set; } = RepairRequestStatus.Unseen;
         
         public bool IsEmergency { get; set; }

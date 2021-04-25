@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CloudinaryDotNet" Version="1.14.0" />
+    <PackageReference Include="CloudinaryDotNet" Version="1.15.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="5.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="5.0.5" />
   </ItemGroup>
 
 </Project>

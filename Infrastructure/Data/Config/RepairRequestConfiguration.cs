@@ -9,6 +9,8 @@ namespace Infrastructure.Data.Config
     {
         public void Configure(EntityTypeBuilder<RepairRequest> builder)
         {
+            builder.Property(P => P.ProblemInfo).HasMaxLength(250);
+
             builder.Property(s=> s.Status)
                 .HasConversion(
                     o => o.ToString(),
