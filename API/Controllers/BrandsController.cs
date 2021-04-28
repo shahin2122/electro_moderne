@@ -4,6 +4,8 @@ using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Core.Specifications;
 using API.Helpers;
+using Microsoft.AspNetCore.Authorization;
+using API.Errors;
 
 namespace API.Controllers
 {
@@ -62,6 +64,36 @@ namespace API.Controllers
         public async Task<ActionResult<ProductBrand>> GetBrands()
         {
             return Ok(await _brandsRepo.ListAllAsync());
+        }
+
+        [Authorize]
+        [HttpPost("update/{brandId}/{newName}")]
+        public async Task<ActionResult<ProductBrand>> UpdateBrand(int brandId, string newName)
+        {
+            var brand = await _brandsRepo.GetByIdAsync(brandId);
+
+            brand.Name = newName;
+
+            _brandsRepo.Update(brand);
+
+            if(await _brandsRepo.SaveAllAsync()) return Ok(brand);
+
+            return BadRequest(new ApiResponse(400, "failed to update product brand"));
+        }
+
+        [Authorize]
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteBrand(int id)
+        {
+            var brand = await _brandsRepo.GetByIdAsync(id);
+
+            if(brand == null)  return NotFound();
+
+            _brandsRepo.Delete(brand);
+
+            if(await _brandsRepo.SaveAllAsync()) return Ok();
+
+            return BadRequest(new ApiResponse(400, "failed to delete product brand"));
         }
     }
 }

@@ -25,7 +25,8 @@ requestToCreate: IRepairRequest;
 
   constructor(private http: HttpClient) { }
 
-  submitNewRepairRequest(model: any){
+  submitNewRepairRequest(model: IRepairRequest){
+    console.log(model);
     return this.http.post(this.baseUrl + 'repairrequests', model);
   }
 

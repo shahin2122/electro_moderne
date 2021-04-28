@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { IProductBrand } from 'src/app/shared/models/productBrand';
 import { AdminService } from '../admin.service';
 
@@ -13,7 +14,7 @@ export class ProductBrandsComponent implements OnInit {
   pageSize = 10;
   totalCount: number;
   
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getBrands();
@@ -33,5 +34,15 @@ export class ProductBrandsComponent implements OnInit {
       this.pageNumber = event;
       this.getBrands();
     }
+  }
+
+  deleteBrand(id: number){
+    this.adminService.deleteProductBrand(id).subscribe(()=> {
+      this.toastr.success("Product Brand Deleted");
+      this.getBrands();
+    }, error => {
+      this.toastr.error(error);
+      console.log(error);
+    })
   }
 }

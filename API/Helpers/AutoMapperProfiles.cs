@@ -53,8 +53,8 @@ namespace API.Helpers
             .ReverseMap();
 
             CreateMap<AppUser, UserDto>()
-                .ForMember(dest => dest.Role, opts => opts.MapFrom(src => 
-                src.UserRoles.FirstOrDefault(x=> x.UserId == src.Id).Role.Name))
+                .ForMember(dest => dest.Roles, opts => opts.MapFrom(src => 
+                src.UserRoles.Select(x=> x.UserId == src.Id)))
                 .ReverseMap();
 
             
@@ -67,7 +67,10 @@ namespace API.Helpers
             CreateMap<Order, OrderToReturnDto>()
                 .ForMember(d => d.DeliveryMethod,o => o.MapFrom(s => s.DeliveryMethod.ShortName))
                 .ForMember(d => d.ShippingPrice,o => o.MapFrom(s => s.DeliveryMethod.Price))
-                .ForMember(d => d.Total , o => o.MapFrom(s => s.GetTotal()));
+                .ForMember(d => d.Total , o => o.MapFrom(s => s.GetTotal()))
+                .ForMember(d => d.TotalTaxed , o => o.MapFrom(s => s.GetTotalTaxed()))
+                .ForMember(d => d.TPS5 , o => o.MapFrom(s => s.TPS5))
+                .ForMember(d => d.TVQ9975 , o => o.MapFrom(s => s.TVQ9975));
                
                 
 

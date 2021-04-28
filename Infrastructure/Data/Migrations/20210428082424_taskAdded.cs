@@ -4,7 +4,7 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace Infrastructure.Data.Migrations
 {
-    public partial class sql : Migration
+    public partial class taskAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -70,19 +70,6 @@ namespace Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PaymentMethods",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PaymentMethods", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ProductBrands",
                 columns: table => new
                 {
@@ -109,37 +96,6 @@ namespace Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RepairRequests",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    CustomerEmail = table.Column<string>(type: "text", nullable: true),
-                    ProductType = table.Column<string>(type: "text", nullable: true),
-                    ProductNumber = table.Column<string>(type: "text", nullable: true),
-                    ProductBrand = table.Column<string>(type: "text", nullable: true),
-                    ProblemInfo = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: true),
-                    RequestDate = table.Column<DateTimeOffset>(type: "timestamp", nullable: false),
-                    Address = table.Column<string>(type: "text", nullable: true),
-                    City = table.Column<string>(type: "text", nullable: true),
-                    PostalCode = table.Column<string>(type: "text", nullable: true),
-                    FullName = table.Column<string>(type: "text", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
-                    AcceptedServiceCall = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    ReasonToReject = table.Column<string>(type: "text", nullable: true),
-                    Status = table.Column<string>(type: "text", nullable: false),
-                    IsEmergency = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    WorkPerformed = table.Column<string>(type: "text", nullable: true),
-                    Subtotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ServiceCallPrice = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
-                    RepairmanId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RepairRequests", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -151,7 +107,9 @@ namespace Infrastructure.Data.Migrations
                     DeliveryMethodId = table.Column<int>(type: "int", nullable: true),
                     Subtotal = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
                     Status = table.Column<string>(type: "text", nullable: false),
-                    PaymentIntentId = table.Column<string>(type: "text", nullable: true)
+                    PaymentIntentId = table.Column<string>(type: "text", nullable: true),
+                    TPS5 = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
+                    TVQ9975 = table.Column<decimal>(type: "decimal(18, 2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -230,26 +188,6 @@ namespace Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DaysAvailability",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    RepairRequestId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DaysAvailability", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_DaysAvailability_RepairRequests_RepairRequestId",
-                        column: x => x.RepairRequestId,
-                        principalTable: "RepairRequests",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "OrderItems",
                 columns: table => new
                 {
@@ -319,10 +257,105 @@ namespace Infrastructure.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "DaysAvailability",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    RepairRequestId = table.Column<int>(type: "int", nullable: true),
+                    RequestTaskId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DaysAvailability", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PaymentMethods",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    RepairRequestId = table.Column<int>(type: "int", nullable: true),
+                    RequestTaskId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PaymentMethods", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RequestTasks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    RepairRequestId = table.Column<int>(type: "int", nullable: false),
+                    RepairManId = table.Column<int>(type: "int", nullable: false),
+                    WorkPerformed = table.Column<string>(type: "text", nullable: true),
+                    Subtotal = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
+                    ServiceCallPrice = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
+                    CustomerEmail = table.Column<string>(type: "text", nullable: true),
+                    ProductType = table.Column<string>(type: "text", nullable: true),
+                    ProductNumber = table.Column<string>(type: "text", nullable: true),
+                    ProductBrand = table.Column<string>(type: "text", nullable: true),
+                    ProblemInfo = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: true),
+                    TaskDate = table.Column<DateTimeOffset>(type: "timestamp", nullable: false),
+                    TaskStatus = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RequestTasks", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RepairRequests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    CustomerEmail = table.Column<string>(type: "text", nullable: true),
+                    ProductType = table.Column<string>(type: "text", nullable: true),
+                    ProductNumber = table.Column<string>(type: "text", nullable: true),
+                    ProductBrand = table.Column<string>(type: "text", nullable: true),
+                    ProblemInfo = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: true),
+                    RequestDate = table.Column<DateTimeOffset>(type: "timestamp", nullable: false),
+                    Address = table.Column<string>(type: "text", nullable: true),
+                    City = table.Column<string>(type: "text", nullable: true),
+                    PostalCode = table.Column<string>(type: "text", nullable: true),
+                    FullName = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    AcceptedServiceCall = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ReasonToReject = table.Column<string>(type: "text", nullable: true),
+                    Status = table.Column<string>(type: "text", nullable: false),
+                    IsEmergency = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ServiceCallPrice = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
+                    RequestTaskId1 = table.Column<int>(type: "int", nullable: true),
+                    RequestTaskId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RepairRequests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RepairRequests_RequestTasks_RequestTaskId1",
+                        column: x => x.RequestTaskId1,
+                        principalTable: "RequestTasks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_DaysAvailability_RepairRequestId",
                 table: "DaysAvailability",
                 column: "RepairRequestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DaysAvailability_RequestTaskId",
+                table: "DaysAvailability",
+                column: "RequestTaskId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderItems_OrderId",
@@ -350,6 +383,16 @@ namespace Infrastructure.Data.Migrations
                 column: "PartTypeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PaymentMethods_RepairRequestId",
+                table: "PaymentMethods",
+                column: "RepairRequestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PaymentMethods_RequestTaskId",
+                table: "PaymentMethods",
+                column: "RequestTaskId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Photos_ProductId",
                 table: "Photos",
                 column: "ProductId");
@@ -363,10 +406,64 @@ namespace Infrastructure.Data.Migrations
                 name: "IX_Products_ProductTypeId",
                 table: "Products",
                 column: "ProductTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RepairRequests_RequestTaskId1",
+                table: "RepairRequests",
+                column: "RequestTaskId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RequestTasks_RepairRequestId",
+                table: "RequestTasks",
+                column: "RepairRequestId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_DaysAvailability_RepairRequests_RepairRequestId",
+                table: "DaysAvailability",
+                column: "RepairRequestId",
+                principalTable: "RepairRequests",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_DaysAvailability_RequestTasks_RequestTaskId",
+                table: "DaysAvailability",
+                column: "RequestTaskId",
+                principalTable: "RequestTasks",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_PaymentMethods_RepairRequests_RepairRequestId",
+                table: "PaymentMethods",
+                column: "RepairRequestId",
+                principalTable: "RepairRequests",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_PaymentMethods_RequestTasks_RequestTaskId",
+                table: "PaymentMethods",
+                column: "RequestTaskId",
+                principalTable: "RequestTasks",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_RequestTasks_RepairRequests_RepairRequestId",
+                table: "RequestTasks",
+                column: "RepairRequestId",
+                principalTable: "RepairRequests",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_RequestTasks_RepairRequests_RepairRequestId",
+                table: "RequestTasks");
+
             migrationBuilder.DropTable(
                 name: "ContactRequests");
 
@@ -384,9 +481,6 @@ namespace Infrastructure.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Photos");
-
-            migrationBuilder.DropTable(
-                name: "RepairRequests");
 
             migrationBuilder.DropTable(
                 name: "Orders");
@@ -411,6 +505,12 @@ namespace Infrastructure.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProductTypes");
+
+            migrationBuilder.DropTable(
+                name: "RepairRequests");
+
+            migrationBuilder.DropTable(
+                name: "RequestTasks");
         }
     }
 }

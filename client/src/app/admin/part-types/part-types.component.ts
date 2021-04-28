@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { IPartType } from 'src/app/shared/models/partType';
 import { AdminService } from '../admin.service';
 
@@ -13,7 +14,7 @@ export class PartTypesComponent implements OnInit {
   pageSize = 10;
   totalCount: number;
 
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getTypes();
@@ -33,5 +34,15 @@ export class PartTypesComponent implements OnInit {
       this.pageNumber = event;
       this.getTypes();
     }
+  }
+
+  deleteType(id: number){
+    this.adminService.deletePartType(id).subscribe(()=> {
+      this.toastr.success("Part Type Deleted");
+      this.getTypes();
+    }, error => {
+      this.toastr.error(error);
+      console.log(error);
+    })
   }
 }

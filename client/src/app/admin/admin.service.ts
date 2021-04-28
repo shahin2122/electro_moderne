@@ -14,6 +14,8 @@ import { PartsParams } from '../shared/models/PartsParams';
 import { IPart } from '../shared/models/part';
 import { IPartType } from '../shared/models/partType';
 import { IPartBrand } from '../shared/models/partBrand';
+import { UserParams } from '../shared/models/usersParams';
+import { IOrder } from '../shared/models/Order';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +25,7 @@ baseUrl = environment.baseApiUrl;
 
 partToAddPhoto: IPart;
 productToAddPhoto: product;
+OrderDetailed: IOrder;
 
   constructor(private http: HttpClient) { }
 
@@ -89,8 +92,20 @@ productToAddPhoto: product;
       );
   }
 
-  getUsersWithRoles() {
-    return this.http.get<Partial<IUSer[]>>(this.baseUrl + 'admin/users-with-roles');
+  getUsersWithRoles(userParams: UserParams) {
+
+    let params = new HttpParams();
+
+    params = params.append('sort', userParams.sort);
+    params = params.append('pageIndex', userParams.pageNumber.toString());
+    params = params.append('pageIndex', userParams.pageSize.toString());
+
+    return this.http.get<IPagination>(this.baseUrl + 'admin/users-with-roles', {observe: 'response', params})
+      .pipe(
+        map(response => {
+          return response.body;
+        })
+      );
   }
 
   updateUserRoles(email: string, roles: string[]) {
@@ -114,14 +129,25 @@ productToAddPhoto: product;
     return this.http.get<IProductType[]>(this.baseUrl + 'types/get-all-raw');
   }
 
+  getType(id: number){
+    return this.http.get<IProductType>(this.baseUrl + 'types/' + id);
+  }
+
   addNewType(typeName: any){
     return this.http.post(this.baseUrl + 'types/add-new-type/' + typeName,"");
   }
+
+  updateType(typeId: number , newName: string){
+    return this.http.post(this.baseUrl + 'types/update/' + typeId + '/' + newName , {});
+  }
+
   addNewPartType(typeName: any){
     return this.http.post(this.baseUrl + 'parttypes/add-new-type/' + typeName,"");
   }
 
-  
+  deleteProductType(id: number){
+    return this.http.delete(this.baseUrl + 'types/' + id);
+  }
 
   getBrandsPaginated(pageNumber: number, pageSize: number) {
     let params = new HttpParams();
@@ -139,6 +165,18 @@ productToAddPhoto: product;
 
   getBrands(){
     return this.http.get<IProductBrand[]>(this.baseUrl + 'brands/get-all-raw');
+  }
+
+  getBrand(id: number){
+    return this.http.get<IProductBrand>(this.baseUrl + 'brands/' + id);
+  }
+
+  updateProductBrand(brandId: number, newName: string){
+    return this.http.post(this.baseUrl + 'brands/update/' + brandId + '/' + newName, {});
+  }
+
+  deleteProductBrand(id: number){
+    return this.http.delete(this.baseUrl + 'brands/' + id);
   }
 
   getPartBrandsPaginated(pageNumber: number, pageSize: number){
@@ -159,6 +197,18 @@ productToAddPhoto: product;
     return this.http.get<IPartBrand[]>(this.baseUrl + 'partbrands/get-all-raw');
   }
 
+  getPartBrand(id: number){
+    return this.http.get<IPartBrand>(this.baseUrl + 'partbrands/' + id);
+  }
+
+  updatePartBrand(brandId: number , newName: string){
+    return this.http.post<IPartBrand>(this.baseUrl + 'partbrands/update/' + brandId + '/' + newName, {});
+  }
+
+  deletePartBrand(brandId: number){
+    return this.http.delete(this.baseUrl + 'partbrands/' + brandId);
+  }
+
   getPartTypesPaginated(pageNumber: number, pageSize: number){
     let params = new HttpParams();
 
@@ -175,6 +225,18 @@ productToAddPhoto: product;
 
   getPartTypes(){
     return this.http.get<IPartType[]>(this.baseUrl + 'parttypes/get-all-raw');
+  }
+
+  getPartType(id: number){
+    return this.http.get<IPartType>(this.baseUrl + 'parttypes/' + id);
+  }
+
+  updatePartType(typeId: number, newName: string) {
+    return this.http.post<IPartType>(this.baseUrl + 'parttypes/update/' + typeId + '/' + newName,{});
+  }
+
+  deletePartType(id: number){
+    return this.http.delete(this.baseUrl + 'parttypes/' + id);
   }
 
   addNewBrand(brandName: any) {
@@ -211,6 +273,15 @@ setMainPartPhoto(photoId: number, partId: number) {
 
 deletePartPhoto(partId: number, photoId: number) {
   return this.http.delete(this.baseUrl + 'partphotos/' + partId + '-' + photoId);
+}
+
+getOrderForAdmin(orderId: number, buyerEmail: string){
+  return this.http.get<IOrder>(this.baseUrl + 'order/admin/' + orderId + '/' + buyerEmail)
+    .pipe(
+      map(response => {
+        this.OrderDetailed = response;
+      })
+    );
 }
 
 }

@@ -4,6 +4,8 @@ using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using API.Helpers;
 using Core.Specifications;
+using Microsoft.AspNetCore.Authorization;
+using API.Errors;
 
 namespace API.Controllers
 {
@@ -61,5 +63,35 @@ namespace API.Controllers
         {
             return Ok(await _partTypeRepo.ListAllAsync());
         }
+
+        [Authorize]
+        [HttpPost("update/{typeId}/{newName}")]
+        public async Task<ActionResult<ProductType>> UpdateType( int typeId, string newName)
+        {
+            var type = await _partTypeRepo.GetByIdAsync(typeId);
+
+            type.Name = newName;
+
+            _partTypeRepo.Update(type);
+
+            if(await _partTypeRepo.SaveAllAsync()) return Ok(type);
+
+            return BadRequest(new ApiResponse(400, "failed to update part type"));
+        }
+
+        [Authorize]
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteType(int id)
+        {
+            var type = await _partTypeRepo.GetByIdAsync(id);
+
+            if(type == null) return NotFound();
+
+            _partTypeRepo.Delete(type);
+            if(await _partTypeRepo.SaveAllAsync()) return Ok();
+
+            return BadRequest("Failed To delete Type");
+        }
+
     }
 }

@@ -63,9 +63,14 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int?>("RepairRequestId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("RequestTaskId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("RepairRequestId");
+
+                    b.HasIndex("RequestTaskId");
 
                     b.ToTable("DaysAvailability");
                 });
@@ -119,6 +124,12 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<decimal>("Subtotal")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<decimal>("TPS5")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<decimal>("TVQ9975")
                         .HasColumnType("decimal(18, 2)");
 
                     b.HasKey("Id");
@@ -254,7 +265,17 @@ namespace Infrastructure.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
+                    b.Property<int?>("RepairRequestId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RequestTaskId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("RepairRequestId");
+
+                    b.HasIndex("RequestTaskId");
 
                     b.ToTable("PaymentMethods");
                 });
@@ -352,6 +373,57 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("ProductTypes");
                 });
 
+            modelBuilder.Entity("Core.Entities.RepairAggregate.RequestTask", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("CustomerEmail")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProblemInfo")
+                        .HasMaxLength(250)
+                        .HasColumnType("varchar(250)");
+
+                    b.Property<string>("ProductBrand")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProductNumber")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProductType")
+                        .HasColumnType("text");
+
+                    b.Property<int>("RepairManId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RepairRequestId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ServiceCallPrice")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<decimal>("Subtotal")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<DateTimeOffset>("TaskDate")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("TaskStatus")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("WorkPerformed")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RepairRequestId");
+
+                    b.ToTable("RequestTasks");
+                });
+
             modelBuilder.Entity("Core.Entities.RepairRequest", b =>
                 {
                     b.Property<int>("Id")
@@ -398,11 +470,14 @@ namespace Infrastructure.Data.Migrations
                     b.Property<string>("ReasonToReject")
                         .HasColumnType("text");
 
-                    b.Property<int>("RepairmanId")
-                        .HasColumnType("int");
-
                     b.Property<DateTimeOffset>("RequestDate")
                         .HasColumnType("timestamp");
+
+                    b.Property<int>("RequestTaskId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RequestTaskId1")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("ServiceCallPrice")
                         .HasColumnType("decimal(18, 2)");
@@ -411,13 +486,9 @@ namespace Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<decimal>("Subtotal")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("WorkPerformed")
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("RequestTaskId1");
 
                     b.ToTable("RepairRequests");
                 });
@@ -427,6 +498,10 @@ namespace Infrastructure.Data.Migrations
                     b.HasOne("Core.Entities.RepairRequest", null)
                         .WithMany("DaysAvailability")
                         .HasForeignKey("RepairRequestId");
+
+                    b.HasOne("Core.Entities.RepairAggregate.RequestTask", null)
+                        .WithMany("DaysAvailability")
+                        .HasForeignKey("RequestTaskId");
                 });
 
             modelBuilder.Entity("Core.Entities.OrderAggregate.Order", b =>
@@ -506,6 +581,17 @@ namespace Infrastructure.Data.Migrations
                     b.Navigation("Part");
                 });
 
+            modelBuilder.Entity("Core.Entities.PaymentMethods", b =>
+                {
+                    b.HasOne("Core.Entities.RepairRequest", null)
+                        .WithMany("PaymentMethods")
+                        .HasForeignKey("RepairRequestId");
+
+                    b.HasOne("Core.Entities.RepairAggregate.RequestTask", null)
+                        .WithMany("PaymentMethods")
+                        .HasForeignKey("RequestTaskId");
+                });
+
             modelBuilder.Entity("Core.Entities.Photo", b =>
                 {
                     b.HasOne("Core.Entities.Product", "Product")
@@ -536,6 +622,26 @@ namespace Infrastructure.Data.Migrations
                     b.Navigation("ProductType");
                 });
 
+            modelBuilder.Entity("Core.Entities.RepairAggregate.RequestTask", b =>
+                {
+                    b.HasOne("Core.Entities.RepairRequest", "RepairRequest")
+                        .WithMany()
+                        .HasForeignKey("RepairRequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("RepairRequest");
+                });
+
+            modelBuilder.Entity("Core.Entities.RepairRequest", b =>
+                {
+                    b.HasOne("Core.Entities.RepairAggregate.RequestTask", "RequestTask")
+                        .WithMany()
+                        .HasForeignKey("RequestTaskId1");
+
+                    b.Navigation("RequestTask");
+                });
+
             modelBuilder.Entity("Core.Entities.OrderAggregate.Order", b =>
                 {
                     b.Navigation("Items");
@@ -551,9 +657,18 @@ namespace Infrastructure.Data.Migrations
                     b.Navigation("Photos");
                 });
 
+            modelBuilder.Entity("Core.Entities.RepairAggregate.RequestTask", b =>
+                {
+                    b.Navigation("DaysAvailability");
+
+                    b.Navigation("PaymentMethods");
+                });
+
             modelBuilder.Entity("Core.Entities.RepairRequest", b =>
                 {
                     b.Navigation("DaysAvailability");
+
+                    b.Navigation("PaymentMethods");
                 });
 #pragma warning restore 612, 618
         }

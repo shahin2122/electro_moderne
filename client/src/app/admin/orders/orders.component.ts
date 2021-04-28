@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { OrderService } from 'src/app/order/order.service';
 import { IOrder } from 'src/app/shared/models/Order';
 import { ordersParams } from 'src/app/shared/models/ordersParams';
+import { AdminService } from '../admin.service';
 
 @Component({
   selector: 'app-orders',
@@ -15,7 +17,8 @@ export class OrdersComponent implements OnInit {
  totalCount: number;
  
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService,private adminService: AdminService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getOrders();
@@ -43,5 +46,11 @@ export class OrdersComponent implements OnInit {
     this.ordersParams.pageNumber = event;
     this.getOrders();
     }
+  }
+
+  onClick(orderId: number, buyerEmail: string){
+    this.adminService.getOrderForAdmin(orderId, buyerEmail).subscribe(response => {
+      this.router.navigateByUrl("admin/orderdetailed");
+    });
   }
 }

@@ -4,6 +4,8 @@ using Core.Entities;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Core.Specifications;
+using API.Errors;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -64,6 +66,35 @@ namespace API.Controllers
         public async Task<ActionResult<ProductType>> GetTypes()
         {
             return Ok(await _typeRepo.ListAllAsync());
+        }
+
+        [Authorize]
+        [HttpPost("update/{typeId}/{newName}")]
+        public async Task<ActionResult<ProductType>> UpdateType( int typeId, string newName)
+        {
+            var type = await _typeRepo.GetByIdAsync(typeId);
+
+            type.Name = newName;
+
+            _typeRepo.Update(type);
+
+            if(await _typeRepo.SaveAllAsync()) return Ok(type);
+
+            return BadRequest(new ApiResponse(400, "failed to update product type"));
+        }
+
+        [Authorize]
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteType(int id)
+        {
+            var type = await _typeRepo.GetByIdAsync(id);
+
+            if(type == null) return NotFound();
+
+            _typeRepo.Delete(type);
+            if(await _typeRepo.SaveAllAsync()) return Ok();
+
+            return BadRequest("Failed To delete Type");
         }
     }
 }

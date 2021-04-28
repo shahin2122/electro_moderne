@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Core.Entities;
 using Core.Entities.OrderAggregate;
+using Core.Entities.RepairAggregate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,7 @@ namespace Infrastructure.Data
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<DeliveryMethod> DeliveryMethods {get; set;}
         public DbSet<RepairRequest> RepairRequests {get; set;}
+        public DbSet<RequestTask> RequestTasks {get; set;}
         public DbSet<ContactRequest> ContactRequests { get; set; }
         public DbSet<PaymentMethods> PaymentMethods { get; set; }
         public DbSet<DaysAvailable> DaysAvailability { get; set; }

@@ -1,3 +1,4 @@
+
 <div class=" mt-4">
     <app-basket-summary 
     [isBasket]=false
@@ -5,6 +6,10 @@
     [partItems]="(basket$ | async).partItems"
     ></app-basket-summary>
 </div>
+<div class="alert alert-primary mt-4">
+    <strong>The Final Price is Total price Plus Taxes!</strong> 
+  </div>
+
 
 <div class="float-none d-flex justify-content-between flex-column flex-lg-row mb-5">
     <button class="btn btn-warning d-flex align-items-center" cdkStepperPrevious>

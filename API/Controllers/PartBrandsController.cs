@@ -1,8 +1,10 @@
 using System.Threading.Tasks;
+using API.Errors;
 using API.Helpers;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -63,6 +65,36 @@ namespace API.Controllers
 
             return Ok(new Pagination<PartBrand>(partTypeSpecParams.PageIndex,
             partTypeSpecParams.pageSize, totalItems, data));
+        } 
+
+       [Authorize]
+        [HttpPost("update/{brandId}/{newName}")]
+        public async Task<ActionResult<ProductBrand>> UpdateBrand(int brandId, string newName)
+        {
+            var brand = await _partBrandRepo.GetByIdAsync(brandId);
+
+            brand.Name = newName;
+
+            _partBrandRepo.Update(brand);
+
+            if(await _partBrandRepo.SaveAllAsync()) return Ok(brand);
+
+            return BadRequest(new ApiResponse(400, "failed to update part brand"));
+        }
+
+        [Authorize]
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteBrand(int id)
+        {
+            var brand = await _partBrandRepo.GetByIdAsync(id);
+
+            if(brand == null)  return NotFound();
+
+            _partBrandRepo.Delete(brand);
+
+            if(await _partBrandRepo.SaveAllAsync()) return Ok();
+
+            return BadRequest(new ApiResponse(400, "failed to delete part brand"));
         } 
     }
 }

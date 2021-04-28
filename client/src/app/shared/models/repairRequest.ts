@@ -22,6 +22,8 @@ export interface IRepairRequest{
     workPerformed: string;
     repairmanId: number;
     price: number;
+    isEmergency: boolean;
+    
 }
 
 export interface IDaysAvailable {

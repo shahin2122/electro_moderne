@@ -10,6 +10,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Core.Specifications;
 using Order = Core.Entities.OrderAggregate.Order;
+using System;
 
 namespace Infrastructure.Services
 {
@@ -18,6 +19,8 @@ namespace Infrastructure.Services
         private readonly IBasketRepository _basketRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IConfiguration _config;
+
+
         public PaymentService(IBasketRepository basketRepository, IUnitOfWork unitOfWork, IConfiguration config)
         {
             _config = config;
@@ -59,6 +62,14 @@ namespace Infrastructure.Services
                 }
             }
 
+            var total = basket.ProductItems.Sum(i => i.Quantity * i.Price ) + basket.PartItems.Sum(i => i.Quantity * i.Price ) + shippingPrice;
+
+          
+
+            var TPS5 = (total * 5) / 100;
+
+            var TVQ9975 = (total * 9.975m )/ 100;
+
             var service = new PaymentIntentService();
 
             PaymentIntent intent;
@@ -69,7 +80,9 @@ namespace Infrastructure.Services
                 {
                     Amount = ((long) basket.ProductItems.Sum(i => i.Quantity * (i.Price * 100))) + 
                              ((long) basket.PartItems.Sum(i => i.Quantity * (i.Price * 100))) + 
-                             ((long) shippingPrice * 100),
+                             ((long) shippingPrice * 100) +
+                             ((long) TPS5 * 100) + 
+                             ((long) TVQ9975 * 100),
                     Currency = "cad",
                     PaymentMethodTypes = new List<string> {"card"}          
                 };
@@ -83,7 +96,9 @@ namespace Infrastructure.Services
                 {
                     Amount = ((long) basket.ProductItems.Sum(i => i.Quantity * (i.Price * 100))) + 
                              ((long) basket.PartItems.Sum(i => i.Quantity * (i.Price * 100))) + 
-                             ((long) shippingPrice * 100),
+                             ((long) shippingPrice * 100) +
+                             ((long) TPS5 * 100) + 
+                             ((long) TVQ9975 * 100),
                 };
                 await service.UpdateAsync(basket.PaymentIntentId, options);
             }
@@ -120,5 +135,6 @@ namespace Infrastructure.Services
 
            return order;
         }
+
     }
 }

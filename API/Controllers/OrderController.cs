@@ -68,6 +68,7 @@ namespace API.Controllers
             return Ok(await _orderService.GetDeliveryMethodsAsync());
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpGet("get-all")]
         public async Task<ActionResult<Pagination<OrderToReturnDto>>> GetAllOrders(
         [FromQuery] OrderSpecParams ordersParams)
@@ -84,6 +85,15 @@ namespace API.Controllers
 
             return Ok(new Pagination<OrderToReturnDto>(ordersParams.PageIndex,
             ordersParams.pageSize, totalItems, data));
+        }
+
+        [Authorize(Policy = "RequireAdminRole")]
+        [HttpGet("admin/{orderId}/{buyerEmail}")]
+        public async Task<OrderToReturnDto> GetOrderByAdmin(int orderId, string buyerEmail)
+        {
+            var order = await _orderService.GetOrderByIdAsync(orderId, buyerEmail);
+
+            return _mapper.Map<OrderToReturnDto>(order);
         }
     }
 }

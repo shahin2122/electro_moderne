@@ -20,7 +20,6 @@ export class RolesModalComponent implements OnInit {
 
 
   updateRoles(){
-    console.log("from modal = " + this.user.displayName);
     this.updateSelectedRoles.emit(this.roles);
     this.bsModalRef.hide();
   }

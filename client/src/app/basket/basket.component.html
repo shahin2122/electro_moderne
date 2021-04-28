@@ -31,6 +31,9 @@
                             [shippingPrice]="(basketTotal$ | async).shipping"
                             [subTotal]="(basketTotal$ | async).subtotal"
                             [total]="(basketTotal$ | async).total"
+                            [tps5]="(basketTotal$ | async).tps5"
+                            [tvq9975]="(basketTotal$ | async).tvq9975"
+                            [totalTaxed]="(basketTotal$ | async).totalTaxed"
                             ></app-order-totals>
                             <a routerLink="/checkout" class="btn btn-success py-2 btn-block">
                                 Proceed to checkout

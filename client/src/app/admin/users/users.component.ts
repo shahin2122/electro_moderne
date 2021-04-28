@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { RolesModalComponent } from 'src/app/modals/roles-modal/roles-modal.component';
+import { IPagination } from 'src/app/shared/models/pagination';
 import { IUSer } from 'src/app/shared/models/user';
+import { UserParams } from 'src/app/shared/models/usersParams';
 import { AdminService } from '../admin.service';
 
 @Component({
@@ -10,8 +12,10 @@ import { AdminService } from '../admin.service';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-users: Partial<IUSer[]>;
+users: IUSer[];
 bsModalRef: BsModalRef;
+userParams = new UserParams();
+totalCount : number;
 
   constructor(private adminService: AdminService, private modalService: BsModalService) { }
 
@@ -21,13 +25,17 @@ bsModalRef: BsModalRef;
 
 
   getUsersWithRoles() {
-    this.adminService.getUsersWithRoles().subscribe(users => {
-      this.users = users;
+    this.adminService.getUsersWithRoles(this.userParams)
+    .subscribe(response  => {
+      this.users = response.data;
+      this.userParams.pageNumber = response.pageIndex;
+      this.userParams.pageSize = response.pageSize;
+      this.totalCount = response.count;
     })
   }
 
   openRolesModal(user : IUSer) {
-    console.log("user from component =" + user.email);
+
     const config = {
       class: 'modal-dialog-centered',
       initialState: {
@@ -47,6 +55,13 @@ bsModalRef: BsModalRef;
         })
       }
     });
+  }
+
+  onPageChanged(event: any) {
+    if(this.userParams.pageNumber !== event){
+      this.userParams.pageNumber = event;
+      this.getUsersWithRoles();
+    }
   }
 
 

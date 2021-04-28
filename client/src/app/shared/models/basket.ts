@@ -45,4 +45,7 @@ export interface IBasketTotals {
     shipping: number;
     subtotal: number;
     total: number;
+    tps5: number;
+    tvq9975: number;
+    totalTaxed: number;
 }

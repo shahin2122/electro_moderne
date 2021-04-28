@@ -19,6 +19,9 @@
     private basketTotalSource = new BehaviorSubject<IBasketTotals>(null);
     basketTotal$ = this.basketTotalSource.asObservable();
     shipping = 0;
+    TPS5 = 0;
+    TVQ9975 = 0;
+    totalTaxed = 0;
   
     constructor(private http: HttpClient) { }
   
@@ -42,7 +45,7 @@
       this.setBasket(basket);
     }
   
-
+    
     
     getBasket(id: string) {
       return this.http.get(this.baseUrl + 'basket?id=' + id)
@@ -233,7 +236,13 @@
       const shipping = this.shipping;
       const subtotal = (basket.partItems.reduce((a, b) => (b.price * b.quantity) + a, 0)) + (basket.productItems.reduce((a, b) => (b.price * b.quantity) + a, 0));
       const total = subtotal + shipping;
-      this.basketTotalSource.next({shipping, total, subtotal});
+      const tps5 = (total * 5) / 100;
+      const tvq9975 = (total * 9.975) / 100;
+      const totalTaxed = total + tps5 + tvq9975;
+      this.basketTotalSource.next({shipping, total, subtotal,tps5,tvq9975,totalTaxed});
+      this.TPS5 = tps5;
+      this.TVQ9975 = tvq9975;
+      this.totalTaxed = totalTaxed;
     }
   }
 

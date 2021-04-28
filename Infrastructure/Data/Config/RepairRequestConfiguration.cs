@@ -18,8 +18,6 @@ namespace Infrastructure.Data.Config
                 );
 
 
-            builder.Property(i => i.Subtotal)
-                .HasColumnType("decimal(18,2)");
         }
     }
 }

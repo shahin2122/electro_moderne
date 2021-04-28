@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using Core.Entities.RepairAggregate;
 
 namespace Core.Entities
 {
@@ -21,23 +21,15 @@ namespace Core.Entities
         public string PhoneNumber { get; set; }
         public bool AcceptedServiceCall { get; set; }
         public string ReasonToReject { get; set; }
-
-        public IReadOnlyList<DaysAvailable> DaysAvailability { get; set; }
-
-       // public IReadOnlyList<PaymentMethods> PaymentMethods { get; set; }
+        public ICollection<DaysAvailable> DaysAvailability { get; set; }
+        public ICollection<PaymentMethods> PaymentMethods { get; set; }
         public RepairRequestStatus Status { get; set; } = RepairRequestStatus.Unseen;
-        
         public bool IsEmergency { get; set; }
 
-        public string WorkPerformed { get; set; }
-        public decimal Subtotal { get; set; } 
         public decimal ServiceCallPrice { get; set; } = 90;
+        public RequestTask RequestTask { get; set; }
+        public int RequestTaskId { get; set; }
 
-        public int RepairmanId { get; set; }
 
-        public decimal GetTotal()
-        {
-            return Subtotal + ServiceCallPrice;
-        }
     }
 }

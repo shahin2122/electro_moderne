@@ -21,6 +21,8 @@ import { PartPhotoEditorComponent } from './parts/part-photo-editor/part-photo-e
 import { OrdersComponent } from './orders/orders.component';
 import { RepairRequestsComponent } from './repair-requests/repair-requests.component';
 import { RequestDetailedComponent } from './repair-requests/request-detailed/request-detailed.component';
+import { AdminOrderDetailedComponent } from './orders/admin-order-detailed/admin-order-detailed.component';
+
 
 
 
@@ -31,7 +33,7 @@ import { RequestDetailedComponent } from './repair-requests/request-detailed/req
     AddNewBrandComponent, AddNewProductComponent, PhotoEditorComponent,
      PartsComponent, AddNewPartComponent, PartBrandsComponent, PartTypesComponent,
       AddNewPartTypeComponent, AddNewPartBrandComponent, PartPhotoEditorComponent,
-       OrdersComponent, RepairRequestsComponent, RequestDetailedComponent],
+       OrdersComponent, RepairRequestsComponent, RequestDetailedComponent, AdminOrderDetailedComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

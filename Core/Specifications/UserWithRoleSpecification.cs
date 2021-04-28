@@ -13,6 +13,7 @@ namespace Core.Specifications
               )
         {
  
+            AddInclude(x => x.UserRoles);
             
             ApplyPaging(userSpecParams.pageSize * (userSpecParams.PageIndex - 1),
             userSpecParams.pageSize);

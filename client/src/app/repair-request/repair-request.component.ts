@@ -50,19 +50,12 @@ paymentMethods: IPaymentMethods[] ;
       
       serviceCallForm: this.fb.group({
         AcceptServiceFee: [null, Validators.required],
-
+        IsEmergency: [null],
       }),
       
 
     });
   }
 
-  onSubmit() {
-    this.requestService.submitNewRepairRequest(this.repairRequestForm.value).subscribe(
-      (response: IRepairRequest) =>{
-      this.router.navigateByUrl("/request-submitted");
-    }, error => {
-      console.log(error);
-    })
-  }
+ 
 }

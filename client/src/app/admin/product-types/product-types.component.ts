@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { IProductType } from 'src/app/shared/models/productType';
 import { AdminService } from '../admin.service';
 
@@ -13,7 +14,8 @@ export class ProductTypesComponent implements OnInit {
  pageSize = 10;
  totalCount: number;
 
-  constructor(private adminService: AdminService) { }
+
+  constructor(private adminService: AdminService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getTypes();
@@ -36,4 +38,14 @@ export class ProductTypesComponent implements OnInit {
     }
   }
 
+  deleteType(id: number){
+    this.adminService.deleteProductType(id).subscribe(()=> {
+      this.toastr.success("Product Type Deleted");
+      this.getTypes();
+    }, error => {
+      this.toastr.error(error);
+      console.log(error);
+    })
+  }
+ 
 }

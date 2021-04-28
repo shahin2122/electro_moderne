@@ -37,6 +37,7 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +71,7 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
     ContactsDetailedComponent,
   
     RolesModalComponent,
+
   
   ],
   imports: [

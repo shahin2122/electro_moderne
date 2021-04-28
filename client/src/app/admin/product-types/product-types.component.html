@@ -21,8 +21,8 @@
             
             <td>
                 <div class="btn-group">
-                <button class="btn btn-outline-primary d-flex-align-items-center"><i class="fa fa-edit fa-2x"></i></button>
-                <button class="btn btn-outline-danger d-flex-align-items-center"><i class="fa fa-trash fa-2x"></i></button>
+                <button routerLink="/admin/add-new-type/{{type.id}}" class="btn btn-primary d-flex align-items-center" style="width: 50%;"><i class="fa fa-edit fa-2x"></i>Edit</button>
+                <button (click)="deleteType(type.id)" class="btn btn-danger d-flex align-items-center" style="width: 50%;"><i class="fa fa-trash fa-2x"></i>Delete</button>
                 </div>
             </td>
         </tr>

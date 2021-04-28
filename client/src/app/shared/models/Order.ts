@@ -16,7 +16,10 @@ export interface IOrder {
     items: IOrderItem[];
     subtotal: number;
     total: number;
+    tps5: number;
+    tvq9975: number;
     status: string;
+    totalTaxed: number;
 }
 
 export interface IOrderItem {

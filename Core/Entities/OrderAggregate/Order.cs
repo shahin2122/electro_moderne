@@ -30,10 +30,17 @@ namespace Core.Entities.OrderAggregate
         public decimal Subtotal { get; set; }
         public Status Status { get; set; } = Status.Pending;
         public string PaymentIntentId { get; set; }
+        public decimal TPS5 { get; set; } 
+        public decimal TVQ9975 { get; set; }
 
         public decimal GetTotal()
         {
             return Subtotal + DeliveryMethod.Price;
+        }
+
+        public decimal GetTotalTaxed()
+        {
+            return GetTotal() + TPS5 + TVQ9975;
         }
     }
 }

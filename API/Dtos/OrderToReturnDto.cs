@@ -16,5 +16,8 @@ namespace API.Dtos
         public decimal Subtotal { get; set; }
         public decimal Total { get; set; }
         public string Status { get; set; } 
+        public decimal TPS5 { get; set; }
+        public decimal TVQ9975 { get; set; }
+        public decimal TotalTaxed {get; set;}
     }
 }

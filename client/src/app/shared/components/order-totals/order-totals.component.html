@@ -2,7 +2,7 @@
     Order Summary
 </div>
 <div class="p-4">
-    <p class="font-italic mb-4">Shipping Costs will be added depending on choices made during chekout</p>
+    <p class="font-italic mb-4">Shipping Costs will be added depending on choices made during chekout And Also Taxes Will be added too</p>
     <ul class="list-unstyled mb-4" >
         <li class="list-unstyled mb-4" >
             <strong class="text-muted">Order subtotal : </strong>
@@ -17,6 +17,21 @@
         <li class="list-unstyled mb-4" >
             <strong class="text-muted">Total : </strong>
             <strong >{{total | currency}}</strong>
+        </li>
+
+        <li class="list-unstyled mb-4" >
+            <strong class="text-muted">TPS(5%) : </strong>
+            <strong >{{tps5 | currency}}</strong>
+        </li>
+
+        <li class="list-unstyled mb-4" >
+            <strong class="text-muted">TVQ(9.975%) : </strong>
+            <strong >{{tvq9975 | currency}}</strong>
+        </li>
+
+        <li class="list-unstyled mb-4" >
+            <strong class="text-muted">Total + Taxes: </strong>
+            <strong >{{totalTaxed | currency}}</strong>
         </li>
     </ul>
 </div>
