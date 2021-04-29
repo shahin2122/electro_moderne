@@ -20,9 +20,7 @@
           "Microsoft.EntityFrameworkCore.Relational": "5.0.5",
           "Microsoft.IdentityModel.Tokens": "6.10.2",
           "MySql.EntityFrameworkCore": "5.0.3",
-          "Npgsql": "5.0.4",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.5.1",
-          "Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite": "5.0.5.1",
+          "Pomelo.EntityFrameworkCore.MySql": "3.2.5",
           "Pomelo.EntityFrameworkCore.MySql.Design": "1.1.2",
           "Pomelo.EntityFrameworkCore.MySql.Json.Newtonsoft": "3.2.5",
           "Pomelo.EntityFrameworkCore.MySql.NetTopologySuite": "3.2.5",
@@ -60,7 +58,7 @@
       "Google.Protobuf/3.14.0": {
         "dependencies": {
           "System.Memory": "4.5.3",
-          "System.Runtime.CompilerServices.Unsafe": "4.6.0"
+          "System.Runtime.CompilerServices.Unsafe": "4.5.2"
         },
         "runtime": {
           "lib/netstandard2.0/Google.Protobuf.dll": {
@@ -69,14 +67,7 @@
           }
         }
       },
-      "Humanizer.Core/2.8.26": {
-        "runtime": {
-          "lib/netstandard2.0/Humanizer.dll": {
-            "assemblyVersion": "2.8.0.0",
-            "fileVersion": "2.8.26.1919"
-          }
-        }
-      },
+      "Humanizer.Core/2.8.26": {},
       "K4os.Compression.LZ4/1.1.11": {
         "dependencies": {
           "System.Memory": "4.5.3"
@@ -301,12 +292,6 @@
           "Humanizer.Core": "2.8.26",
           "Microsoft.CSharp": "4.7.0",
           "Microsoft.EntityFrameworkCore.Relational": "5.0.5"
-        },
-        "runtime": {
-          "lib/netstandard2.1/Microsoft.EntityFrameworkCore.Design.dll": {
-            "assemblyVersion": "5.0.5.0",
-            "fileVersion": "5.0.521.16102"
-          }
         }
       },
       "Microsoft.EntityFrameworkCore.Relational/5.0.5": {
@@ -636,71 +621,11 @@
           }
         }
       },
-      "NetTopologySuite.IO.PostGis/2.0.0": {
-        "dependencies": {
-          "NetTopologySuite": "2.0.0"
-        },
-        "runtime": {
-          "lib/netstandard2.0/NetTopologySuite.IO.PostGis.dll": {
-            "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.0.0.0"
-          }
-        }
-      },
       "Newtonsoft.Json/12.0.3": {
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "assemblyVersion": "12.0.0.0",
             "fileVersion": "12.0.3.23909"
-          }
-        }
-      },
-      "Npgsql/5.0.4": {
-        "dependencies": {
-          "System.Runtime.CompilerServices.Unsafe": "4.6.0"
-        },
-        "runtime": {
-          "lib/net5.0/Npgsql.dll": {
-            "assemblyVersion": "5.0.4.0",
-            "fileVersion": "5.0.4.0"
-          }
-        }
-      },
-      "Npgsql.EntityFrameworkCore.PostgreSQL/5.0.5.1": {
-        "dependencies": {
-          "Microsoft.EntityFrameworkCore": "5.0.5",
-          "Microsoft.EntityFrameworkCore.Abstractions": "5.0.5",
-          "Microsoft.EntityFrameworkCore.Relational": "5.0.5",
-          "Npgsql": "5.0.4"
-        },
-        "runtime": {
-          "lib/netstandard2.1/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {
-            "assemblyVersion": "5.0.5.1",
-            "fileVersion": "5.0.5.1"
-          }
-        }
-      },
-      "Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite/5.0.5.1": {
-        "dependencies": {
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.5.1",
-          "Npgsql.NetTopologySuite": "5.0.4"
-        },
-        "runtime": {
-          "lib/netstandard2.1/Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite.dll": {
-            "assemblyVersion": "5.0.5.1",
-            "fileVersion": "5.0.5.1"
-          }
-        }
-      },
-      "Npgsql.NetTopologySuite/5.0.4": {
-        "dependencies": {
-          "NetTopologySuite.IO.PostGis": "2.0.0",
-          "Npgsql": "5.0.4"
-        },
-        "runtime": {
-          "lib/netstandard2.0/Npgsql.NetTopologySuite.dll": {
-            "assemblyVersion": "5.0.4.0",
-            "fileVersion": "5.0.4.0"
           }
         }
       },
@@ -1253,7 +1178,7 @@
           "Microsoft.NETCore.Targets": "1.1.0"
         }
       },
-      "System.Runtime.CompilerServices.Unsafe/4.6.0": {},
+      "System.Runtime.CompilerServices.Unsafe/4.5.2": {},
       "System.Runtime.Extensions/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "5.0.0",
@@ -2033,47 +1958,12 @@
       "path": "nettopologysuite/2.0.0",
       "hashPath": "nettopologysuite.2.0.0.nupkg.sha512"
     },
-    "NetTopologySuite.IO.PostGis/2.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-f4PAE9VTUfM8w+SOlFcsvn5/S9e5SQywmEPsCMAVgfiemwHw9NKSB4Jnn4+U/jl5hN9tUutHxpHnOUx2Pqm6Ew==",
-      "path": "nettopologysuite.io.postgis/2.0.0",
-      "hashPath": "nettopologysuite.io.postgis.2.0.0.nupkg.sha512"
-    },
     "Newtonsoft.Json/12.0.3": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
       "path": "newtonsoft.json/12.0.3",
       "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
-    },
-    "Npgsql/5.0.4": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-wuJUsrhOKaR41ZB9Ecw9ZEpQzMQ5bRahl7w+pt4noVMDkDPbw4cMHV8UfNKeZSPLXaN4yWXPR2QgJ+2vG/85VQ==",
-      "path": "npgsql/5.0.4",
-      "hashPath": "npgsql.5.0.4.nupkg.sha512"
-    },
-    "Npgsql.EntityFrameworkCore.PostgreSQL/5.0.5.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-yTFRZ5jMOu+Ez94YJzYKlxnbSO7h0BDSCM38xVN8ynZrS01xfP4/g8o/+InOarCkT6stZPMPD910STIsXYNQ5w==",
-      "path": "npgsql.entityframeworkcore.postgresql/5.0.5.1",
-      "hashPath": "npgsql.entityframeworkcore.postgresql.5.0.5.1.nupkg.sha512"
-    },
-    "Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite/5.0.5.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-+axrrMCFOB9eTdg7PGxTPCDKJyHEpvnXlIOcoXUYavqF7e+k1a9ALLkeKmCCjzJF39efUiK20aG2CeCCgzq+hA==",
-      "path": "npgsql.entityframeworkcore.postgresql.nettopologysuite/5.0.5.1",
-      "hashPath": "npgsql.entityframeworkcore.postgresql.nettopologysuite.5.0.5.1.nupkg.sha512"
-    },
-    "Npgsql.NetTopologySuite/5.0.4": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-XyF/54OSo24OzQWYvOKS2ZCHxbR1vEqKOyQ2+TqiBujGTVSSvz0fygzqlOZr8YV9NDWW+zTcmtT/otF0MCsKXw==",
-      "path": "npgsql.nettopologysuite/5.0.4",
-      "hashPath": "npgsql.nettopologysuite.5.0.4.nupkg.sha512"
     },
     "Pipelines.Sockets.Unofficial/2.2.0": {
       "type": "package",
@@ -2551,12 +2441,12 @@
       "path": "system.runtime/4.3.0",
       "hashPath": "system.runtime.4.3.0.nupkg.sha512"
     },
-    "System.Runtime.CompilerServices.Unsafe/4.6.0": {
+    "System.Runtime.CompilerServices.Unsafe/4.5.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-HxozeSlipUK7dAroTYwIcGwKDeOVpQnJlpVaOkBz7CM4TsE5b/tKlQBZecTjh6FzcSbxndYaxxpsBMz+wMJeyw==",
-      "path": "system.runtime.compilerservices.unsafe/4.6.0",
-      "hashPath": "system.runtime.compilerservices.unsafe.4.6.0.nupkg.sha512"
+      "sha512": "sha512-wprSFgext8cwqymChhrBLu62LMg/1u92bU+VOwyfBimSPVFXtsNqEWC92Pf9ofzJFlk4IHmJA75EDJn1b2goAQ==",
+      "path": "system.runtime.compilerservices.unsafe/4.5.2",
+      "hashPath": "system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512"
     },
     "System.Runtime.Extensions/4.3.0": {
       "type": "package",

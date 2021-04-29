@@ -1,4 +1,4 @@
-version: '3.1'
+
 
 services:
 
@@ -22,13 +22,13 @@ services:
       - redis
 
   db:
-    image: mysql
-    command: --default-authentication-plugin=mysql_native_password
+    image: postgres
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: example
+      POSTGRES_PASSWORD: sekret
+      POSTGRES_USER: appuser
     ports:
-      - 3306:3306
+      - 5432:5432
       
   adminer:
     image: adminer

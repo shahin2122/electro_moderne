@@ -4,6 +4,7 @@ C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Core.pdb
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\CloudinaryDotNet.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Microsoft.AspNetCore.Html.Abstractions.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Microsoft.AspNetCore.Http.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Microsoft.AspNetCore.Http.Abstractions.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Microsoft.AspNetCore.Http.Features.dll
@@ -18,5 +19,6 @@ C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Microsof
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Microsoft.Extensions.ObjectPool.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Microsoft.Extensions.Options.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Microsoft.Extensions.Primitives.dll
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Microsoft.Extensions.WebEncoders.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Microsoft.Net.Http.Headers.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Newtonsoft.Json.dll

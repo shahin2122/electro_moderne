@@ -13,3 +13,8 @@ C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\Infrastructure\o
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\Infrastructure\obj\Release\net5.0\Infrastructure.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\Infrastructure\obj\Release\net5.0\ref\Infrastructure.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\Infrastructure\obj\Release\net5.0\Infrastructure.pdb
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\Infrastructure\bin\Release\net5.0\Infrastructure.runtimeconfig.json
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\Infrastructure\bin\Release\net5.0\Infrastructure.runtimeconfig.dev.json
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\Infrastructure\obj\Release\net5.0\EFCoreMySqlNetTopologySuite.cs
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\Infrastructure\obj\Release\net5.0\EFCoreMySqlJsonNewtonsoft.cs
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\Infrastructure\obj\Release\net5.0\Infrastructure.genruntimeconfig.cache

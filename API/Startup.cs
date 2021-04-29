@@ -52,7 +52,7 @@ namespace API
             });
 
             services.AddDbContext<AppIdentityDbContext>(x => 
-                x.UseMySQL(
+                x.UseNpgsql(
                     _config.GetConnectionString("IdentityConnection")));
                 
 
@@ -104,6 +104,7 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
     }
