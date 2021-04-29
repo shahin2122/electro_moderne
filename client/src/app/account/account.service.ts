@@ -5,8 +5,6 @@ import { environment } from 'src/environments/environment';
 import { IUSer } from '../shared/models/user';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { SocialAuthService } from 'angularx-social-login';
-import { GoogleLoginProvider } from 'angularx-social-login';
 import { IAddress } from '../shared/models/address';
 
 
@@ -21,7 +19,7 @@ export class AccountService {
 
 
   constructor(private http: HttpClient, private router: Router,
-    private socialAuthService: SocialAuthService) { }
+   ) { }
 
  
 
@@ -95,19 +93,7 @@ getDecodedToken(token) {
   return JSON.parse(atob(token.split('.')[1]));
 }
 
-googleLogin(model: any){
-  return this.http.post(this.baseUrl + 'account/external-login', model).pipe(
-    
-    map((user: IUSer) => {
-      if(user) {
-        localStorage.setItem('token', user.token);
-        this.setCurrentUser(user);
-      console.log("ac " + user.address1);
-      }
-      return user;
-    })
-  );
- }
+
 
  getUserAddress(){
    return this.http.get<IAddress>(this.baseUrl + 'account/address');

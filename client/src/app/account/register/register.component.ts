@@ -5,8 +5,6 @@ import { ToastrService } from 'ngx-toastr';
 import { of, timer } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { AccountService } from '../account.service';
-import { SocialAuthService } from 'angularx-social-login';
-import { GoogleLoginProvider } from 'angularx-social-login';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +18,7 @@ export class RegisterComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder, private accountService: AccountService, private router: Router,
-    private toastr: ToastrService, private socialAuthService: SocialAuthService) { }
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.createRegisterForm();
@@ -64,27 +62,5 @@ export class RegisterComponent implements OnInit {
     };
   }
 
-  logInWithGoogle(platform: string): void {
-    
-    platform = GoogleLoginProvider.PROVIDER_ID;
-   
-    this.socialAuthService.signIn(platform).then(
-    (response) => {
-     
-    // this.externalUser = response;
-      this.externalUser = {
-          id : response.id,
-          email : response.email,
-          username: response.name,
-          firstName: response.firstName,
-          lastName: response.lastName,
-          pictureUrl: response.photoUrl,
-          provider: response.provider,
-        };
-      
-      console.log(this.externalUser);
-        this.accountService.googleLogin(this.externalUser).subscribe();
-      });
-     
-  }
+ 
 }

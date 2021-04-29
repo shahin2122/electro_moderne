@@ -47,28 +47,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  logInWithGoogle(platform: string): void {
-    
-    platform = GoogleLoginProvider.PROVIDER_ID;
-   
-    this.socialAuthService.signIn(platform).then(
-    (response) => {
-     
-    // this.externalUser = response;
-      this.externalUser = {
-          id : response.id,
-          email : response.email,
-          username: response.name,
-          firstName: response.firstName,
-          lastName: response.lastName,
-          pictureUrl: response.photoUrl,
-          provider: response.provider
-        };
-      
-
-        this.accountService.googleLogin(this.externalUser).subscribe();
-      });
-     
-  }
+  
   
 }
