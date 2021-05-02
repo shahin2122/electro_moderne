@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
-using Pomelo.EntityFrameworkCore.MySql;
+
 
 namespace API
 {
@@ -88,13 +88,12 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            
-            app.UseCors("CorsPolicy");
 
             app.UseStaticFiles();
 
-            app.UseAuthentication();
+            app.UseCors("CorsPolicy");
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseDefaultFiles();

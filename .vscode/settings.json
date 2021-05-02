@@ -1,0 +1,31 @@
+{
+    "deploy.reloaded": {
+        "packages": [
+            {
+                "name": "Version 1.0.0",
+                "description": "Package version 1.0.0",
+
+                "files": [
+                    "publish/**"
+                ]
+            }
+        ],
+
+        "targets": [
+            {
+                "type": "sftp",
+                "name": "Linux",
+                "description": "SFTP folder",
+
+                "host": "159.203.28.167", "port": 22,
+                "user": "root", "password": "_X7n33d5or28s",
+
+                "dir": "/var/emwebsite",
+                "mappings": {
+                    "publish/**": "/"
+                }
+            }
+        ]
+    }
+}
+
