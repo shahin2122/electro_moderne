@@ -11,6 +11,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { ServerErrorComponent } from './core/server-error/server-error.component';
 import { TestErrorComponent } from './core/test-error/test-error.component';
+import { FrenchComponent } from './french/french.component';
 import { HomeComponent } from './home/home.component';
 import { RepairRequestComponent } from './repair-request/repair-request.component';
 import { RequestSubmitedComponent } from './repair-request/request-submited/request-submited.component';
@@ -20,6 +21,7 @@ import { ShopComponent } from './shop/shop.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent, data: {breadcrumb: 'Home'}},
+    {path: 'french', component: FrenchComponent, data: {breadcrumb: 'french'}},
     {path: 'repair-request', component: RepairRequestComponent, data: {breadcrumb: 'Repair Request'}},
     {path: 'request-submitted', component: RequestSubmitedComponent, data: {breadcrumb: 'Repair Request Submitted'}},
     {path: 'contact-us', component: ContactUsComponent, data: {breadcrumb: 'Contact Us'}},

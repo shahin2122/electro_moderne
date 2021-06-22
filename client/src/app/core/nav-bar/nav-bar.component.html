@@ -71,11 +71,14 @@ p-3 px-md-4  bg-body border-bottom shadow-sm">
     </div>
     </div>
 
-    <div class="col-xl-6 col-lg-4 col-md-4 col-sm-10 ">
+    <div class="col-xl-6 col-lg-4 col-md-4 col-sm-10 d-flex align-items-center justify-content-start">
+     <div>
+      <img src="/assets/images/GB.png" style="cursor: pointer;" routerLink="/"> <strong class="font-large"> _ </strong> <img src="/assets/images/FR.png" style="cursor: pointer;" routerLink="/french">
+     </div>
       <form class="form-inline my-2 my-lg-0">
       <div class="row-md-12 row-xs-12  container d-flex  align-items-center">
           <input class="form-control d-flex col-xl-9 col-lg-9 col-md-9 col-sm-10 col-xs-10 mr-sm-2 my-2 font-large" type="text" style="height: 63px;" placeholder="What do you need?">
-          <button class="btn btn-secondary d-flex d-block d-none  col-xl-3 col-lg-3 col-md-3 col-sm-2 col-2 my-2 my-sm-0 font-larger align-items-center" type="submit" style="height: 63px;"><i class="fa fa-search fa-2x d-none d-sm-block"></i> <i class="fa fa-search  d-block d-sm-none"></i> <span class="d-none d-xl-block"> Search</span> </button>
+          <button class="btn btn-secondary d-flex d-block d-none  col-xl-3 col-lg-3 col-md-3 col-sm-2 col-2 my-2 my-sm-0 font-larger align-items-center" type="submit" style="height: 63px;"><i class="fa fa-search fa-2x d-none d-sm-block"></i> <i class="fa fa-search  d-block d-sm-none"></i> </button>
          
       </div>
      </form>
@@ -98,7 +101,7 @@ p-3 px-md-4  bg-body border-bottom shadow-sm">
     
       <li class="nav-item">
         <a class="nav-link font-large" 
-         href="https://docs.google.com/forms/d/e/1FAIpQLScme5U0JfDxoKGJGm74F8HDmA-L2kudIkMM2KlN199siko27w/viewform">Repair Request</a> 
+        routerLink="/repair-request" >Repair Request</a> 
       </li>
      
    
@@ -143,7 +146,7 @@ p-3 px-md-4  bg-body border-bottom shadow-sm">
 </nav>
 
 <nav class="navbar navbar-expand-md navbar-light bg-light">
-  <a routerLink="/part-shop" class="navbar-brand font-large" routerLink="/part-shop">Appliances Parts</a>
+  <a routerLink="/part-shop" class="navbar-brand font-large">Appliances Parts</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>

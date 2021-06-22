@@ -1,7 +1,7 @@
+import { AppRoutingModule } from './app-routing.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ShopComponent } from './shop/shop.component';
@@ -34,6 +34,7 @@ import { SubmitedComponent } from './contact-us/submited/submited.component';
 import { ContactsComponent } from './contact-us/contacts/contacts.component';
 import { ContactsDetailedComponent } from './contact-us/contacts-detailed/contacts-detailed.component';
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
+import { FrenchComponent } from './french/french.component';
 
 
 
@@ -71,6 +72,8 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
     ContactsDetailedComponent,
   
     RolesModalComponent,
+  
+    FrenchComponent,
 
   
   ],

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { AppRoutingModule } from '../app-routing.module';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +10,13 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  goToShop(){
+    this.router.navigateByUrl("/shop");
+    console.log("going to shop");
+  }
 }

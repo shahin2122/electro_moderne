@@ -38,7 +38,7 @@
         <div class="col4 text-center ">
                 <div class=" d-flex justify-content-center align-items-center">
                     <i class="fa fa-truck fa-5x"></i>
-                    <h1>We Deliver, Install & Tidy</h1>
+                    <h1>Deliver & Install</h1>
                 </div>
                 <div class="text-center">
                     <h3>If you need a hand with anything, please check our range of services when you place your order</h3>
@@ -47,7 +47,7 @@
         <div class="col4 text-center ">
             <div class=" d-flex justify-content-center align-items-center">
                 <i class="fa fa-cogs fa-5x"></i>
-                <h1>We Repair & Fix Your Appliances</h1>
+                <h1>Repair & Fix Your Appliances</h1>
             </div>
             <div class="text-center">
                 <h3>If you have problem with any Appliances, please click fast on repair request, we will come to your aid quickly!</h3>
@@ -56,10 +56,10 @@
     <div class="col4 text-center">
         <div class=" d-flex justify-content-center align-items-center">
             <i class="fa fa-phone fa-5x"></i>
-            <h1>We sell Best Appliances and Parts in montréal</h1>
+            <h1>Sell Best Appliances & Appliance Parts in montréal</h1>
         </div>
         <div class="text-center">
-            <h3>If you need anything that is not on the website, please contact us fast (438)494-7672</h3>
+            <h3>Sell Brand New and Refurbished Appliances & Appliance Parts</h3>
         </div>
 </div>
     </div>
@@ -70,13 +70,13 @@
   
         </div>
         <div >
-            <img  src="../../assets/images/dishwasher.png" alt="dishwashers" class="img-fluid custom-img" routerLink="shop" >
-            <img routerLink="shop" src="../../assets/images/refrigerator.jpg" alt="refrigerators" class="img-fluid custom-img" >
-            <img routerLink="shop" src="../../assets/images/stove.png" alt="stoves" class="img-fluid custom-img" >
-            <img routerLink="shop" src="../../assets/images/washer.png" alt="washers" class="img-fluid custom-img" >
-            <img routerLink="shop" src="../../assets/images/freezer.png" alt="freezers" class="img-fluid custom-img" >
-            <img routerLink="shop" src="../../assets/images/microwave.png" alt="microwaves" class="img-fluid custom-img" >
-            <img routerLink="shop" src="../../assets/images/hood.png" alt="hoods" class="img-fluid custom-img" >
+            <img src="../../assets/images/dishwasher.png" alt="dishwashers" class="img-fluid custom-img" (click)="goToShop()" >
+            <img src="../../assets/images/refrigerator.jpg" alt="refrigerators" class="img-fluid custom-img" (click)="goToShop()">
+            <img  src="../../assets/images/stove.png" alt="stoves" class="img-fluid custom-img" (click)="goToShop()">
+            <img  src="../../assets/images/washer.png" alt="washers" class="img-fluid custom-img" (click)="goToShop()">
+            <img src="../../assets/images/freezer.png" alt="freezers" class="img-fluid custom-img"  (click)="goToShop()">
+            <img  src="../../assets/images/microwave.png" alt="microwaves" class="img-fluid custom-img" (click)="goToShop()">
+            <img  src="../../assets/images/hood.png" alt="hoods" class="img-fluid custom-img" (click)="goToShop()">
         </div>
       
     </div>
@@ -85,19 +85,19 @@
         <div class="col-12 text-center">
             <h1 class="mb-5">Our Favourite Brands </h1>
         </div>
-        <img src="../../assets/images/brands/aeg 1.png" alt="AEG" class="brand-img img-fluid">
-        <img src="../../assets/images/brands/electriq.png" alt="ELECTRIQ" class="brand-img img-fluid">
-        <img src="../../assets/images/brands/b1.png" alt="BEKO" class="brand-img img-fluid">
-        <img src="../../assets/images/brands/indesit.png" alt="INDESIT" class="brand-img img-fluid">
-        <img src="../../assets/images/brands/bosch1.png" alt="BOSCH" class="brand-img img-fluid">
-        <img src="../../assets/images/brands/hisense1.png" alt="HISENSE" class="brand-img img-fluid">
-        <img src="../../assets/images/brands/ge1.png" alt="GE" class="brand-img img-fluid">
-        <img src="../../assets/images/brands/s1.png" alt="SAMSUNG" class="brand-img img-fluid">
-       
+        <img src="../../assets/images/brands/amana.png" alt="AMANA" class="brand-img img-fluid" (click)="goToShop()">
+        <img src="../../assets/images/brands/whirlpool.png" alt="WHIRLPOOL" class="brand-img img-fluid" (click)="goToShop()">
+        <img src="../../assets/images/brands/samsung.png" alt="SAMSUNG" class="brand-img img-fluid" (click)="goToShop()">
+        <img src="../../assets/images/brands/lg.png" alt="LG" class="brand-img img-fluid" (click)="goToShop()">
+        <img src="../../assets/images/brands/ge1.png" alt="GE" class="brand-img img-fluid" (click)="goToShop()">
+        <img src="../../assets/images/brands/bosch1.png" alt="BOSCH" class="brand-img img-fluid" (click)="goToShop()">
+        <img src="../../assets/images/brands/kenmore.png" alt="KENMORE" class="brand-img img-fluid" (click)="goToShop()">
+        <img src="../../assets/images/brands/inglis.png" alt="INGLIS" class="brand-img img-fluid" (click)="goToShop()">
+        <img src="../../assets/images/brands/maytag.png" alt="MAYTAG" class="brand-img img-fluid" (click)="goToShop()">
     </div>
 
 
-    <div class="row d-flex justify-content-center mb-5 p-5" style="background-color: whitesmoke;">
+  <!--  <div class="row d-flex justify-content-center mb-5 p-5" style="background-color: whitesmoke;">
         <div class="col-12 d-flex justify-content-center text-primary mb-3">
             <h1>Also Have A Look at our Parts</h1>
         </div>
@@ -116,5 +116,5 @@
             <h2 class="my-2 mx-1">Refrigerator  Parts</h2>
         </div>
     </div>
-
+    -->
 </div>
