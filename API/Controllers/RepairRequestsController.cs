@@ -38,6 +38,7 @@ namespace API.Controllers
             return BadRequest("failed to submit your repair request");
         }
 
+        
 
         [HttpGet("{id}")]
         public async Task<ActionResult<RepairRequestToReturnDto>> GetRequest(int id)
@@ -67,25 +68,7 @@ namespace API.Controllers
             requestParams.pageSize, totalItems, data));
 
         }
-        [HttpGet("payment-methods")]
-        public async Task<ActionResult<IReadOnlyList<PaymentMethods>>> GetPaymentMethodsAsync()
-        {
-            var payments = await _unitOfWork.Repository<PaymentMethods>().ListAllAsync();
-            
-            if(payments == null) return NotFound();
-
-            return Ok(payments);
-        }
-
-        [HttpGet("days")]
-        public async Task<ActionResult<IReadOnlyList<DaysAvailable>>> GetDaysAvailableAsync()
-        {
-            var days = await _unitOfWork.Repository<DaysAvailable>().ListAllAsync();
-            
-            if(days == null) return NotFound();
-
-            return Ok(days);
-        }
+        
 
         [HttpGet("unseen-requests")]
         public async Task<int> GetUnseenRequestsCountAsync()

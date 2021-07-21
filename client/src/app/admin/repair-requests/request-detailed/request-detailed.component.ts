@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RepairRequestService } from 'src/app/repair-request/repair-request.service';
 import { IRepairRequest } from 'src/app/shared/models/repairRequest';
 import { BreadcrumbService } from 'xng-breadcrumb';
+import { AdminService } from '../../admin.service';
 
 @Component({
   selector: 'app-request-detailed',
@@ -13,7 +14,7 @@ export class RequestDetailedComponent implements OnInit {
 request: IRepairRequest;
 
   constructor(private route: ActivatedRoute, private breadcrumbService: BreadcrumbService,
-    private repairRequestService: RepairRequestService) {
+    private repairRequestService: RepairRequestService, private adminService : AdminService) {
       this.breadcrumbService.set('@Request Detailed', '')
      }
 
@@ -28,6 +29,7 @@ request: IRepairRequest;
         console.log(error);
       })
 
+      this.getRepairmans();
       
   }
 
@@ -37,5 +39,9 @@ request: IRepairRequest;
 
   onReject(){
     this.repairRequestService.setRequestStatusToRejected(this.request.id).subscribe();
+  }
+
+  getRepairmans(){
+    this.adminService.getRepairmans().subscribe();
   }
 }

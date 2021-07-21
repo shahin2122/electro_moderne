@@ -122,6 +122,10 @@
               "target": "Package",
               "version": "[1.15.1, )"
             },
+            "MailKit": {
+              "target": "Package",
+              "version": "[2.13.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[5.0.5, )",
@@ -165,6 +169,10 @@
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
               "version": "[6.10.2, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[2.13.0, )"
             },
             "Npgsql": {
               "target": "Package",

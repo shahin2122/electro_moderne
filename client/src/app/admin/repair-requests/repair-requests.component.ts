@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { map } from 'rxjs/operators';
+import { RepairmanSelectModalComponent } from 'src/app/modals/repairman-select-modal/repairman-select-modal.component';
 import { RepairRequestService } from 'src/app/repair-request/repair-request.service';
 import { IRepairRequest } from 'src/app/shared/models/repairRequest';
 import { RepairRequestParams } from 'src/app/shared/models/repairRequestParams';
@@ -16,8 +18,10 @@ export class RepairRequestsComponent implements OnInit {
   requestParams = new RepairRequestParams();
   totalCount: number;
   reqToSetStatusToSeen: IRepairRequest;
+  bsModalRef: BsModalRef;
 
-  constructor(private repairRequestService: RepairRequestService, private router: Router) { }
+  constructor(private repairRequestService: RepairRequestService, private router: Router,
+    private modalService: BsModalService) { }
 
   ngOnInit(): void {
     this.getRequests();
@@ -60,5 +64,16 @@ export class RepairRequestsComponent implements OnInit {
     
   }
 
+  openRepairmanSelectModal() {
+    const initialState = {
+      list: [
+        'Open a modal with component',
+        'Pass your data',
+      ],
+      title: 'Modal with component'
+    };
+    this.bsModalRef = this.modalService.show(RepairmanSelectModalComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
+  }
  
 }

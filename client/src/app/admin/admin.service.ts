@@ -16,6 +16,12 @@ import { IPartType } from '../shared/models/partType';
 import { IPartBrand } from '../shared/models/partBrand';
 import { UserParams } from '../shared/models/usersParams';
 import { IOrder } from '../shared/models/Order';
+import { CustomerParams } from '../shared/models/customerParams';
+import { ICustomer } from '../shared/models/customer';
+import { InvoiceParams } from '../shared/models/invoiceParams';
+import { IInvoice } from '../shared/models/invoice';
+import { InvoiceService } from './invoices/invoice.service';
+import { AccountService } from '../account/account.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +33,25 @@ partToAddPhoto: IPart;
 productToAddPhoto: product;
 OrderDetailed: IOrder;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private invoiceService: InvoiceService, private accountService: AccountService) { }
+
+
+  addNewInvoice(){
+   this.accountService.currentUser$.subscribe(response => {
+      this.invoiceService.invoiceToAdd.submitter = response.displayName;
+    })
+    return this.http.post(this.baseUrl + 'invoice', this.invoiceService.invoiceToAdd);
+  }
+
+ 
+
+  updateCustomer(customerId: number, newCustomer: ICustomer){ 
+    return this.http.put(this.baseUrl + 'customers/update/' + customerId , newCustomer);
+  }
+
+  addNewCustomer(model: any){
+    return this.http.post(this.baseUrl + 'customers', model);
+  }
 
   addNewProduct(model: any) {
       return this.http.post(this.baseUrl + 'products/add-new-product', model);
@@ -35,6 +59,41 @@ OrderDetailed: IOrder;
 
   addNewPart(model: any) {
     return this.http.post(this.baseUrl + 'parts/add-new-part', model);
+  }
+
+  getInvoicesPaginated(invoiceParams: InvoiceParams){
+    let params = new HttpParams();
+
+    if(invoiceParams.search){
+      params = params.append('search', invoiceParams.search);
+    }
+    params = params.append('pageIndex', invoiceParams.pageNumber.toString());
+    params = params.append('pageIndex', invoiceParams.pageSize.toString());
+
+    return this.http.get<IPagination>(this.baseUrl + 'invoice', {observe: 'response', params})
+      .pipe(
+        map(response => {
+          return response.body;
+        })
+      );
+  }
+
+  getCustomersPaginated(customerParams: CustomerParams) {
+    let params = new HttpParams();
+
+    if(customerParams.search) {
+      params = params.append('search', customerParams.search);
+    }
+    params = params.append('sort', customerParams.sort);
+    params = params.append('pageIndex', customerParams.pageNumber.toString());
+    params = params.append('pageIndex', customerParams.pageSize.toString());
+
+    return this.http.get<IPagination>(this.baseUrl + 'customers', {observe: 'response', params})
+      .pipe(
+        map(response => {
+          return response.body;
+        })
+      );
   }
 
   getParts(partsparams: PartsParams) {
@@ -108,6 +167,10 @@ OrderDetailed: IOrder;
       );
   }
 
+  getRepairmans(){
+    return this.http.get(this.baseUrl + 'admin/repairmans');
+  }
+
   updateUserRoles(email: string, roles: string[]) {
     return this.http.post(this.baseUrl + 'admin/edit-roles/' + email + '?roles=' + roles, {});
   }
@@ -131,6 +194,14 @@ OrderDetailed: IOrder;
 
   getType(id: number){
     return this.http.get<IProductType>(this.baseUrl + 'types/' + id);
+  }
+
+  getCustomer(id: number){
+    return this.http.get<ICustomer>(this.baseUrl + 'customers/' + id);
+  }
+
+  getInvoice(id: number){
+    return this.http.get<IInvoice>(this.baseUrl + 'invoice/' + id);
   }
 
   addNewType(typeName: any){
@@ -169,6 +240,12 @@ OrderDetailed: IOrder;
 
   getBrand(id: number){
     return this.http.get<IProductBrand>(this.baseUrl + 'brands/' + id);
+  }
+
+  
+
+  deleteCustomer(id: number){
+    return this.http.delete(this.baseUrl+ 'customers/' + id);
   }
 
   updateProductBrand(brandId: number, newName: string){
@@ -283,5 +360,7 @@ getOrderForAdmin(orderId: number, buyerEmail: string){
       })
     );
 }
+
+
 
 }

@@ -100,10 +100,16 @@ p-3 px-md-4  bg-body border-bottom shadow-sm">
       
     
       <li class="nav-item">
-        <a class="nav-link font-large" 
-        routerLink="/repair-request" >Repair Request</a> 
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScme5U0JfDxoKGJGm74F8HDmA-L2kudIkMM2KlN199siko27w/viewform?vc=0&c=0&w=1&flr=0&usp=mail_form_link" class="nav-link font-large" >
+       <!-- routerLink="/repair-request" -->
+       Repair Request</a> 
       </li>
      
+      <li class="nav-item"> <a class="nav-link font-large"
+      routerLink="/repair-request" 
+      >Repair
+    </a>
+      </li>
    
       <li class="nav-item">
         <a class="nav-link font-large" routerLink="contact-us">Contact Us</a>
@@ -117,8 +123,18 @@ p-3 px-md-4  bg-body border-bottom shadow-sm">
       </li>
 
       <li  class="nav-item" >
+        <a  class="nav-link font-large" *appHasRole='["Admin"]'  routerLink="/admin/customers" routerLinkActive="active">Customers</a>
+      </li>
+
+      <li  class="nav-item" >
+        <a  class="nav-link font-large" *appHasRole='["Admin"]'  routerLink="/admin/invoices" routerLinkActive="active">Invoices</a>
+      </li>
+
+      <li  class="nav-item" >
         <a  class="nav-link font-large" *appHasRole='["Admin"]'  routerLink="/test-error" routerLinkActive="active">Errors</a>
       </li>
+
+     
       
     </ul>
     

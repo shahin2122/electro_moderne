@@ -18,16 +18,30 @@ import { AddNewPartBrandComponent } from './part-brands/add-new-part-brand/add-n
 import { PartPhotoEditorComponent } from './parts/part-photo-editor/part-photo-editor.component';
 import { OrdersComponent } from './orders/orders.component';
 import { AdminOrderDetailedComponent } from './orders/admin-order-detailed/admin-order-detailed.component';
+import { CustomersComponent } from './customers/customers.component';
+import { CustomerDetailedComponent } from './customers/customer-detailed/customer-detailed.component';
+import { AddNewCustomerComponent } from './customers/add-new-customer/add-new-customer.component';
+import { InvoicesComponent } from './invoices/invoices.component';
+import { AddNewInvoiceComponent } from './invoices/add-new-invoice/add-new-invoice.component';
+import { InvoiceDetailsComponent } from './invoices/invoice-details/invoice-details.component';
 
 
 const routes: Routes = [
   {path: 'users', component: UsersComponent},
+  {path: 'customers', component: CustomersComponent},
+  {path: 'customers/:id', component: CustomerDetailedComponent},
+  {path: 'invoices', component: InvoicesComponent},
+  {path: 'invoices/:id', component: InvoiceDetailsComponent},
+  {path: 'add-new-invoice', component: AddNewInvoiceComponent},
+  {path: 'add-new-invoice/:id', component: AddNewInvoiceComponent},
   {path: 'products', component: ProductsComponent},
   {path: 'parts', component: PartsComponent},
   {path: 'orders', component: OrdersComponent},
   {path: 'orderdetailed', component: AdminOrderDetailedComponent},
   {path: 'add-new-product', component: AddNewProductComponent },
   {path: 'add-new-product/:id', component: AddNewProductComponent },
+  {path: 'add-new-customer', component: AddNewCustomerComponent},
+  {path: 'add-new-customer/:id', component: AddNewCustomerComponent},
   {path: 'add-new-part', component: AddNewPartComponent},
   {path: 'add-new-part/:id', component: AddNewPartComponent},
   {path: 'pannel', component: PannelComponent},

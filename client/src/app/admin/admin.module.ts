@@ -22,6 +22,14 @@ import { OrdersComponent } from './orders/orders.component';
 import { RepairRequestsComponent } from './repair-requests/repair-requests.component';
 import { RequestDetailedComponent } from './repair-requests/request-detailed/request-detailed.component';
 import { AdminOrderDetailedComponent } from './orders/admin-order-detailed/admin-order-detailed.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CustomersComponent } from './customers/customers.component';
+import { AddNewCustomerComponent } from './customers/add-new-customer/add-new-customer.component';
+import { CustomerDetailedComponent } from './customers/customer-detailed/customer-detailed.component';
+import { InvoicesComponent } from './invoices/invoices.component';
+import { AddNewInvoiceComponent } from './invoices/add-new-invoice/add-new-invoice.component';
+import { InvoiceDetailsComponent } from './invoices/invoice-details/invoice-details.component';
+import { UpdateInvoiceComponent } from './invoices/update-invoice/update-invoice.component';
 
 
 
@@ -33,11 +41,12 @@ import { AdminOrderDetailedComponent } from './orders/admin-order-detailed/admin
     AddNewBrandComponent, AddNewProductComponent, PhotoEditorComponent,
      PartsComponent, AddNewPartComponent, PartBrandsComponent, PartTypesComponent,
       AddNewPartTypeComponent, AddNewPartBrandComponent, PartPhotoEditorComponent,
-       OrdersComponent, RepairRequestsComponent, RequestDetailedComponent, AdminOrderDetailedComponent],
+       OrdersComponent, RepairRequestsComponent, RequestDetailedComponent, AdminOrderDetailedComponent, CustomersComponent, AddNewCustomerComponent, CustomerDetailedComponent, InvoicesComponent, AddNewInvoiceComponent, InvoiceDetailsComponent, UpdateInvoiceComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
     SharedModule,
+
   ]
 })
 export class AdminModule { }

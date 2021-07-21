@@ -5,9 +5,9 @@ import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IPagination } from '../shared/models/pagination';
-import { IDaysAvailable, IPaymentMethods, IRepairRequest } from '../shared/models/repairRequest';
+import {IRepairRequest } from '../shared/models/repairRequest';
 
-import { AddressFormParams, RepairRequestParams } from '../shared/models/repairRequestParams';
+import { RepairRequestParams } from '../shared/models/repairRequestParams';
 
 
 @Injectable({
@@ -19,14 +19,17 @@ baseUrl = environment.baseApiUrl;
 unseenReqs : number;
 request: IRepairRequest;
 
-requestToCreate: IRepairRequest;
+ requestToCreate: IRepairRequest;
 
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    
+  }
 
   submitNewRepairRequest(model: IRepairRequest){
-    console.log(model);
+    console.log("address from service = " + model.address);
+    console.log("days from service = " + model.daysAvailability);
     return this.http.post(this.baseUrl + 'repairrequests', model);
   }
 
@@ -66,19 +69,7 @@ requestToCreate: IRepairRequest;
     );
   }
 
-  setAddress(model: AddressFormParams){
 
-
-
-  }
-
-  setDays(days: IDaysAvailable[]){
-    
-  }
-  setMethods(methods: IPaymentMethods[]){
-
-
-  }
 
   setRequestStatusToSeen(id: number){
     return this.http.post(this.baseUrl + 'repairrequests/update-status-seen/' + id , {});
@@ -92,11 +83,5 @@ requestToCreate: IRepairRequest;
     return this.http.post(this.baseUrl + 'repairrequests/update-status-rejected/' + id , {});
   }
 
-  getDaysAvailable(){
-    return this.http.get<IDaysAvailable[]>(this.baseUrl + 'repairrequests/days');
-  }
-
-  getPaymentMethods(){
-    return this.http.get<IPaymentMethods[]>(this.baseUrl + 'repairrequests/payment-methods');
-  }
+  
 }

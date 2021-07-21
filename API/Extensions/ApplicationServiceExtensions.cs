@@ -8,6 +8,7 @@ using Infrastructure.Services;
 using Infrastructure.Helpers;
 using System;
 
+
 namespace API.Extensions
 {
     public static class ApplicationServiceExtensions
@@ -17,10 +18,13 @@ namespace API.Extensions
         {
             services.AddSingleton<IResponseCacheService, ResponseCacheService>();
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+            services.Configure<EmailSettings>(config.GetSection("MailSettings"));
+            services.AddTransient<IEmailService , EmailService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IPhotoService, PhotoService>();
+            services.AddScoped<IInvoiceService, InvoiceService>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
@@ -36,6 +40,8 @@ namespace API.Extensions
 
                 options.UseNpgsql(connStr);
             });
+
+
             
             return services;
         }

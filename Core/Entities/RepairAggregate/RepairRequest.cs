@@ -10,7 +10,7 @@ namespace Core.Entities
        
         public string CustomerEmail { get; set; }
         public string ProductType { get; set; }
-        public string ProductNumber { get; set; }
+
         public string ProductBrand { get; set; }
         public string ProblemInfo { get; set; }
         public DateTimeOffset RequestDate { get; set; } = DateTimeOffset.Now;
@@ -19,17 +19,13 @@ namespace Core.Entities
         public string PostalCode { get; set; }
         public string FullName { get; set; }
         public string PhoneNumber { get; set; }
-        public bool AcceptedServiceCall { get; set; }
-        public string ReasonToReject { get; set; }
-        public ICollection<DaysAvailable> DaysAvailability { get; set; }
-        public ICollection<PaymentMethods> PaymentMethods { get; set; }
+
+        public string DaysAvailability { get; set; }
+        public string PaymentMethods { get; set; }
         public RepairRequestStatus Status { get; set; } = RepairRequestStatus.Unseen;
-        public bool IsEmergency { get; set; }
-
-        public decimal ServiceCallPrice { get; set; } = 90;
-        public RequestTask RequestTask { get; set; }
-        public int RequestTaskId { get; set; }
 
 
+        public ICollection<TaskRequest> TaskRequest { get; set; }
+        public ICollection<TaskRepairman> TaskRepairman { get; set; }
     }
 }

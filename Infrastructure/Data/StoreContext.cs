@@ -28,9 +28,11 @@ namespace Infrastructure.Data
         public DbSet<DeliveryMethod> DeliveryMethods {get; set;}
         public DbSet<RepairRequest> RepairRequests {get; set;}
         public DbSet<RequestTask> RequestTasks {get; set;}
+        public DbSet<Customer> Customers {get; set;}
         public DbSet<ContactRequest> ContactRequests { get; set; }
-        public DbSet<PaymentMethods> PaymentMethods { get; set; }
-        public DbSet<DaysAvailable> DaysAvailability { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<InvoiceItem> InvoiceItems { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -59,10 +61,12 @@ namespace Infrastructure.Data
                             modelBuilder.Entity(entityType.Name).Property(property.Name)
                                 .HasConversion(new DateTimeOffsetToBinaryConverter());
                         }
-                }
-            }
-           
 
+                   
+                }
+
+                
+            }
         }
     }
 }

@@ -1,0 +1,34 @@
+<div class="container">
+
+    <button  routerLink="/admin/customers"
+class="btn btn-warning mt-3 font-x-large d-flex align-items-center justify-content-center "><i class="fa fa-chevron-left fa-2x mr-1"></i>Back</button>
+
+<h1 class="font-xxx-large mt-3">Customer Details</h1>
+    <div class="container d-flex justify-content-start ">
+        <div *ngIf="customer" class="row  my-5 d-flex justify-content-start">
+        <h1 class="ml-3">Register Date:<strong class="text-primary"> {{customer.registeredDate | date: 'medium'}}</strong></h1>
+        <h1 class="col-12"> 
+        Customer Name: <strong class="text-primary">{{customer.fullName}}</strong> 
+        <br class="my-3"> 
+        Email: <strong class="text-primary">{{customer.email}}</strong>
+        <br class="my-3"> 
+        Address: <strong class="text-primary">{{customer.address}}</strong> 
+        <br class="my-3"> 
+        City: <strong class="text-primary">{{customer.city}}</strong>
+        <br class="my-3"> 
+        Postal Code: <strong class="text-primary">{{customer.postalCode}}</strong>
+        <br class="my-3"> 
+        Appliance: <strong class="text-primary">{{customer.appliance}}</strong>
+        <br class="my-3"> 
+        Appliance Brand: <strong class="text-primary">{{customer.brand}}</strong>
+        <br class="my-3"> 
+        Model Number: <strong class="text-primary">{{customer.modelNumber}}</strong>
+        <br class="my-3"> 
+        Requested Service: <strong class="text-primary">{{customer.requestedService}}</strong>
+        <br class="my-3"> 
+        Invoices: <strong class="text-primary"></strong>
+        <br class="my-3"> 
+        </h1>
+        </div>
+    </div>
+</div>

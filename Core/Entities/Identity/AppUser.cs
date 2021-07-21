@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
+using Core.Entities.RepairAggregate;
+
 
 namespace Core.Entities.Identity
 {
@@ -20,7 +22,6 @@ namespace Core.Entities.Identity
         public bool? IsCommercial { get; set; } = false;
         public string PostalCode { get; set; }
         public ICollection<AppUserRole> UserRoles { get; set; }
-
         public string Provider { get; set; }
         public bool? Deactive { get; set; } = false;
 

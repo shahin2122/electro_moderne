@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { IDaysAvailable, IPaymentMethods, IRepairRequest } from '../shared/models/repairRequest';
+import { ToastrService } from 'ngx-toastr';
+import { AdminService } from '../admin/admin.service';
+import { ICustomer } from '../shared/models/customer';
+import { IRepairRequest } from '../shared/models/repairRequest';
 import { RepairRequestService } from './repair-request.service';
 
 @Component({
@@ -12,10 +15,12 @@ import { RepairRequestService } from './repair-request.service';
 export class RepairRequestComponent implements OnInit {
 repairRequestForm: FormGroup;
 request: IRepairRequest;
-days: IDaysAvailable[] ;
-paymentMethods: IPaymentMethods[] ;
+days: string[] ;
+paymentMethods: string[] ;
 
-  constructor(private requestService: RepairRequestService,private router: Router,private fb:FormBuilder) { }
+
+  constructor(private requestService: RepairRequestService,private router: Router, private adminService: AdminService,
+    private fb:FormBuilder, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -25,37 +30,46 @@ paymentMethods: IPaymentMethods[] ;
   initializeForm(){
     this.repairRequestForm = this.fb.group({
 
-      addressForm: this.fb.group({
+     
       FullName: [null, Validators.required],
       PhoneNumber: [null, Validators.required],
       CustomerEmail: [null, Validators.required],
       Address: [null, Validators.required],
       City: [null,  Validators.required],
       PostalCode: [null, Validators.required],
-      }),
       
-      productForm: this.fb.group({
         ProductType: [null, Validators.required],
         ProductBrand: [null, Validators.required],
         ProblemInfo: [null, Validators.required],
-      }),
-      
-      daysForm: this.fb.group({
-        DaysAvailability: [null, Validators.required],
-      }),
 
-      paymentForm: this.fb.group({
+     
+        DaysAvailability: [null, Validators.required],
+
         PaymentMethods: [null, Validators.required],
-      }),
       
-      serviceCallForm: this.fb.group({
+
         AcceptServiceFee: [null, Validators.required],
-        IsEmergency: [null],
-      }),
+     
       
 
     });
   }
 
+  onSubmit(){
+    this.requestService.submitNewRepairRequest(this.repairRequestForm.value).subscribe(
+      (response:IRepairRequest) => {
+      console.log("response is =" + response);
+      
+      this.toastr.success("New Request Submited");
+      this.router.navigateByUrl("/repair-request-submitted");
+    }, error => {
+      console.log(error);
+      this.toastr.error(error.message);
+    })
+
+    
+  }
  
+  
+
 }

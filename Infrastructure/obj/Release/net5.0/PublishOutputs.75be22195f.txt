@@ -2,6 +2,7 @@ C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Infrastr
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Infrastructure.runtimeconfig.json
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Infrastructure.pdb
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\CloudinaryDotNet.dll
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\MailKit.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Microsoft.AspNetCore.Cryptography.Internal.dll
@@ -19,6 +20,7 @@ C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Microsof
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Microsoft.IdentityModel.Tokens.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Microsoft.OpenApi.dll
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\MimeKit.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\NetTopologySuite.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\NetTopologySuite.IO.PostGis.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Newtonsoft.Json.dll
@@ -27,6 +29,7 @@ C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Npgsql.E
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Npgsql.NetTopologySuite.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Pipelines.Sockets.Unofficial.dll
+C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\BouncyCastle.Crypto.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\StackExchange.Redis.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Stripe.net.dll
 C:\Users\shahin\Documents\Visual Studio 2019\Projects\EMWebsite\publish\Swashbuckle.AspNetCore.Swagger.dll

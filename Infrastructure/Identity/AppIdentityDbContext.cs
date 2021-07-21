@@ -36,6 +36,7 @@ namespace Infrastructure.Identity
            builder.Entity<AppUser>().Property(p => p.Email).HasMaxLength(128);
            builder.Entity<AppUser>().Property(p => p.UserName).HasMaxLength(128);
            
+
         }
 
         

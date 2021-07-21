@@ -1,4 +1,5 @@
 
+using System.Configuration;
 using System.Linq;
 using API.Errors;
 using API.Extensions;
@@ -77,6 +78,9 @@ namespace API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Electro Moderne API", Version = "v1" });
             });
+
+            
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

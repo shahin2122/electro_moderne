@@ -57,6 +57,10 @@ namespace API.Helpers
                 src.UserRoles.Select(x=> x.UserId == src.Id)))
                 .ReverseMap();
 
+             CreateMap<InvoiceItem, InvoiceItemDto>()
+                .ReverseMap();
+
+
             
             CreateMap<PhotoDto, Photo>()
                 .ReverseMap();
@@ -84,6 +88,19 @@ namespace API.Helpers
             CreateMap<RepairRequest, RepairRequestToReturnDto>();
 
             CreateMap<ContactRequest, ContactRequestToRetuenDto>();
+
+            CreateMap<Customer, CustomerUpdateDto>()
+                .ReverseMap();
+
+            CreateMap<InvoiceToCreateDto , Invoice>()
+                .ReverseMap();
+
+            CreateMap<Invoice , InvoiceToReturnDto>()
+                .ForMember(d => d.Customer, o => o.MapFrom(s => s.Customer.FullName))
+                .ReverseMap();
+
+           
+
         }
     }
 }

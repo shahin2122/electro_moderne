@@ -19,11 +19,15 @@ namespace API.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public AdminController(UserManager<AppUser> userManager, IUnitOfWork unitOfWork, IMapper mapper)
+        
+
+        public AdminController(UserManager<AppUser> userManager,
+         IUnitOfWork unitOfWork, IMapper mapper)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _userManager = userManager;
+
         }
 
         [Authorize(Policy = "RequireAdminRole")]
@@ -53,6 +57,16 @@ namespace API.Controllers
             userParams.pageSize, totalItems, users));
         }
 
+       // [Authorize(Policy = "RequireAdminRole")]
+        [HttpGet("repairmans")]
+        public async Task<IReadOnlyList<UserDto>> GetRepairmans()
+        {
+
+            var repairmans = await _userManager.GetUsersInRoleAsync("Repairman");
+
+            return  _mapper.Map<IReadOnlyList<UserDto>>(repairmans);  
+  
+        }
 
         [Authorize(Policy = "RepairAdminRole")]
         [HttpGet("create-offvoice")]

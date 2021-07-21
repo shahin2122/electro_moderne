@@ -1,12 +1,28 @@
-<div class="container d-flex justify-content-center ">
-    <div *ngIf="request" class="row text-center my-5 d-flex justify-content-center">
-        <h1 >We Have A Repair Request!</h1>
+<div class="container d-flex justify-content-start ">
+    <div *ngIf="request" class="row  my-5 d-flex justify-content-start">
+        <h1 class="ml-3">Date:<strong class="text-primary"> {{request.requestDate | date: 'medium'}}</strong></h1>
         <h1 class="col-12"> 
-             From <strong class="text-primary">{{request.fullName}}</strong> for a <strong class="text-primary">{{request.productBrand}} {{request.productType}}</strong>
-        In This Address: <strong class="text-success">{{request.address}}</strong> With This Phone Number: <strong class="text-primary">{{request.phoneNumber}}</strong></h1>
-        <h2 class="col-12 mt-5">Problem Information Gathered By Customer: <strong class="text-danger">{{request.problemInfo}}</strong></h2>
+        Customer Name: <strong class="text-primary">{{request.fullName}}</strong> 
+        <br class="my-3"> 
+        Email: <strong class="text-primary">{{request.customerEmail}}</strong>
+        <br class="my-3"> 
+        Address: <strong class="text-primary">{{request.address}}</strong> 
+        <br class="my-3"> 
+        City: <strong class="text-primary">{{request.city}}</strong>
+        <br class="my-3"> 
+        Phone Number: <strong class="text-primary">{{request.phoneNumber}}</strong></h1>
+        <br class="my-2">
+        <h1 class="col-12">Postal Code: <strong class="text-primary">{{request.postalCode}}</strong></h1>
+        <br class="my-2">
+        <h1 class="col-12">Days Availability: <strong class="text-primary">{{request.daysAvailability}}</strong> </h1>
+        <br class="my-2">  
+        <h1 class=" col-12">Payment Methods: <strong class="text-primary">{{request.paymentMethods}}</strong> </h1>
+        <br class="my-2">
+        <h1 class="col-12 mt-5">Problem Information Gathered By Customer: <strong class="text-primary">{{request.problemInfo}}</strong></h1>
 
-        <button (click)="onAccept()" class="btn btn-success col-3 font-x-large d-flex align-items-center justify-content-center">ACCEPT<i class="fa fa-check fa-2x"></i></button>
-        <button (click)="onReject()" class="btn btn-danger col-3 font-x-large d-flex align-items-center justify-content-center">REJECT<i class="fa fa-ban fa-2x"></i></button>
-    </div>
+        
+        
+
+        <button (click)="onAccept()" class="btn btn-success mt-5 col-3 font-x-large d-flex align-items-center justify-content-center">Save Customer<i class="fa fa-check fa-2x"></i></button>
+          </div>
 </div>

@@ -17,8 +17,8 @@ namespace API.Dtos
         public string PostalCode { get; set; }
         public string FullName { get; set; }
         public string PhoneNumber { get; set; }
-        public IReadOnlyList<string> DaysAvailability { get; set; }
-        public IReadOnlyList<string> PaymentMethods { get; set; }
+        public string DaysAvailability { get; set; }
+        public string PaymentMethods { get; set; }
         public string Status { get; set; } 
         public string WorkPerformed { get; set; }
         public decimal Subtotal { get; set; } 

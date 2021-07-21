@@ -1,27 +1,39 @@
 <div class="container">
     <div class="d-flex justify-content-center text-center mt-5">
     <h1 class="mt-3">Your Appliances Got Problem?!! Dont Worry You Are In Right Place.
-   Just Submit This Form and BOOM!! We Will Be There To Fix Your Problem.</h1>
+   Just Submit This Form and We Will Be There To Fix Your Problem.</h1>
     </div>
     <div class=" mt-5">
-        <div class="row">
-                <app-stepper [linearModeSelected]="false" #appStepper>
-                    <cdk-step [label]="'Contact Info'" >
-                        <app-request-address [repairRequestForm]="repairRequestForm"></app-request-address>
-                    </cdk-step>
-                    <cdk-step [label]="'Appliance Info'" >
-                        <app-request-product [repairRequestForm]="repairRequestForm"></app-request-product>
-                    </cdk-step>
-                    <cdk-step [label]="'Days Availability'" >
-                        <app-request-days [repairRequestForm]="repairRequestForm"></app-request-days>
-                    </cdk-step>
-                    <cdk-step [label]="'Peyment Methods'" >
-                        <app-request-methods [repairRequestForm]="repairRequestForm"></app-request-methods>
-                    </cdk-step>
-                    <cdk-step [label]="'Service Call Fee'" >
-                        <app-request-service-call [repairRequestForm]="repairRequestForm"></app-request-service-call>
-                    </cdk-step>
-                </app-stepper>
+        <div class="col-12">
+                <form [formGroup]="repairRequestForm" (ngSubmit)="onSubmit()">
+                    <app-text-input formControlName="FullName" [label]="'Full Name'"></app-text-input>
+                    <app-text-input formControlName="PhoneNumber" [label]="'Phone Number'"></app-text-input>
+                    <app-text-input formControlName="CustomerEmail" [label]="'Email'"></app-text-input>
+                    <app-text-input formControlName="Address" [label]="'Address'"></app-text-input>
+                    <app-text-input formControlName="City" [label]="'City'"></app-text-input>
+                    <app-text-input formControlName="PostalCode" [label]="'PostalCode'"></app-text-input>
+                    <app-text-input formControlName="ProductType" [label]="'Product'"></app-text-input>
+                    <app-text-input formControlName="ProductBrand" [label]="'Product Brand'"></app-text-input>
+                   
+                    <label for="ProblemInfo" class="font-xx-large">ProblemInfo:</label>
+                    <textarea class="form-control" formControlName="ProblemInfo" id="ProblemInfo" placeholder="tell us about problem..." style="font-size: 30px;" rows="4"></textarea>
+
+                    <h3 class="mt-5">Type Below The Days That You Are Available For Us to come there, seperate days with a ","</h3>
+                    <h5 class="text-success">like monday,tuesday,friday....</h5>
+                    <app-text-input formControlName="DaysAvailability" [label]="'DaysAvailability'"></app-text-input>
+                    <h3 class="mt-5">Type Below Payment Methods That is available for you to checkout, seperate methods with a "," if there is some</h3>
+                    <h5 class="text-success">like e-transfer,cash,....</h5>
+                    <app-text-input formControlName="PaymentMethods" [label]="'Payment Methods'"></app-text-input>
+                    
+                    <div class="row d-flex align-items-center text-center ml-1">
+                        <label class="font-xx-large">I Accept 90$ service call fee</label>
+                        <input class="ml-2" type="checkbox"  formControlName="AcceptServiceFee" style="width: 25px; height: 25px;">
+                        <h4 class="text-success">you must accept service call fee before making repair request, that will be added to your invoice later.</h4>
+                    </div>
+                    <button  [disabled]="repairRequestForm.invalid || repairRequestForm.get('AcceptServiceFee').value != true"
+                    class="w-100 btn btn-lg btn-info my-4 font-x-large d-flex align-items-center justify-content-center" 
+                    type="submit">Submit <i class="fa fa-check fa-2x"></i></button>
+                </form>
             </div>
     </div>
                     

@@ -27,16 +27,20 @@
                         <th>Date</th>
                         <th>Product</th>
                         <th>Status</th>
+                        <th>Repairman</th>
+                        <th></th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr *ngFor="let request of requests" (click)="onClicked(request.id)">
+                    <tr *ngFor="let request of requests" >
                         <th># {{request.id}}</th>
                         <td>{{request.fullName}}</td>
                         <td>{{request.requestDate | date: 'medium'}}</td>
                         <td>{{request.productType}}</td>
                         <td>{{request.status}}</td>
+                        <td><button (click)="openRepairmanSelectModal()" class="btn btn-info">Select</button></td>
+                        <td><button (click)="onClicked(request.id)" class="btn btn-success">Details</button></td>
                     </tr>
                 </tbody>
             </table>

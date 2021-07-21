@@ -4,10 +4,3 @@ export class RepairRequestParams {
     search: string;
 }
 
-export class AddressFormParams{
-    FullName:string;
-    PhoneNumber:string;
-    City:string;
-    PostalCode:string;
-    Address:string;
-}

@@ -23,18 +23,14 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { FooterComponent } from './footer/footer.component';
 import { RepairRequestComponent } from './repair-request/repair-request.component';
-import { RequestSubmitedComponent } from './repair-request/request-submited/request-submited.component';
-import { RequestAddressComponent } from './repair-request/request-address/request-address.component';
-import { RequestProductComponent } from './repair-request/request-product/request-product.component';
-import { RequestDaysComponent } from './repair-request/request-days/request-days.component';
-import { RequestMethodsComponent } from './repair-request/request-methods/request-methods.component';
-import { RequestServiceCallComponent } from './repair-request/request-service-call/request-service-call.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { SubmitedComponent } from './contact-us/submited/submited.component';
 import { ContactsComponent } from './contact-us/contacts/contacts.component';
 import { ContactsDetailedComponent } from './contact-us/contacts-detailed/contacts-detailed.component';
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 import { FrenchComponent } from './french/french.component';
+import { RepairmanSelectModalComponent } from './modals/repairman-select-modal/repairman-select-modal.component';
+import { RequestSubmitedComponent } from './repair-request/request-submited/request-submited.component';
 
 
 
@@ -50,19 +46,7 @@ import { FrenchComponent } from './french/french.component';
     FooterComponent,
   
     RepairRequestComponent,
-  
-    RequestSubmitedComponent,
-  
-    RequestAddressComponent,
-  
-    RequestProductComponent,
-  
-    RequestDaysComponent,
-  
-    RequestMethodsComponent,
-  
-    RequestServiceCallComponent,
-  
+    
     ContactUsComponent,
   
     SubmitedComponent,
@@ -74,6 +58,10 @@ import { FrenchComponent } from './french/french.component';
     RolesModalComponent,
   
     FrenchComponent,
+  
+    RepairmanSelectModalComponent,
+  
+    RequestSubmitedComponent,
 
   
   ],
@@ -109,7 +97,7 @@ import { FrenchComponent } from './french/french.component';
   }
  
              ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 
             })
 export class AppModule { }

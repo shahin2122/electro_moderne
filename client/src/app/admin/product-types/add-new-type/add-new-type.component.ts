@@ -57,7 +57,7 @@ export class AddNewTypeComponent implements OnInit {
         this.router.navigateByUrl("/admin/pannel");
       }, error => {
         console.log(error);
-        this.toastr.error(error);
+        this.toastr.error(error.message);
       })
     }else {
       this.adminService.addNewType(this.addTypeForm.controls.typeName.value).subscribe(() => {

@@ -41,7 +41,7 @@ export class PartTypesComponent implements OnInit {
       this.toastr.success("Part Type Deleted");
       this.getTypes();
     }, error => {
-      this.toastr.error(error);
+      this.toastr.error(error.message);
       console.log(error);
     })
   }

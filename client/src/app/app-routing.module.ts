@@ -23,7 +23,7 @@ const routes: Routes = [
     {path: '', component: HomeComponent, data: {breadcrumb: 'Home'}},
     {path: 'french', component: FrenchComponent, data: {breadcrumb: 'french'}},
     {path: 'repair-request', component: RepairRequestComponent, data: {breadcrumb: 'Repair Request'}},
-    {path: 'request-submitted', component: RequestSubmitedComponent, data: {breadcrumb: 'Repair Request Submitted'}},
+    {path: 'repair-request-submited', component: RequestSubmitedComponent, data: {breadcrumb: 'Request Submitted'}},
     {path: 'contact-us', component: ContactUsComponent, data: {breadcrumb: 'Contact Us'}},
     {path: 'contact-submitted', component: SubmitedComponent, data: {breadcrumb: 'Contact Request Submitted'}},
     {path: 'test-error', component: TestErrorComponent, data: {breadcrumb: 'Test Errors'}},

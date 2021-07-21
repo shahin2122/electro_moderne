@@ -1,0 +1,103 @@
+<div class="container" *ngIf="Invoice && Invoice.customer">
+    <div class="col-12" style="border: solid black 1px;">
+        <div class="col-12" style="border-bottom: solid black 1px;">
+            <p class="font-xx-large d-flex justify-content-center">Date: {{Invoice.date| date:'medium'}}</p>
+    </div>
+    
+    <div class="col-12 d-flex justify-content-start align-items-center " style="border-bottom: solid black 1px;">
+        <div class="col-8" style="border-right: solid black 1px;">
+            <p class="font-xx-large">Customer Name: {{Invoice.customer.fullName}}</p>
+        </div>
+        <div class="col-4">
+            <p class="font-xx-large">Phone: {{Invoice.customer.phoneNumber}}</p>
+        </div>
+    </div>
+
+    <div class="col-12" style="border-bottom: solid black 1px;">
+        <div class="col-12 d-flex justify-content-start" >
+            <p class="font-xx-large">Address: {{Invoice.customer.address}}</p>
+        </div>
+    </div>
+
+    <div class="col-12 d-flex justify-content-start align-items-center " style="border-bottom: solid black 1px;">
+       
+        <div class="col-6" style="border-right: solid black 1px;">
+            <p class="font-xx-large">City: {{Invoice.customer.city}}</p>
+        </div>
+        <div class="col-6" >
+            <p class="font-xx-large">Postal: {{Invoice.customer.postalCode}}</p>
+        </div>
+       
+    </div>
+
+    <div class="col-12 d-flex justify-content-start align-items-center " style="border-bottom: solid black 1px;">
+       
+        <div class="col-6" style="border-right: solid black 1px;">
+            <p class="font-xx-large">Appliance: {{Invoice.appliance}}</p>
+        </div>
+        <div class="col-6" >
+            <p class="font-xx-large">Model Number: {{Invoice.modelNumber}}</p>
+        </div>
+       
+    </div>
+   
+    <div class="col-12 d-flex justify-content-start align-items-center " style="border-bottom: solid black 1px;">
+        <p class="font-xx-large">Work Performed: {{Invoice.workPerformed}}</p>
+    </div>
+
+    <div class="col-12 d-flex justify-content-start align-items-center " style="border-bottom: solid black 1px;">
+        <table class="table font-large">
+            <thead class="thead-primary">
+             <tr>
+                 
+                 <th>Item</th>
+                 <th>Quantity</th>
+                 <th>Price</th>
+             </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of Invoice.items">
+                 <th>{{item.name}}</th>
+                 <th>{{item.quantity}}</th>
+                 <th>{{item.price}}</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-12 d-flex justify-content-start align-items-center " style="border-bottom: solid black 1px;">
+        <div class="col-6" style="border-right: solid black 1px;">
+
+        </div>
+
+        <div class="col-6">
+            <div class="col-12 d-flex justify-content-start">
+            <div class="col-6" style="border-right: solid black 1px;"> <p class="font-xx-large">Total:</p></div>
+            <div class="col-6" style="border-bottom: solid black 1px;"><p class="font-xx-large">{{Invoice.total | currency}}</p></div>
+            </div>
+            
+            <div class="col-12 d-flex justify-content-start">
+                <div class="col-6" style="border-right: solid black 1px;"> <p class="font-xx-large">Sub total:</p></div>
+                <div class="col-6" style="border-bottom: solid black 1px;"><p class="font-xx-large">{{Invoice.subtotal | currency}}</p></div>
+            </div>
+
+            <div class="col-12 d-flex justify-content-start">
+                <div class="col-6" style="border-right: solid black 1px;"> <p class="font-xx-large">Service Call:</p></div>
+                <div class="col-6" style="border-bottom: solid black 1px;"><p class="font-xx-large">$89.95</p></div>
+            </div>
+
+            <div class="col-12 d-flex justify-content-start">
+                <div class="col-6" style="border-right: solid black 1px;"> <p class="font-xx-large">TPS %5:</p></div>
+                <div class="col-6" style="border-bottom: solid black 1px;"><p class="font-xx-large">{{Invoice.tpS5 | currency}}</p></div>
+            </div>
+            
+            <div class="col-12 d-flex justify-content-start">
+                <div class="col-6" style="border-right: solid black 1px;"> <p class="font-xx-large">TVQ %9.975:</p></div>
+                <div class="col-6" style="border-bottom: solid black 1px;"><p class="font-xx-large">{{Invoice.tvQ9975 | currency}}</p></div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-success btn-block my-5 d-flex justify-content-center" > Submit</button>
+
+</div>

@@ -12,8 +12,6 @@ namespace Infrastructure.Data.Config
         {
             builder.Property(P => P.ProblemInfo).HasMaxLength(250);
 
-            builder.HasOne(x => x.RepairRequest).WithMany()
-                .HasForeignKey(s => s.RepairRequestId);
 
             builder.Property(s=> s.TaskStatus)
                 .HasConversion(

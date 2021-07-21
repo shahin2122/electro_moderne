@@ -1,0 +1,285 @@
+<div class="container">
+
+        <div class="col-12">
+            <ng-container *ngIf="step1">
+           
+
+            <h1 *ngIf="!isUpdate">Select Customer From Below.</h1>
+            <h1 *ngIf="isUpdate">Select New Customer If Customer Needs To Change or click on Skip.</h1>
+
+            <div class="d-flex justify-content-center align-items-center pb-2 mr-2">
+                <app-paging-header
+                [totalCount]="totalCount"
+                [pageSize]="this.customerParams.pageSize"
+                [pageNumber]="this.customerParams.pageNumber"
+              ></app-paging-header>
+
+              <div class="form-inline mt-2 " *ngIf="customers">
+                <input (keyup.enter)="onSearch()" #search class="form-control mr-1 ml-4" style="width: 300px;" placeholder="search" type="text">
+                <button (click)="onSearch()" class="btn btn-outline-primary my-2 ">Search</button>
+               
+            </div>
+            </div>
+
+            <table class="table table-hover" style="cursor: pointer;">
+                <thead class="thead-primary">
+                    <tr>
+                        <th>Customer</th>
+                        <th>Email</th>
+                        <th>FullName</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="!isUpdate">
+                    <tr  *ngFor="let customer of customers"   (click)="onClick(customer.id)">
+                        <th># {{customer.id}}</th>
+                        <td>{{customer.email}}</td>
+                        <td>{{customer.fullName}}</td>
+                        <td>{{customer.phoneNumber}}</td>
+                        <td>{{customer.Address}}</td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="isUpdate">
+                    <tr  *ngFor="let customer of customers"   (click)="onUpdateClick(customer.id)">
+                        <th># {{customer.id}}</th>
+                        <td>{{customer.email}}</td>
+                        <td>{{customer.fullName}}</td>
+                        <td>{{customer.phoneNumber}}</td>
+                        <td>{{customer.Address}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button *ngIf="isUpdate" (click)="onSkipCustomer()" class="btn btn-success d-flex justify-content-center btn-lg"> Skip</button>
+
+            <div class="d-flex justify-content-center mt-2" *ngIf="totalCount > 0">
+                <app-pager
+                 [pageSize]="customerParams.pageSize"
+                 [totalCount]="totalCount"
+                 (pageChanged)="onPageChanged($event)"
+                ></app-pager>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="step2">
+            <button (click)="backToStep1()"
+            class="btn btn-warning mt-3 font-x-large d-flex align-items-center justify-content-center "><i class="fa fa-chevron-left fa-2x mr-1"></i>Back</button>
+            
+            <h1 class="font-xxx-large mt-3">Customer Details</h1>
+                <div class="d-flex justify-content-start ">
+                    <div *ngIf="selectedCustomer" class="row  my-5 d-flex justify-content-start">
+                
+                    <h1 class="col-12"> 
+                    Date: <strong class="text-primary"> {{todayDate | date:'medium'}}</strong>
+                    <br class="my-3"> 
+                    Customer Name: <strong class="text-primary">{{selectedCustomer.fullName}}</strong> 
+                    <br class="my-3"> 
+                    Email: <strong class="text-primary">{{selectedCustomer.email}}</strong>
+                    <br class="my-3"> 
+                    Address: <strong class="text-primary">{{selectedCustomer.address}}</strong> 
+                    <br class="my-3"> 
+                    City: <strong class="text-primary">{{selectedCustomer.city}}</strong>
+                    <br class="my-3"> 
+                    Postal Code: <strong class="text-primary">{{selectedCustomer.postalCode}}</strong>
+                   
+                    </h1>
+                    </div>
+
+                   
+                </div>
+               
+        </ng-container>
+
+       
+        </div>
+      
+   
+
+    <div class="col-12">
+        <div *ngIf="step2">
+            <table class="table font-large" style="cursor: pointer;">
+                <thead class="thead-primary">
+                    <tr>
+                        <th style="width: 50%;">item</th>
+                        <th style="width: 20%;">price</th>
+                        <th style="width: 10%;">quantity</th>
+                        <th *ngIf="isUpdate" style="width: 20%;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of items">
+                        <td>{{item.name}}</td>
+                        <td>{{item.price}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td *ngIf="isUpdate"> 
+                            
+                            <div class="btn-group">
+                                <button (click)="onItemUpdate(item)" class="btn btn-primary d-flex align-items-center" style="width: 50%;"><i class="fa fa-edit fa-2x"></i>Edit</button>
+                                <button  class="btn btn-danger d-flex align-items-center" style="width: 50%;"><i class="fa fa-trash fa-2x"></i>Delete</button>
+                                </div>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    <ng-container *ngIf="step2">
+        <div class="d-flex justify-content-center ">
+            <h1 class="mt-2">Add Item:</h1>
+            <div class="col-12">
+                <form  class="d-flex justify-content-start" [formGroup]="AddItemsForm" (ngSubmit)="addItem()">
+                    <div class="col-6">
+                        <app-text-input  formControlName="name" [label]="'Item Name'"></app-text-input>
+                    </div>
+                   <div class="col-3">
+                    <app-text-input  formControlName="price" [label]="'price'"></app-text-input>
+                   </div>
+                   <div class="col-2">
+                    <app-text-input  formControlName="quantity" [label]="'quantity'"></app-text-input>
+                   </div>
+                    <button *ngIf="!isItemUpdate" class="btn btn-success" type="submit">Add</button>
+                    
+                </form>
+                
+                <button *ngIf="isItemUpdate" (click)="ItemUpdateSubmit()" class="btn btn-warning" >Update</button>
+
+                <form [formGroup]="workPerformedForm">
+                <div class="col-12 mt-5">
+                    <div class="row">
+                    <div class="col-6">
+                        <app-text-input  formControlName="appliance" [label]="'Appliance'"></app-text-input>
+                    </div>
+                    <div class="col-6">
+                        <app-text-input  formControlName="modelNumber" [label]="'Model Number'"></app-text-input>
+                    </div>
+                    </div>
+                    <label for="Description" class="font-xx-large">Work Performed:</label>
+                    <textarea class="form-control"  id="workPerformed" name="workPerformed" formControlName="workPerformed" placeholder="work performed..." style="font-size: 30px; background-color: whitesmoke;" rows="10"></textarea>
+             
+                </div>
+                </form>
+                   <div class="col-12 mt-5 d-flex justify-content-center">
+                    <button class="btn btn-success btn-lg" (click)="goToStep3()">
+                        next
+                    </button>
+                   </div>
+            </div>
+         
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="step3">
+        <div class="col-12" style="border: solid black 1px;">
+            <div class="col-12" style="border-bottom: solid black 1px;">
+                <p class="font-xx-large d-flex justify-content-center">Date: {{todayDate | date:'medium'}}</p>
+        </div>
+        
+        <div class="col-12 d-flex justify-content-start align-items-center " style="border-bottom: solid black 1px;">
+            <div class="col-8" style="border-right: solid black 1px;">
+                <p class="font-xx-large">Customer Name: {{selectedCustomer.fullName}}</p>
+            </div>
+            <div class="col-4">
+                <p class="font-xx-large">Phone: {{selectedCustomer.phoneNumber}}</p>
+            </div>
+        </div>
+
+        <div class="col-12" style="border-bottom: solid black 1px;">
+            <div class="col-12 d-flex justify-content-start" >
+                <p class="font-xx-large">Address: {{selectedCustomer.address}}</p>
+            </div>
+        </div>
+
+        <div class="col-12 d-flex justify-content-start align-items-center " style="border-bottom: solid black 1px;">
+           
+            <div class="col-6" style="border-right: solid black 1px;">
+                <p class="font-xx-large">City: {{selectedCustomer.city}}</p>
+            </div>
+            <div class="col-6" >
+                <p class="font-xx-large">Postal: {{selectedCustomer.postalCode}}</p>
+            </div>
+           
+        </div>
+
+        <div class="col-12 d-flex justify-content-start align-items-center " style="border-bottom: solid black 1px;">
+           
+            <div class="col-6" style="border-right: solid black 1px;">
+                <p class="font-xx-large">Appliance: {{invoice.appliance}}</p>
+            </div>
+            <div class="col-6" >
+                <p class="font-xx-large">Model Number: {{invoice.modelNumber}}</p>
+            </div>
+           
+        </div>
+       
+        <div class="col-12 d-flex justify-content-start align-items-center " style="border-bottom: solid black 1px;">
+            <p class="font-xx-large">Work Performed: {{invoice.workPerformed}}</p>
+        </div>
+
+        <div class="col-12 d-flex justify-content-start align-items-center " style="border-bottom: solid black 1px;">
+            <table class="table font-large">
+                <thead class="thead-primary">
+                 <tr>
+                     
+                     <th>Item</th>
+                     <th>Quantity</th>
+                     <th>Price</th>
+                 </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of items">
+                     <th>{{item.name}}</th>
+                     <th>{{item.quantity}}</th>
+                     <th>{{item.price}}</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-12 d-flex justify-content-start align-items-center " style="border-bottom: solid black 1px;">
+            <div class="col-6" style="border-right: solid black 1px;">
+
+            </div>
+
+            <div class="col-6">
+                <div class="col-12 d-flex justify-content-start">
+                <div class="col-6" style="border-right: solid black 1px;"> <p class="font-xx-large">Total:</p></div>
+                <div class="col-6" style="border-bottom: solid black 1px;"><p class="font-xx-large">{{invoice.total | currency}}</p></div>
+                </div>
+                
+                <div class="col-12 d-flex justify-content-start">
+                    <div class="col-6" style="border-right: solid black 1px;"> <p class="font-xx-large">Sub total:</p></div>
+                    <div class="col-6" style="border-bottom: solid black 1px;"><p class="font-xx-large">{{invoice.subTotal | currency}}</p></div>
+                </div>
+
+                <div class="col-12 d-flex justify-content-start">
+                    <div class="col-6" style="border-right: solid black 1px;"> <p class="font-xx-large">Service Call:</p></div>
+                    <div class="col-6" style="border-bottom: solid black 1px;"><p class="font-xx-large">{{serviceCallFee | currency}}</p></div>
+                </div>
+
+                <div class="col-12 d-flex justify-content-start">
+                    <div class="col-6" style="border-right: solid black 1px;"> <p class="font-xx-large">TPS %5:</p></div>
+                    <div class="col-6" style="border-bottom: solid black 1px;"><p class="font-xx-large">{{invoice.tps5 | currency}}</p></div>
+                </div>
+                
+                <div class="col-12 d-flex justify-content-start">
+                    <div class="col-6" style="border-right: solid black 1px;"> <p class="font-xx-large">TVQ %9.975:</p></div>
+                    <div class="col-6" style="border-bottom: solid black 1px;"><p class="font-xx-large">{{invoice.tvq9975 | currency}}</p></div>
+                </div>
+            </div>
+        </div>
+
+        <button *ngIf="!isUpdate" class="btn btn-success btn-block my-5 d-flex justify-content-center" (click)="submitNewInvoice()"> Submit</button>
+        <button *ngIf="isUpdate" class="btn btn-success btn-block my-5 d-flex justify-content-center" (click)="submitInvoiceUpdate()"> Update</button>
+
+    </div>
+
+       
+
+    </ng-container>
+
+
+
+    </div>
+     
+</div>

@@ -4,13 +4,11 @@ export interface IRepairRequest{
     address: string;
     status: string;
     requestDate: string;
-    daysAvailability: IDaysAvailable[];
-    paymentMethods: IPaymentMethods[];
+    daysAvailability: string;
+    paymentMethods: string;
     repairmanTask: string;
     subtoTal: number;
     total: number;
-    acceptedServiceCall: boolean;
-    reasonToReject: string;
     customerEmail: string;
     city: string;
     postalCode: string;
@@ -20,18 +18,6 @@ export interface IRepairRequest{
     productBrand: string;
     problemInfo: string;
     workPerformed: string;
-    repairmanId: number;
-    price: number;
-    isEmergency: boolean;
     
-}
-
-export interface IDaysAvailable {
-    id: number;
-    name:string;
-}
-
-export interface IPaymentMethods {
-    id: number;
-    name:string;
+    
 }
