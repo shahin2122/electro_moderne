@@ -68,7 +68,7 @@ namespace API.Controllers
             return Ok(await _orderService.GetDeliveryMethodsAsync());
         }
 
-        [Authorize(Policy = "RequireAdminRole")]
+  
         [HttpGet("get-all")]
         public async Task<ActionResult<Pagination<OrderToReturnDto>>> GetAllOrders(
         [FromQuery] OrderSpecParams ordersParams)

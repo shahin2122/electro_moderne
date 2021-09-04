@@ -43,6 +43,16 @@ export class PartShopService {
       );
   }
 
+  getLatestParts(){
+    let params = new HttpParams();
+    return this.http.get<IPagination>(this.baseUrl + 'parts', {observe: 'response', params})
+      .pipe(
+        map(response => {
+          return response.body;
+        })
+      );
+  }
+
   getPart(id: number) {
     return this.http.get<IPart>(this.baseUrl + 'parts/' + id);
   }

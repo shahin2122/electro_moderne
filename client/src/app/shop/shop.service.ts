@@ -51,6 +51,19 @@ photos: Photo[] = [];
       );
   }
 
+  getLatestProduct(){
+    let params = new HttpParams();
+    
+
+
+    return this.http.get<IPagination>(this.baseUrl + 'products', {observe: 'response', params})
+      .pipe(
+        map(response => {
+          return response.body;
+        })
+      );
+  }
+
   getTypes() {
     if(this.types.length > 0){
       return of(this.types);

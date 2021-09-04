@@ -35,6 +35,7 @@ import { RequestSubmitedComponent } from './repair-request/request-submited/requ
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +63,8 @@ import { RequestSubmitedComponent } from './repair-request/request-submited/requ
     RepairmanSelectModalComponent,
   
     RequestSubmitedComponent,
+  
+
 
   
   ],

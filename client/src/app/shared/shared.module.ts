@@ -15,10 +15,15 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
 import { RouterModule } from '@angular/router';
-import { ModalModule } from 'ngx-bootstrap/modal'
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { LatestProductsComponent } from './components/latest-products/latest-products.component'
+import { ProductItemComponent } from './components/product-item/product-item.component';
+import { LatestPartsComponent } from './components/latest-parts/latest-parts.component';
+import { PartItemComponent } from './components/part-item/part-item.component';
 
 @NgModule({
-  declarations: [TextInputComponent, PagingHeaderComponent, PagerComponent, OrderTotalsComponent, StepperComponent, BasketSummaryComponent],
+  declarations: [TextInputComponent, PagingHeaderComponent, PagerComponent, OrderTotalsComponent, StepperComponent, 
+    BasketSummaryComponent, LatestProductsComponent,ProductItemComponent, LatestPartsComponent,PartItemComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -49,7 +54,11 @@ import { ModalModule } from 'ngx-bootstrap/modal'
     CdkStepperModule,
     StepperComponent,
     BasketSummaryComponent,
-    ModalModule
+    ModalModule,
+    LatestProductsComponent,
+    ProductItemComponent,
+    PartItemComponent,
+    LatestPartsComponent
   ]
 })
 export class SharedModule { }

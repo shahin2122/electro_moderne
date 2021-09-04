@@ -1,8 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { AccountService } from './account/account.service';
 import { BasketService } from './basket/basket.service';
 import { RepairRequestService } from './repair-request/repair-request.service';
+
+
+declare var gtag;
 
 @Component({
   selector: 'app-root',
@@ -10,10 +15,19 @@ import { RepairRequestService } from './repair-request/repair-request.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Electro Moderne';
+  title = 'Home Appliance Repair & Installation in Montreal Quebec-Electro Moderne';
 
   constructor(private accountService: AccountService, private basketService: BasketService,
-    private repairRequestService: RepairRequestService) {}
+    private repairRequestService: RepairRequestService, router: Router) {
+     const navEndEvents = router.events.pipe(
+        filter(event => event instanceof NavigationEnd),
+      );
+      navEndEvents.subscribe((event: NavigationEnd) => {
+        gtag('config', 'G-XBD7V2YQ03', {
+          'page_path': event.urlAfterRedirects
+        });
+      });
+    }
 
   ngOnInit(){
     this.loadCurrentUser();
