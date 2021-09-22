@@ -163,7 +163,8 @@ namespace API.Controllers
 
             _unitOfWork.Repository<Invoice>().Update(invoice);
 
-             if (await _unitOfWork.Repository<Invoice>().SaveAllAsync()) return Ok(_mapper.Map<InvoiceToReturnDto>(invoice));
+             if (await _unitOfWork.Repository<Invoice>().SaveAllAsync()) return Ok
+                (_mapper.Map<InvoiceToReturnDto>(invoice));
 
             return BadRequest("failed to update Invoice");
         }

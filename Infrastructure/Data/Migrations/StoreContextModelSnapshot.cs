@@ -19,6 +19,57 @@ namespace Infrastructure.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+            modelBuilder.Entity("Core.Entities.Blog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTimeOffset>("CreatedTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Tags")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Blogs");
+                });
+
+            modelBuilder.Entity("Core.Entities.BlogPhoto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Alt")
+                        .HasColumnType("text");
+
+                    b.Property<int>("BlogId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogId")
+                        .IsUnique();
+
+                    b.ToTable("BlogPhotos");
+                });
+
             modelBuilder.Entity("Core.Entities.ContactRequest", b =>
                 {
                     b.Property<int>("Id")
@@ -27,8 +78,7 @@ namespace Infrastructure.Data.Migrations
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Context")
-                        .HasMaxLength(250)
-                        .HasColumnType("character varying(250)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .HasColumnType("text");
@@ -389,8 +439,7 @@ namespace Infrastructure.Data.Migrations
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Description")
-                        .HasMaxLength(250)
-                        .HasColumnType("character varying(250)");
+                        .HasColumnType("text");
 
                     b.Property<string>("LocalId")
                         .HasColumnType("text");
@@ -602,6 +651,17 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("RepairRequests");
                 });
 
+            modelBuilder.Entity("Core.Entities.BlogPhoto", b =>
+                {
+                    b.HasOne("Core.Entities.Blog", "Blog")
+                        .WithOne("Photo")
+                        .HasForeignKey("Core.Entities.BlogPhoto", "BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Blog");
+                });
+
             modelBuilder.Entity("Core.Entities.Invoice", b =>
                 {
                     b.HasOne("Core.Entities.Customer", "Customer")
@@ -759,6 +819,11 @@ namespace Infrastructure.Data.Migrations
                     b.Navigation("Request");
 
                     b.Navigation("Task");
+                });
+
+            modelBuilder.Entity("Core.Entities.Blog", b =>
+                {
+                    b.Navigation("Photo");
                 });
 
             modelBuilder.Entity("Core.Entities.Customer", b =>

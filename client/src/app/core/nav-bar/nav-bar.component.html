@@ -1,202 +1,206 @@
 <div class="container-fluid">
   
-<header class="row d-flex flex-column flex-md-row align-items-center justify-content-between
-p-3 px-md-4  bg-body border-bottom shadow-sm">
-
-    <img src="/assets/images/Electro Moderne Appliance Repair montreal.png" routerLink="/" class="col-xl-2 col-lg-3 col-md-3  " style="max-height: 133px;cursor: pointer;"  alt="Electro Moderne Appliance Repair montreal">
-    
-   
-    
+  <header class="row d-flex flex-column flex-md-row align-items-center justify-content-between
+  p-3 px-md-4  bg-body border-bottom shadow-sm">
   
-    <div class="d-flex  col-xl-4 col-lg-5 col-md-5 align-items-center">
-            <ng-container>
-              <div class="container col-xl-3 col-lg-3 col-md-3 ">
-                <a routerLink="/basket" class="position-relative">
-                <i class="fa fa-shopping-cart fa-2x mr-2 text-dark" aria-hidden="true"></i>
-                <div *ngIf="(basket$ | async) as basket" class="cart-no" style="padding-top: 2px;">{{basket.partItems.length + basket.productItems.length}}</div>
-               </a>
+      <img src="/assets/images/Electro Moderne Appliance Repair montreal.png" routerLink="/" class="col-xl-2 col-lg-3 col-md-3  " 
+      style="max-height: 133px;cursor: pointer;"  alt="Electro Moderne Appliance Repair montreal" title="Electro Moderne Appliance Repair montreal">
+      
+     
+      
+    
+      <div class="d-flex  col-xl-4 col-lg-5 col-md-5 align-items-center">
+              <ng-container>
+                <div class="container col-xl-3 col-lg-3 col-md-3 ">
+                  <a routerLink="/basket" class="position-relative" title="view basket">
+                  <i class="fa fa-shopping-cart fa-2x mr-2 text-dark" aria-hidden="true"></i>
+                  <div *ngIf="(basket$ | async) as basket" class="cart-no" style="padding-top: 2px;">{{basket.partItems.length + basket.productItems.length}}</div>
+                 </a>
+              </div>
+            </ng-container>
+              <ng-container *appHasRole='["Admin"]'>
+                <div class="container col-xl-3 col-lg-3 col-md-3 ">
+                  <a routerLink="/requests" class="position-releative">
+                  <i class="fa fa-wrench fa-2x text-dark" aria-hidden="true"></i>
+                  <div *ngIf="(unseenRepairReqs > 0)" class="req-no" style="padding-top: 2px;">{{unseenRepairReqs}}</div>
+                  </a>
+                </div>
+              </ng-container>
+  
+              <ng-container *appHasRole='["Admin"]'>
+                <div class="container col-xl-3 col-lg-3 col-md-3 ">
+                  <a routerLink="/contacts" class="position-releative">
+                  <i class="fa fa-commenting-o fa-2x text-dark" aria-hidden="true"></i>
+                  <div *ngIf="(unseenContactReqs > 0)" class="req-no" style="padding-top: 2px;">{{unseenContactReqs}}</div>
+                  </a>
+                </div>
+              </ng-container>
+  
+  
+       <div class="container  d-flex flex-block col-xl-9 col-lg-9 col-md-9 ">
+        <ng-container *ngIf="(currentUser$ | async) === null">
+          <a routerLink="/account/login" class="btn col-md-6 col-sm-6  col-xs-3  btn-success d-flex align-items-center 
+          mr-2 text-white font-large sign-in-btn " ><span class="d-none d-sm-block">Sign in</span>  <i class="fa fa-sign-in fa-2x "></i></a>
+          <a routerLink="/account/register" class="btn col-md-6 col-sm-6 col-xs-3 btn-info mr-3 d-flex align-items-center 
+          text-white font-large register-btn" ><span class="d-none d-sm-block">Register</span> <i class="fa fa-user-plus fa-2x"></i></a>
+        </ng-container>  
+        
+        <ng-container *ngIf="currentUser$ | async">
+  
+          <div class="dropdown " dropdown> 
+            <a class="dropdown-toggle" style="cursor: pointer;" dropdownToggle> 
+             <strong class="font-large"> Welcome {{(currentUser$ | async).displayName}}</strong></a>
+             <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;" *dropdownMenu>
+                <a class="dropdown-item d-flex align-items-center py-2 font-larger">
+                  <i routerLink="/basket" class="fa fa-shopping-cart mr-3"> View Basket</i>
+                </a>
+  
+                <a  routerLink="/order" title="view your orders"
+                    class="dropdown-item d-flex align-items-center py-2 font-larger">
+                  <i class="fa fa-history mr-3"> View Orders</i>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a (click)="logOut()" class="dropdown-item d-flex align-items-center py-2 font-larger" title="logout"> 
+                  <i class="fa fa-sign-out mr-3"> Log Out</i>
+                </a>
             </div>
-          </ng-container>
-            <ng-container *appHasRole='["Admin"]'>
-              <div class="container col-xl-3 col-lg-3 col-md-3 ">
-                <a routerLink="/requests" class="position-releative">
-                <i class="fa fa-wrench fa-2x text-dark" aria-hidden="true"></i>
-                <div *ngIf="(unseenRepairReqs > 0)" class="req-no" style="padding-top: 2px;">{{unseenRepairReqs}}</div>
-                </a>
-              </div>
-            </ng-container>
-
-            <ng-container *appHasRole='["Admin"]'>
-              <div class="container col-xl-3 col-lg-3 col-md-3 ">
-                <a routerLink="/contacts" class="position-releative">
-                <i class="fa fa-commenting-o fa-2x text-dark" aria-hidden="true"></i>
-                <div *ngIf="(unseenContactReqs > 0)" class="req-no" style="padding-top: 2px;">{{unseenContactReqs}}</div>
-                </a>
-              </div>
-            </ng-container>
-
-
-     <div class="container  d-flex flex-block col-xl-9 col-lg-9 col-md-9 ">
-      <ng-container *ngIf="(currentUser$ | async) === null">
-        <a routerLink="/account/login" class="btn col-md-6 col-sm-6  col-xs-3  btn-success d-flex align-items-center 
-        mr-2 text-white font-large sign-in-btn " ><span class="d-none d-sm-block">Sign in</span>  <i class="fa fa-sign-in fa-2x "></i></a>
-        <a routerLink="/account/register" class="btn col-md-6 col-sm-6 col-xs-3 btn-info mr-3 d-flex align-items-center 
-        text-white font-large register-btn" ><span class="d-none d-sm-block">Register</span> <i class="fa fa-user-plus fa-2x"></i></a>
-      </ng-container>  
-      
-      <ng-container *ngIf="currentUser$ | async">
-
-        <div class="dropdown " dropdown> 
-          <a class="dropdown-toggle" style="cursor: pointer;" dropdownToggle> 
-           <strong class="font-large"> Welcome {{(currentUser$ | async).displayName}}</strong></a>
-           <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;" *dropdownMenu>
-              <a class="dropdown-item d-flex align-items-center py-2 font-larger">
-                <i routerLink="/basket" class="fa fa-shopping-cart mr-3"> View Basket</i>
-              </a>
-
-              <a  routerLink="/order"
-                  class="dropdown-item d-flex align-items-center py-2 font-larger">
-                <i class="fa fa-history mr-3"> View Orders</i>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a (click)="logOut()" class="dropdown-item d-flex align-items-center py-2 font-larger">
-                <i class="fa fa-sign-out mr-3"> Log Out</i>
-              </a>
           </div>
-        </div>
-
-      
-      </ng-container>
-      
-    </div>
-    </div>
-
-    <div class="col-xl-6 col-lg-4 col-md-4 col-sm-10 d-flex align-items-center justify-content-start">
-     <div>
-      <img src="/assets/images/GB.png" style="cursor: pointer;" routerLink="/"> <strong class="font-large"> _ </strong> <img src="/assets/images/FR.png" style="cursor: pointer;" routerLink="/french">
-     </div>
-      <form class="form-inline my-2 my-lg-0">
-      <div class="row-md-12 row-xs-12  container d-flex  align-items-center">
-          <input class="form-control d-flex col-xl-9 col-lg-9 col-md-9 col-sm-10 col-xs-10 mr-sm-2 my-2 font-large" type="text" style="height: 63px;" placeholder="What do you need?">
-          <button class="btn btn-secondary d-flex d-block d-none  col-xl-3 col-lg-3 col-md-3 col-sm-2 col-2 my-2 my-sm-0 font-larger align-items-center" type="submit" style="height: 63px;"><i class="fa fa-search fa-2x d-none d-sm-block"></i> <i class="fa fa-search  d-block d-sm-none"></i> </button>
-         
-      </div>
-     </form>
-    </div>
-     
-  </header>
- 
-
-</div>
-
-<div class="container col d-flex  justify-content-center" >
-  <div class="row">
-
   
-  <div class="d-flex align-items-center justify-content-center p-2 col-xs-12">
-    <h2><i class="fa fa-map-marker fa-2x "></i> <span class="ml-3 col-xs-12">Montreal - Quebec</span></h2>
-  </div>
-
-  <div class="d-flex align-items-center justify-content-center p-2 col-xs-12">
-    <h2> <i class="fa fa-envelope-o fa-2x "></i> <span class="ml-3 col-xs-12">info@electromoderne.ca</span></h2>
-  </div>
-
-  <div class="d-flex align-items-center justify-content-center p-2">
-    <h2> <i class="fa fa-mobile fa-2x col-xs-12"></i> <span class="ml-3 col-xs-12">(438) 494 7672</span></h2>
-  </div>
-
-</div>
-</div>
-
-
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand font-large" [routerLink]="['/']" routerLinkActive="active" >Electro Moderne</a>
-  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="navbar-collapse collapse" id="navbarColor02" >
-    <ul class="navbar-nav mr-auto">
-      
-    
-      <li class="nav-item">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScme5U0JfDxoKGJGm74F8HDmA-L2kudIkMM2KlN199siko27w/viewform?vc=0&c=0&w=1&flr=0&usp=mail_form_link" class="nav-link font-large" >
-       <!-- routerLink="/repair-request" -->
-       Repair Request</a> 
-      </li>
-     
-     <!-- <li class="nav-item"> <a class="nav-link font-large"
-      routerLink="/repair-request" 
-      >Repair
-    </a>
-      </li>
-   -->
-      <li class="nav-item">
-        <a class="nav-link font-large" routerLink="contact-us">Contact Us</a>
-      </li>
-      <li  class="nav-item" >
-        <a  class="nav-link font-large" *appHasRole='["Admin"]' routerLink="/admin/pannel" routerLinkActive="active">Admin</a>
-      </li>
-
-      <li  class="nav-item" >
-        <a  class="nav-link font-large" *appHasRole='["Admin"]'  routerLink="/admin/orders" routerLinkActive="active">Orders</a>
-      </li>
-
-      <li  class="nav-item" >
-        <a  class="nav-link font-large" *appHasRole='["Admin"]'  routerLink="/admin/customers" routerLinkActive="active">Customers</a>
-      </li>
-
-      <li  class="nav-item" >
-        <a  class="nav-link font-large" *appHasRole='["Admin"]'  routerLink="/admin/invoices" routerLinkActive="active">Invoices</a>
-      </li>
-
-      <li  class="nav-item" >
-        <a  class="nav-link font-large" *appHasRole='["Admin"]'  routerLink="/test-error" routerLinkActive="active">Errors</a>
-      </li>
-
-     
-      
-    </ul>
-    
-  </div>
-</nav>
-
-<nav class=" navbar navbar-expand-md navbar-dark bg-primary ">
-  <a class="navbar-brand font-larger" routerLink="/shop">Appliances</a>
-  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="navbar-collapse collapse " id="navbarColor01" style="padding: 0; margin: 0;">
-    <ul class="navbar-nav  container">
-      <li class="nav-item active "  *ngFor="let type of types">
-        <a routerLink="shop/{{type.id}}" class="nav-link font-larger " >{{type.name}} </a>
-      </li>
-
-
-    
-   
-    </ul>
-    
-  </div>
-</nav>
-
-<nav class="navbar navbar-expand-md navbar-light bg-light">
-  <a routerLink="/part-shop" class="navbar-brand font-large">Appliances Parts</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarColor03">
-    <ul class="navbar-nav mr-auto container">
-      <li class="nav-item col-3" *ngFor="let type of partTypes">
-        <a class="nav-link" routerLink="part-shop/{{type.id}}">{{type.name}}
+        
+        </ng-container>
+        
+      </div>
+      </div>
+  
+      <div class="col-xl-6 col-lg-4 col-md-4 col-sm-10 d-flex align-items-center justify-content-start">
+       <div>
+        <img src="/assets/images/ENGLISH.png" alt="english language of electromoderne.ca" title="english language of electromoderne.ca" style="cursor: pointer;" routerLink="/"> <strong class="font-large"> _ </strong> <img src="/assets/images/FRENCH.png" alt="french language of electromoderne.ca" title="french language of electromoderne.ca" style="cursor: pointer;" routerLink="/french">
+       </div>
+        <form class="form-inline my-2 my-lg-0">
+        <div class="row-md-12 row-xs-12  container d-flex  align-items-center">
+            <input class="form-control d-flex col-xl-9 col-lg-9 col-md-9 col-sm-10 col-xs-10 mr-sm-2 my-2 font-large" type="text" style="height: 63px;" placeholder="What do you need?">
+            <button class="btn btn-secondary d-flex d-block d-none  col-xl-3 col-lg-3 col-md-3 col-sm-2 col-2 my-2 my-sm-0 font-larger align-items-center" type="submit" style="height: 63px;"><i class="fa fa-search fa-2x d-none d-sm-block"></i> <i class="fa fa-search  d-block d-sm-none"></i> </button>
+           
+        </div>
+       </form>
+      </div>
        
-        </a>
-
-     
-    </ul>
+    </header>
    
+  
   </div>
-</nav>
+  
+  <div class="container col d-flex  justify-content-center" >
+    <div class="row">
+  
+    
+    <div class="d-flex align-items-center justify-content-center p-2 col-xs-12">
+      <h2><i class="fa fa-map-marker fa-2x "></i> <span class="ml-3 col-xs-12">Montreal - Quebec</span></h2>
+    </div>
+  
+    <div class="d-flex align-items-center justify-content-center p-2 col-xs-12">
+      <h2> <i class="fa fa-envelope-o fa-2x "></i> <span class="ml-3 col-xs-12">info@electromoderne.ca</span></h2>
+    </div>
+  
+    <div class="d-flex align-items-center justify-content-center p-2">
+      <h2> <i class="fa fa-mobile fa-2x col-xs-12"></i> <span class="ml-3 col-xs-12">(438) 494 7672</span></h2>
+    </div>
+  
+  </div>
+  </div>
+  
+  
+  
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand font-large" [routerLink]="['/']" title="home page" routerLinkActive="active" >Electro Moderne</a>
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="navbar-collapse collapse" id="navbarColor02" >
+      <ul class="navbar-nav mr-auto">
+        
+      
+        <li class="nav-item">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLScme5U0JfDxoKGJGm74F8HDmA-L2kudIkMM2KlN199siko27w/viewform?vc=0&c=0&w=1&flr=0&usp=mail_form_link" class="nav-link font-large" title="repair request link">
+         <!-- routerLink="/repair-request" -->
+         Repair Request</a> 
+        </li>
+       
+       <!-- <li class="nav-item"> <a class="nav-link font-large"
+        routerLink="/repair-request" 
+        >Repair
+      </a>
+        </li>
+     -->
+        <li class="nav-item">
+          <a class="nav-link font-large" routerLink="contact-us" title="contact us">Contact Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-large" routerLink="blogs" title="blogs">Blogs</a>
+        </li>
+        <li  class="nav-item" >
+          <a  class="nav-link font-large" *appHasRole='["Admin"]' routerLink="/admin/pannel" routerLinkActive="active">Admin</a>
+        </li>
+  
+        <li  class="nav-item" >
+          <a  class="nav-link font-large" *appHasRole='["Admin"]' title="orders"  routerLink="/admin/orders" routerLinkActive="active">Orders</a>
+        </li>
+  
+        <li  class="nav-item" >
+          <a  class="nav-link font-large" *appHasRole='["Admin"]'  routerLink="/admin/customers" routerLinkActive="active">Customers</a>
+        </li>
+  
+        <li  class="nav-item" >
+          <a  class="nav-link font-large" *appHasRole='["Admin"]'  routerLink="/admin/invoices" routerLinkActive="active">Invoices</a>
+        </li>
+  
+        <li  class="nav-item" >
+          <a  class="nav-link font-large" *appHasRole='["Admin"]'  routerLink="/test-error" routerLinkActive="active">Errors</a>
+        </li>
+  
+       
+        
+      </ul>
+      
+    </div>
+  </nav>
+  
+  <nav class=" navbar navbar-expand-md navbar-dark bg-primary ">
+    <a class="navbar-brand font-larger" title="appliance shop" routerLink="/shop">Appliances</a>
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="navbar-collapse collapse " id="navbarColor01" style="padding: 0; margin: 0;">
+      <ul class="navbar-nav  container">
+        <li class="nav-item active "  *ngFor="let type of types">
+          <a routerLink="shop/{{type.id}}" title="appliance details" class="nav-link font-larger " >{{type.name}} </a>
+        </li>
+  
+  
+      
+     
+      </ul>
+      
+    </div>
+  </nav>
+  
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <a routerLink="/part-shop" title="appliance parts shop" class="navbar-brand font-large">Appliances Parts</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarColor03">
+      <ul class="navbar-nav mr-auto container">
+        <li class="nav-item col-3" *ngFor="let type of partTypes">
+          <a class="nav-link" title="appliance parts details" routerLink="part-shop/{{type.id}}">{{type.name}}
+         
+          </a>
+  
+       
+      </ul>
+     
+    </div>
+  </nav>

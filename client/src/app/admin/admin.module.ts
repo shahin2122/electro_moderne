@@ -30,6 +30,9 @@ import { InvoicesComponent } from './invoices/invoices.component';
 import { AddNewInvoiceComponent } from './invoices/add-new-invoice/add-new-invoice.component';
 import { InvoiceDetailsComponent } from './invoices/invoice-details/invoice-details.component';
 import { UpdateInvoiceComponent } from './invoices/update-invoice/update-invoice.component';
+import { BlogsComponent } from './blogs/blogs.component';
+import { AddNewBlogComponent } from './blogs/add-new-blog/add-new-blog.component';
+import { BlogPhotoEditorComponent } from './blogs/blog-photo-editor/blog-photo-editor.component';
 
 
 
@@ -41,7 +44,7 @@ import { UpdateInvoiceComponent } from './invoices/update-invoice/update-invoice
     AddNewBrandComponent, AddNewProductComponent, PhotoEditorComponent,
      PartsComponent, AddNewPartComponent, PartBrandsComponent, PartTypesComponent,
       AddNewPartTypeComponent, AddNewPartBrandComponent, PartPhotoEditorComponent,
-       OrdersComponent, RepairRequestsComponent, RequestDetailedComponent, AdminOrderDetailedComponent, CustomersComponent, AddNewCustomerComponent, CustomerDetailedComponent, InvoicesComponent, AddNewInvoiceComponent, InvoiceDetailsComponent, UpdateInvoiceComponent],
+       OrdersComponent, RepairRequestsComponent, RequestDetailedComponent, AdminOrderDetailedComponent, CustomersComponent, AddNewCustomerComponent, CustomerDetailedComponent, InvoicesComponent, AddNewInvoiceComponent, InvoiceDetailsComponent, UpdateInvoiceComponent, BlogsComponent, AddNewBlogComponent, BlogPhotoEditorComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

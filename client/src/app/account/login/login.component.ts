@@ -3,8 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../account.service';
-import { SocialAuthService } from 'angularx-social-login';
-import { GoogleLoginProvider } from 'angularx-social-login';
+
 
 
 @Component({
@@ -19,7 +18,7 @@ export class LoginComponent implements OnInit {
   externalUser: any;
   validationErrors: string[] = [];
   
-  constructor(private accountService: AccountService, private router: Router,private socialAuthService: SocialAuthService,
+  constructor(private accountService: AccountService, private router: Router,
     private toastr: ToastrService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {

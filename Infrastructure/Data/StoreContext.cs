@@ -18,6 +18,8 @@ namespace Infrastructure.Data
         {
         }
 
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<BlogPhoto> BlogPhotos { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Part> Parts { get; set; }
         public DbSet<ProductBrand> ProductBrands { get; set; }
@@ -32,6 +34,7 @@ namespace Infrastructure.Data
         public DbSet<ContactRequest> ContactRequests { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<InvoiceItem> InvoiceItems { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

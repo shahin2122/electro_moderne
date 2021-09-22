@@ -1,0 +1,20 @@
+<div class="col-12">
+    <div class="card w-120 h-100 shadow-sm">
+        <div class="image position-relative">
+            <img src="{{blog.photoUrl}}" class="img-fluid" alt="{{blog.title}}" title="{{blog.title}}"  style="cursor: pointer;" routerLink="/blog-details/{{url}}">
+
+            <div routerLink="/blog-details/{{url}}" class="d-flex align-items-center justify-content-start pt-2 pl-2" style="cursor: pointer;">
+                <h4>{{blog.title}}</h4>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-start pl-2">
+                <p>{{blog.createdTime | date:'medium'}}</p>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-center pl-2">
+                <p>{{shortTitle}}...</p>
+            </div> 
+            <p routerLink="/blog-details/{{url}}" style="cursor: pointer;" class="text-primary ml-2" style="cursor: pointer;">Read more</p> 
+        </div>
+    </div>
+</div>

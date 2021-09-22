@@ -22,6 +22,8 @@ import { InvoiceParams } from '../shared/models/invoiceParams';
 import { IInvoice } from '../shared/models/invoice';
 import { InvoiceService } from './invoices/invoice.service';
 import { AccountService } from '../account/account.service';
+import { BlogParams } from '../shared/models/blogParams';
+import { IBlog } from '../shared/models/blog';
 
 @Injectable({
   providedIn: 'root'
@@ -32,9 +34,55 @@ baseUrl = environment.baseApiUrl;
 partToAddPhoto: IPart;
 productToAddPhoto: product;
 OrderDetailed: IOrder;
+blogToAddPhoto: IBlog;
+
 
   constructor(private http: HttpClient, private invoiceService: InvoiceService, private accountService: AccountService) { }
 
+
+  getBlogsPaginated(blogParams: BlogParams){
+    let params = new HttpParams();
+
+    if(blogParams.search){
+      params = params.append('search', blogParams.search);
+
+      params = params.append('pageIndex', blogParams.pageNumber.toString());
+      params = params.append('pageIndex', blogParams.pageSize.toString());
+    }
+    
+   return this.http.get<IPagination>(this.baseUrl + 'blogs', {observe: 'response', params})
+    .pipe(
+      map(response => {
+        return response.body;
+      })
+    );
+  }
+
+  
+  addNewBlog(model: any){
+    return this.http.post(this.baseUrl + 'blogs', model);
+  }
+
+  getBlog(id: number){
+    return this.http.get<IBlog>(this.baseUrl + 'blogs/' + id);
+  }
+
+  getBlogByTitle(title: string){
+    return this.http.get<IBlog>(this.baseUrl + 'blogs/get-by-title/' + title);
+  }
+
+  updateBlog(blogId: number, newBlog: IBlog){
+    console.log("update from admin service",newBlog);
+    return this.http.put(this.baseUrl + 'blogs/update/'+ blogId, newBlog);
+  }
+
+  deleteBlog(blogId: number){
+    return this.http.delete(this.baseUrl + 'blogs/' + blogId);
+  }
+
+  deleteBlogPhoto(blogId: number) {
+    return this.http.delete(this.baseUrl + 'blogs/delete-photo/' + blogId);
+  }
 
   addNewInvoice(){
    this.accountService.currentUser$.subscribe(response => {
@@ -61,6 +109,7 @@ OrderDetailed: IOrder;
     return this.http.post(this.baseUrl + 'parts/add-new-part', model);
   }
 
+  
   getInvoicesPaginated(invoiceParams: InvoiceParams){
     let params = new HttpParams();
 
@@ -220,6 +269,7 @@ OrderDetailed: IOrder;
     return this.http.delete(this.baseUrl + 'types/' + id);
   }
 
+ 
   getBrandsPaginated(pageNumber: number, pageSize: number) {
     let params = new HttpParams();
 

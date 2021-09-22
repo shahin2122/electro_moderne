@@ -24,9 +24,15 @@ import { AddNewCustomerComponent } from './customers/add-new-customer/add-new-cu
 import { InvoicesComponent } from './invoices/invoices.component';
 import { AddNewInvoiceComponent } from './invoices/add-new-invoice/add-new-invoice.component';
 import { InvoiceDetailsComponent } from './invoices/invoice-details/invoice-details.component';
+import { BlogsComponent } from './blogs/blogs.component';
+import { AddNewBlogComponent } from './blogs/add-new-blog/add-new-blog.component';
+import { BlogPhotoEditorComponent } from './blogs/blog-photo-editor/blog-photo-editor.component';
 
 
 const routes: Routes = [
+  {path: 'blogs', component: BlogsComponent},
+  {path: 'add-new-blog', component: AddNewBlogComponent},
+  {path: 'add-new-blog/:id', component: AddNewBlogComponent},
   {path: 'users', component: UsersComponent},
   {path: 'customers', component: CustomersComponent},
   {path: 'customers/:id', component: CustomerDetailedComponent},
@@ -58,6 +64,7 @@ const routes: Routes = [
   {path: 'add-new-part-brand/:id', component: AddNewPartBrandComponent},
   {path: 'photo-editor/:productId', component: PhotoEditorComponent},
   {path: 'part-photo-editor/:partId', component: PartPhotoEditorComponent},
+  {path: 'blog-photo-editor/:blogId', component: BlogPhotoEditorComponent},
 ]
 
 @NgModule({

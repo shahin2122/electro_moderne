@@ -9,7 +9,7 @@ namespace Infrastructure.Data.Config
     {
         public void Configure(EntityTypeBuilder<ContactRequest> builder)
         {   
-            builder.Property(P => P.Context).HasMaxLength(250);
+           // builder.Property(P => P.Context).HasMaxLength(250);
             builder.Property(s => s.Status)
                 .HasConversion(
                     o => o.ToString(),

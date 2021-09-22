@@ -4,12 +4,13 @@ import { HomeComponent } from './home.component';
 import { SharedModule } from '../shared/shared.module';
 
 
+
 @NgModule({
   declarations: [HomeComponent],
   imports: [
     CommonModule,
     SharedModule,
-   
+  
   ]
 })
 export class HomeModule { }

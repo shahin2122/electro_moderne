@@ -99,8 +99,16 @@ namespace API.Helpers
                 .ForMember(d => d.Customer, o => o.MapFrom(s => s.Customer.FullName))
                 .ReverseMap();
 
-           
+           CreateMap<Blog , BlogDto>()
+                .ReverseMap();
+                
+           CreateMap<Blog , BlogToReturnDto>()
+                .ForMember(dest => dest.PhotoUrl, opts => opts.MapFrom(source => 
+                    source.Photo.Url))
+                .ReverseMap();
 
+            CreateMap<BlogPhoto , PhotoDto>()
+                .ReverseMap();
         }
     }
 }

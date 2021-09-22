@@ -1,0 +1,23 @@
+<div class="container">
+    <div>
+        <button routerLink="/admin/pannel" class="btn btn-success font-x-large d-flex align-items-center justify-content-center"><i class="fa fa-long-arrow-left fa-2x mr-1"></i> Back</button>
+        <h1 *ngIf="!isUpdate" class="mt-2">Add New Blog</h1>
+        <h1 *ngIf="isUpdate" class="mt-2">Edit Blog</h1>
+        <div class="d-flex justify-content-center mt-5">
+            <div class="col-8">
+                <form [formGroup]="addBlogForm" (ngSubmit)="onSubmit()">
+                    <label for="Description" class="font-xx-large">Title:</label>
+                    <textarea class="form-control" formControlName="title" id="title" placeholder="Title..." style="font-size: 30px;" rows="3"></textarea>
+        
+                    <label for="Description" class="font-xx-large">Text:</label>
+                    <textarea class="form-control" formControlName="text" id="text" placeholder="Text..." style="font-size: 30px;" rows="20"></textarea>
+    
+
+                    <button [disabled]="addBlogForm.invalid" class="w-100 btn btn-lg btn-info mt-2" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    
+    </div>
+    
+</div>

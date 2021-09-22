@@ -36,7 +36,7 @@ namespace Infrastructure.Data
             return await ApplySpecification(spec).FirstOrDefaultAsync();
         }
 
-       
+      
 
         public async Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec)
         {
@@ -60,10 +60,7 @@ namespace Infrastructure.Data
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public Task<T> GetByNameAsync(string name)
-        {
-            throw new System.NotImplementedException();
-        }
+        
 
         public void Add(T entity)
         {

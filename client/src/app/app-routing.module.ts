@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RepairRequestsComponent } from './admin/repair-requests/repair-requests.component';
 import { RequestDetailedComponent } from './admin/repair-requests/request-detailed/request-detailed.component';
+import { AllBlogsComponent } from './all-blogs/all-blogs.component';
+import { BlogDetailsComponent } from './all-blogs/blog-details/blog-details.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { ContactsDetailedComponent } from './contact-us/contacts-detailed/contacts-detailed.component';
 import { ContactsComponent } from './contact-us/contacts/contacts.component';
@@ -22,6 +24,8 @@ import { ShopComponent } from './shop/shop.component';
 const routes: Routes = [
     {path: '', component: HomeComponent, data: {breadcrumb: 'Home'}},
     {path: 'french', component: FrenchComponent, data: {breadcrumb: 'french'}},
+    {path: 'blog-details/:title', component: BlogDetailsComponent, data: {breadcrumb: 'blogDetails'}},
+    {path: 'blogs', component: AllBlogsComponent, data: {breadcrumb: 'Blogs'}},
     {path: 'repair-request', component: RepairRequestComponent, data: {breadcrumb: 'Repair Request'}},
     {path: 'repair-request-submited', component: RequestSubmitedComponent, data: {breadcrumb: 'Request Submitted'}},
     {path: 'contact-us', component: ContactUsComponent, data: {breadcrumb: 'Contact Us'}},
@@ -65,7 +69,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    initialNavigation: 'enabled'
+})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

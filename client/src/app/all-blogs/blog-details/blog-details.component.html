@@ -1,0 +1,43 @@
+<head>
+<title>electromoderne blogs - {{blog.title}}</title>
+<link rel="canonical" href="https://www.electromoderne.ca/blog-details/{{title}}">
+<meta name="description" content="{{shortTitle}}"> 
+</head>
+
+
+<div class="container">
+
+    <div class="d-flex justify-content-center text-center mt-3 mb-3">
+        <h1 class="font-xxx-large">{{blog.title}}.</h1>
+
+    </div>
+
+    <div class="d-flex justify-content-center text-center mt-3 mb-3">
+     
+        <h4>{{blog.createdTime | date:'medium'}}</h4>
+    </div>
+
+    <div class="d-flex justify-content-center mt-3 mb-3">
+       
+            <img src="{{blog.photoUrl}}" alt="{{blog.title}}" title="{{blog.title}}" >
+    
+    </div>
+
+    <div class="d-flex justify-content-start font-x-large mt-3 mb-3">
+        {{blog.text}}
+    </div>
+
+    <div class="d-flex justify-content-center font-xx-large mt-3 mb-3">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScme5U0JfDxoKGJGm74F8HDmA-L2kudIkMM2KlN199siko27w/viewform?vc=0&c=0&w=1&flr=0&usp=mail_form_link" class="btn btn-primary">Repair Request</a>
+    </div>
+
+    <p class="d-flex justify-content-center font-xx-large mt-5 mb-3 text-primary">Electro Moderne Accounts In Social Medias:</p>
+
+    <div class="d-flex justify-content-center">
+        <a href="https://www.instagram.com/electromoderne/" title="electro moderne instagram account"><i class="fa fa-instagram fa-4x"></i></a>
+        <a href="https://twitter.com/ModerneRepair/" title="electro moderne twitter account"><i class="fa fa-twitter fa-4x ml-5"></i></a>
+        <a href="https://www.instagram.com/electromoderne/" title="electro moderne youtube account"><i class="fa fa-youtube fa-4x ml-5"></i></a>
+        <a href="https://www.youtube.com/channel/UCh2MhSR4lSta7zfYcmF-Afw/" title="electro moderne facebook account"><i class="fa fa-facebook fa-4x ml-5"></i></a>
+        <a href="https://wa.link/idxqzz"><i class="fa fa-whatsapp fa-4x ml-5" title="electro moderne Whatsapp account"></i></a>
+    </div>
+</div>

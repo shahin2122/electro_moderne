@@ -1,0 +1,41 @@
+<div class="row my-2 d-flex justify-content-center">
+    <button routerLink="/admin/add-new-blog" class="btn btn-success d-flex align-items-center"><i class="fa fa-plus fa-2x mr-1"></i> Add New Blog</button>
+</div>
+
+<div class="row d-flex justify-content-center align-items-center my-2">
+    <app-paging-header
+    [totalCount]="totalCount"
+    [pageSize]="blogParams.pageSize"
+    [pageNumber]="blogParams.pageNumber"
+    ></app-paging-header>
+</div>
+
+<div class="row">
+    <table class="table">
+        <tr>
+            <th style="width: 10%;">Blog Id </th>
+            <th style="width: 50%;">Blog Title </th>
+            <th style="width: 20%;"></th>
+            <th style="width: 20%;"></th>
+        </tr>
+        <tr *ngFor="let blog of blogs">
+            <td>{{blog.id}}</td>
+            <td>{{blog.title}}</td>
+            <td><img *ngIf="blog.photoUrl" src="{{blog.photoUrl}}" alt="{{blog.photoUrl}}" class="img img-thumbnail p-1"></td>
+            <td>
+                <div class="btn-group">
+                <button routerLink="/admin/add-new-blog/{{blog.id}}" class="btn btn-primary d-flex align-items-center" style="width: 50%;"><i class="fa fa-edit fa-2x"></i>Edit</button>
+                <button (click)="deleteBlog(blog.id)" class="btn btn-danger d-flex align-items-center" style="width: 50%;"><i class="fa fa-trash fa-2x"></i>Delete</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="row d-flex justify-content-center mt-2 " *ngIf="totalCount > 0">
+    <app-pager
+     [pageSize]="pageSize"
+     [totalCount]="totalCount"
+     (pageChanged)="onPageChanged($event)"
+    ></app-pager>
+   </div>

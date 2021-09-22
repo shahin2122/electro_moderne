@@ -1,0 +1,15 @@
+<div class="col-12">
+    <div class=" d-flex justify-content-center">
+
+        <img  src="{{blog.photoUrl}}" class="img-fluid" alt="{{blog.title}}" title="{{blog.title}}"
+        style="cursor: pointer;" routerLink="/blog-details/{{url}}">
+
+    </div>
+   
+    <h1><strong>{{blog.title}}</strong></h1>
+    <p>{{blog.createdTime | date: 'medium'}}</p>
+
+    <h5>{{shortTitle}}...</h5>
+
+    <p routerLink="/blog-details/{{url}}" style="cursor: pointer;" class="text-primary">Read more</p>
+</div>

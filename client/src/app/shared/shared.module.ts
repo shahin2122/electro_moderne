@@ -20,10 +20,14 @@ import { LatestProductsComponent } from './components/latest-products/latest-pro
 import { ProductItemComponent } from './components/product-item/product-item.component';
 import { LatestPartsComponent } from './components/latest-parts/latest-parts.component';
 import { PartItemComponent } from './components/part-item/part-item.component';
+import { BlogItemComponent } from './components/blog-item/blog-item.component';
+import { HomePageBlogItemComponent } from './components/home-page-blog-item/home-page-blog-item.component';
+import { LatestBlogsComponent } from '../latest-blogs/latest-blogs.component';
 
 @NgModule({
   declarations: [TextInputComponent, PagingHeaderComponent, PagerComponent, OrderTotalsComponent, StepperComponent, 
-    BasketSummaryComponent, LatestProductsComponent,ProductItemComponent, LatestPartsComponent,PartItemComponent],
+    BasketSummaryComponent, LatestProductsComponent,ProductItemComponent, LatestPartsComponent,PartItemComponent,
+     BlogItemComponent, HomePageBlogItemComponent, LatestBlogsComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -58,7 +62,10 @@ import { PartItemComponent } from './components/part-item/part-item.component';
     LatestProductsComponent,
     ProductItemComponent,
     PartItemComponent,
-    LatestPartsComponent
+    LatestPartsComponent,
+    BlogItemComponent,
+    HomePageBlogItemComponent,
+    LatestBlogsComponent
   ]
 })
 export class SharedModule { }

@@ -31,6 +31,8 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
 import { FrenchComponent } from './french/french.component';
 import { RepairmanSelectModalComponent } from './modals/repairman-select-modal/repairman-select-modal.component';
 import { RequestSubmitedComponent } from './repair-request/request-submited/request-submited.component';
+import { AllBlogsComponent } from './all-blogs/all-blogs.component';
+import { BlogDetailsComponent } from './all-blogs/blog-details/blog-details.component';
 
 
 
@@ -63,13 +65,16 @@ import { RequestSubmitedComponent } from './repair-request/request-submited/requ
     RepairmanSelectModalComponent,
   
     RequestSubmitedComponent,
-  
+    
+    AllBlogsComponent,
 
+    BlogDetailsComponent,
 
+    
   
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
@@ -89,16 +94,9 @@ import { RequestSubmitedComponent } from './repair-request/request-submited/requ
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    {provide: 'SocialAuthServiceConfig', useValue: {
-      autoLogin: false,providers: [{
-        id: GoogleLoginProvider.PROVIDER_ID,
-        provider: new GoogleLoginProvider(
-          '457129431480-eme0r5m4mpu0401fhnloicdju32ajcq9.apps.googleusercontent.com'
-        )
-      }]
-    }as SocialAuthServiceConfig,
-  }
- 
+    {provide: 'googleTagManagerId', useValue:'GTM-P77PQHC'},
+    
+  
              ],
   bootstrap: [AppComponent]
 
