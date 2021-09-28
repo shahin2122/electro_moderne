@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 import { ToastrService } from 'ngx-toastr';
 import { IBlog } from 'src/app/shared/models/blog';
 import { AdminService } from '../../admin.service';
@@ -14,7 +15,7 @@ export class AddNewBlogComponent implements OnInit {
   addBlogForm: FormGroup;
   isUpdate = false;
   blog: IBlog;
-
+  editorText = '';
 
   constructor(private adminService: AdminService, private toastr: ToastrService, 
     private router:Router,private activatedRoute: ActivatedRoute) { }
@@ -42,9 +43,11 @@ export class AddNewBlogComponent implements OnInit {
   }
 
   onSubmit(){
+    this.blog = this.addBlogForm.value;
+    this.blog.rawText = this.editorText;
     if(this.isUpdate)
     {
-      this.adminService.updateBlog(Number(this.activatedRoute.snapshot.paramMap.get('id')), this.addBlogForm.value)
+      this.adminService.updateBlog(Number(this.activatedRoute.snapshot.paramMap.get('id')), this.blog)
         .subscribe((response : IBlog) => {
           this.toastr.success("Blog Edited");
           this.adminService.blogToAddPhoto = response;
@@ -54,7 +57,7 @@ export class AddNewBlogComponent implements OnInit {
           this.toastr.error(error);
         })
     }else{
-      this.adminService.addNewBlog(this.addBlogForm.value).subscribe((response : IBlog) => {
+      this.adminService.addNewBlog(this.blog).subscribe((response : IBlog) => {
         this.toastr.success("New Blog Added");
         this.adminService.blogToAddPhoto = response;
         this.router.navigateByUrl("/admin/blog-photo-editor/" + response.id);
@@ -63,5 +66,12 @@ export class AddNewBlogComponent implements OnInit {
         this.toastr.error(error.message);
       })
     }
+  }
+
+  changeEditor(event: EditorChangeContent ){
+    this.editorText = event['text'];
+    console.log(event);
+    console.log(this.editorText);
+    
   }
 }

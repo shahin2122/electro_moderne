@@ -13,6 +13,7 @@ export class BlogDetailsComponent implements OnInit {
   blog: IBlog;
   title: string;
   shortTitle: string;
+  htmlText: string;
 
 
   constructor(private activatedRoute: ActivatedRoute, private bcService: BreadcrumbService,
@@ -29,7 +30,7 @@ export class BlogDetailsComponent implements OnInit {
         this.shortTitle = this.blog.text.substring(0, 200);
       })
 
-   
+  
   }
 
  

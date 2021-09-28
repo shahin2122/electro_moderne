@@ -11,13 +11,13 @@ import { IBlog } from '../../models/blog';
 export class BlogItemComponent implements OnInit {
  @Input() blog: IBlog;
   url: string;
-  shortTitle: string;
+ // shortTitle: string;
 
   constructor(private router: Router, private adminService: AdminService) { }
 
   ngOnInit(): void {
     this.url = this.blog.title.replace(/ /g, '-');
-    this.shortTitle = this.blog.text.substring(0, 200);
+   // this.shortTitle = this.blog.rawText.substring(0, 200);
     
   }
 

@@ -10,8 +10,9 @@
                     <textarea class="form-control" formControlName="title" id="title" placeholder="Title..." style="font-size: 30px;" rows="3"></textarea>
         
                     <label for="Description" class="font-xx-large">Text:</label>
-                    <textarea class="form-control" formControlName="text" id="text" placeholder="Text..." style="font-size: 30px;" rows="20"></textarea>
-    
+                    
+                    
+                    <quill-editor  formControlName="text" id="text" (onEditorChanged)="changeEditor($event)"></quill-editor>
 
                     <button [disabled]="addBlogForm.invalid" class="w-100 btn btn-lg btn-info mt-2" type="submit">Submit</button>
                 </form>

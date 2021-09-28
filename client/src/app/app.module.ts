@@ -33,6 +33,7 @@ import { RepairmanSelectModalComponent } from './modals/repairman-select-modal/r
 import { RequestSubmitedComponent } from './repair-request/request-submited/request-submited.component';
 import { AllBlogsComponent } from './all-blogs/all-blogs.component';
 import { BlogDetailsComponent } from './all-blogs/blog-details/blog-details.component';
+import { QuillModule } from 'ngx-quill';
 
 
 
@@ -88,7 +89,7 @@ import { BlogDetailsComponent } from './all-blogs/blog-details/blog-details.comp
     AccountModule,
     SocialLoginModule,
     NgxSpinnerModule,
-
+    QuillModule.forRoot(),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

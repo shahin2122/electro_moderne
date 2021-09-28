@@ -23,6 +23,9 @@ import { PartItemComponent } from './components/part-item/part-item.component';
 import { BlogItemComponent } from './components/blog-item/blog-item.component';
 import { HomePageBlogItemComponent } from './components/home-page-blog-item/home-page-blog-item.component';
 import { LatestBlogsComponent } from '../latest-blogs/latest-blogs.component';
+import { QuillModule } from 'ngx-quill';
+
+
 
 @NgModule({
   declarations: [TextInputComponent, PagingHeaderComponent, PagerComponent, OrderTotalsComponent, StepperComponent, 
@@ -36,6 +39,7 @@ import { LatestBlogsComponent } from '../latest-blogs/latest-blogs.component';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
     }),
+    QuillModule.forRoot(),
     FileUploadModule,
     NgxGalleryModule,
     PaginationModule.forRoot(),
@@ -65,7 +69,9 @@ import { LatestBlogsComponent } from '../latest-blogs/latest-blogs.component';
     LatestPartsComponent,
     BlogItemComponent,
     HomePageBlogItemComponent,
-    LatestBlogsComponent
+    LatestBlogsComponent,
+    QuillModule,
+  
   ]
 })
 export class SharedModule { }
