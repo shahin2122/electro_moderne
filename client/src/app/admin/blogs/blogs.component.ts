@@ -26,13 +26,16 @@ export class BlogsComponent implements OnInit {
       this.blogParams.pageNumber = response.pageIndex;
       this.blogParams.pageSize = response.pageSize;
       this.totalCount = response.count;
-      console.log(response.data);
+      console.log(response);
+      console.log(this.blogParams.pageNumber);
     })
   }
 
   onPageChanged(event: any) {
     if(this.blogParams.pageNumber !== event){
       this.blogParams.pageNumber = event;
+      console.log(this.blogParams.pageNumber);
+      console.log(event);
       this.getBlogs();
     }
   }

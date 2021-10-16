@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { IPart } from 'src/app/shared/models/part';
 import { PartsParams } from 'src/app/shared/models/PartsParams';
 import { ShopService } from 'src/app/shop/shop.service';
@@ -15,7 +16,7 @@ export class PartsComponent implements OnInit {
   totalCount: number;
   partsParams = new PartsParams();
 
-  constructor(private adminService: AdminService, private router: Router) { }
+  constructor(private adminService: AdminService, private router: Router,private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getParts();
@@ -43,5 +44,15 @@ export class PartsComponent implements OnInit {
       this.partsParams.pageNumber = event;
       this.getParts();
     }
+  }
+
+  deletePart(id: number){
+    this.adminService.deletePart(id).subscribe(()=> {
+      this.toastr.success("Part Deleted");
+      this.getParts();
+    }, error => {
+      this.toastr.error(error.message);
+      console.log(error);
+    })
   }
 }

@@ -42,14 +42,19 @@ blogToAddPhoto: IBlog;
 
   getBlogsPaginated(blogParams: BlogParams){
     let params = new HttpParams();
+    
 
+    
     if(blogParams.search){
       params = params.append('search', blogParams.search);
 
-      params = params.append('pageIndex', blogParams.pageNumber.toString());
-      params = params.append('pageIndex', blogParams.pageSize.toString());
     }
-    
+
+    params = params.append('pageIndex', blogParams.pageNumber.toString());
+    params = params.append('pageIndex', blogParams.pageSize.toString());
+
+
+
    return this.http.get<IPagination>(this.baseUrl + 'blogs', {observe: 'response', params})
     .pipe(
       map(response => {
@@ -74,6 +79,10 @@ blogToAddPhoto: IBlog;
   updateBlog(blogId: number, newBlog: IBlog){
     console.log("update from admin service",newBlog);
     return this.http.put(this.baseUrl + 'blogs/update/'+ blogId, newBlog);
+  }
+
+  updatePart(partId:number, newPart: IPart){
+    return this.http.put(this.baseUrl + 'parts/update/' + partId, newPart);
   }
 
   deleteBlog(blogId: number){
@@ -170,6 +179,14 @@ blogToAddPhoto: IBlog;
             return response.body;
           })
         );
+  }
+
+  getPart(id: number){
+    return this.http.get<IPart>(this.baseUrl + 'parts/' + id);
+  }
+
+  deletePart(id: number){
+    return this.http.delete(this.baseUrl + 'parts/' + id);
   }
 
   getProducts(productsParams: AdminProductsParams) {
@@ -331,6 +348,8 @@ blogToAddPhoto: IBlog;
   updatePartBrand(brandId: number , newName: string){
     return this.http.post<IPartBrand>(this.baseUrl + 'partbrands/update/' + brandId + '/' + newName, {});
   }
+
+ 
 
   deletePartBrand(brandId: number){
     return this.http.delete(this.baseUrl + 'partbrands/' + brandId);

@@ -77,7 +77,9 @@ namespace API.Controllers
         {
             var spec = new BlogSpecification(blogParams);
 
-            var totalItems = await _unitOfWork.Repository<Blog>().CountAsync(spec);
+            var countSpec = new BlogsForCountSpecification(blogParams);
+
+            var totalItems = await _unitOfWork.Repository<Blog>().CountAsync(countSpec);
 
             var blogs = await _unitOfWork.Repository<Blog>().ListAsync(spec);
 

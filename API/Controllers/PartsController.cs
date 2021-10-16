@@ -1,13 +1,17 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Dtos;
-using API.Helpers;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
-using Core.Specifications;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using API.Errors;
+using API.Helpers;
+using Core.Specifications;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+
 
 namespace API.Controllers
 {
@@ -101,6 +105,39 @@ namespace API.Controllers
             }
 
             return BadRequest("failed to add photo");
+        }
+
+        [Authorize]
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeletePart(int id)
+        {
+            var part = await _partsRepo.GetByIdAsync(id);
+
+            if(part == null) return NotFound(new ApiResponse(404));
+
+            _partsRepo.Delete(part);
+
+            if(await _partsRepo.SaveAllAsync()) return Ok();
+
+            return BadRequest("failed to delete part");
+        }
+
+        [Authorize]
+        [HttpPut("update/{id}")]
+        public async Task<ActionResult<PartToReturnDto>> UpdatePart(int id, [FromBody] 
+        PartDto newPartDto)
+        {
+            var spec = new PartsSpecification(id);
+
+            var part = await _partsRepo.GetEntityWithSpecAsync(spec);
+
+            _mapper.Map(newPartDto, part);
+
+            _partsRepo.Update(part);
+
+            if(await _partsRepo.SaveAllAsync()) return Ok(_mapper.Map<PartToReturnDto>(part));
+
+            return BadRequest("failed to update part");
         }
     }
 }

@@ -54,7 +54,7 @@ export class AddNewBlogComponent implements OnInit {
           this.router.navigateByUrl("/admin/blog-photo-editor/" + response.id);
         }, error => {
           console.log(error);
-          this.toastr.error(error);
+          this.toastr.error(error.message);
         })
     }else{
       this.adminService.addNewBlog(this.blog).subscribe((response : IBlog) => {
